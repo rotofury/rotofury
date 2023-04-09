@@ -2,8 +2,8 @@ package keeper_test
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	merlion "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/maker/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/maker/types"
 	"github.com/tharsis/ethermint/crypto/ethsecp256k1"
 )
 
@@ -70,9 +70,9 @@ func (suite *KeeperTestSuite) TestAllBackingPools() {
 
 	// add backing pool
 	poolBacking := types.PoolBacking{
-		MerMinted:  sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(100)),
+		GridMinted:  sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(100)),
 		Backing:    sdk.NewCoin(suite.bcDenom, sdk.NewInt(10)),
-		LionBurned: sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(1000)),
+		IronBurned: sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(1000)),
 	}
 	suite.app.MakerKeeper.SetPoolBacking(suite.ctx, poolBacking)
 	res, err = suite.queryClient.AllBackingPools(ctx, &types.QueryAllBackingPoolsRequest{})
@@ -84,9 +84,9 @@ func (suite *KeeperTestSuite) TestAllBackingPools() {
 
 	// add another backing pool
 	poolBacking2 := types.PoolBacking{
-		MerMinted:  sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(200)),
+		GridMinted:  sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(200)),
 		Backing:    sdk.NewCoin("eth", sdk.NewInt(20)),
-		LionBurned: sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(2000)),
+		IronBurned: sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(2000)),
 	}
 	suite.app.MakerKeeper.SetPoolBacking(suite.ctx, poolBacking2)
 	res, err = suite.queryClient.AllBackingPools(ctx, &types.QueryAllBackingPoolsRequest{})
@@ -106,8 +106,8 @@ func (suite *KeeperTestSuite) TestAllCollateralPools() {
 	// add collateral pool
 	poolColl := types.PoolCollateral{
 		Collateral:         sdk.NewCoin(suite.bcDenom, sdk.NewInt(10)),
-		MerDebt:            sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(100)),
-		LionCollateralized: sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(1000)),
+		GridDebt:            sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(100)),
+		IronCollateralized: sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(1000)),
 	}
 	suite.app.MakerKeeper.SetPoolCollateral(suite.ctx, poolColl)
 	res, err = suite.queryClient.AllCollateralPools(ctx, &types.QueryAllCollateralPoolsRequest{})
@@ -120,8 +120,8 @@ func (suite *KeeperTestSuite) TestAllCollateralPools() {
 	// add another collateral pool
 	poolColl2 := types.PoolCollateral{
 		Collateral:         sdk.NewCoin("eth", sdk.NewInt(10)),
-		MerDebt:            sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(200)),
-		LionCollateralized: sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(2000)),
+		GridDebt:            sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(200)),
+		IronCollateralized: sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(2000)),
 	}
 	suite.app.MakerKeeper.SetPoolCollateral(suite.ctx, poolColl2)
 	res, err = suite.queryClient.AllCollateralPools(ctx, &types.QueryAllCollateralPoolsRequest{})
@@ -133,9 +133,9 @@ func (suite *KeeperTestSuite) TestAllCollateralPools() {
 
 func (suite *KeeperTestSuite) TestBackingPool() {
 	poolBacking := types.PoolBacking{
-		MerMinted:  sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(200)),
+		GridMinted:  sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(200)),
 		Backing:    sdk.NewCoin(suite.bcDenom, sdk.NewInt(20)),
-		LionBurned: sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(2000)),
+		IronBurned: sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(2000)),
 	}
 	suite.app.MakerKeeper.SetPoolBacking(suite.ctx, poolBacking)
 
@@ -154,8 +154,8 @@ func (suite *KeeperTestSuite) TestBackingPool() {
 func (suite *KeeperTestSuite) TestCollateralPool() {
 	poolCollateral := types.PoolCollateral{
 		Collateral:         sdk.NewCoin(suite.bcDenom, sdk.NewInt(10)),
-		MerDebt:            sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(200)),
-		LionCollateralized: sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(2000)),
+		GridDebt:            sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(200)),
+		IronCollateralized: sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(2000)),
 	}
 	suite.app.MakerKeeper.SetPoolCollateral(suite.ctx, poolCollateral)
 
@@ -183,9 +183,9 @@ func (suite *KeeperTestSuite) TestCollateralOfAccount() {
 	accColl := types.AccountCollateral{
 		Account:             accAddress.String(),
 		Collateral:          sdk.NewCoin(suite.bcDenom, sdk.NewInt(100)),
-		MerDebt:             sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(200)),
-		LionCollateralized:  sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(1000)),
-		LastInterest:        sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(10)),
+		GridDebt:             sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(200)),
+		IronCollateralized:  sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(1000)),
+		LastInterest:        sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(10)),
 		LastSettlementBlock: 666,
 	}
 	suite.app.MakerKeeper.SetAccountCollateral(suite.ctx, accAddress, accColl)
@@ -222,8 +222,8 @@ func (suite *KeeperTestSuite) TestTotalBacking() {
 	expRes := &types.QueryTotalBackingResponse{
 		TotalBacking: types.TotalBacking{
 			BackingValue: sdk.ZeroInt(),
-			MerMinted:    sdk.Coin{"", sdk.ZeroInt()},
-			LionBurned:   sdk.Coin{"", sdk.ZeroInt()},
+			GridMinted:    sdk.Coin{"", sdk.ZeroInt()},
+			IronBurned:   sdk.Coin{"", sdk.ZeroInt()},
 		},
 	}
 	suite.Require().NoError(err)
@@ -233,21 +233,21 @@ func (suite *KeeperTestSuite) TestTotalBacking() {
 	suite.setupEstimationTest()
 	totalBacking := types.TotalBacking{
 		BackingValue: sdk.OneInt(),
-		MerMinted:    sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(100)),
-		LionBurned:   sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(1000)),
+		GridMinted:    sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(100)),
+		IronBurned:   sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(1000)),
 	}
 	suite.app.MakerKeeper.SetTotalBacking(suite.ctx, totalBacking)
 
 	suite.app.MakerKeeper.SetPoolBacking(suite.ctx, types.PoolBacking{
-		MerMinted:  sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(100)),
+		GridMinted:  sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(100)),
 		Backing:    sdk.NewCoin(suite.bcDenom, sdk.NewInt(10_000000)),
-		LionBurned: sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(1000)),
+		IronBurned: sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(1000)),
 	})
 
 	suite.app.MakerKeeper.SetPoolBacking(suite.ctx, types.PoolBacking{
-		MerMinted:  sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(200)),
+		GridMinted:  sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(200)),
 		Backing:    sdk.NewCoin("eth", sdk.NewInt(2)),
-		LionBurned: sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(2000)),
+		IronBurned: sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(2000)),
 	})
 
 	totalBacking.BackingValue = sdk.NewInt(2009_900000) // 10_000000 * 0.99 + 2 * 1000_000000
@@ -264,8 +264,8 @@ func (suite *KeeperTestSuite) TestTotalCollateral() {
 	res, err := suite.queryClient.TotalCollateral(ctx, &types.QueryTotalCollateralRequest{})
 	expRes := &types.QueryTotalCollateralResponse{
 		TotalCollateral: types.TotalCollateral{
-			MerDebt:            sdk.Coin{"", sdk.ZeroInt()},
-			LionCollateralized: sdk.Coin{"", sdk.ZeroInt()},
+			GridDebt:            sdk.Coin{"", sdk.ZeroInt()},
+			IronCollateralized: sdk.Coin{"", sdk.ZeroInt()},
 		},
 	}
 	suite.Require().NoError(err)
@@ -273,8 +273,8 @@ func (suite *KeeperTestSuite) TestTotalCollateral() {
 
 	// set total collateral
 	totalCollateral := types.TotalCollateral{
-		MerDebt:            sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(100)),
-		LionCollateralized: sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(1000)),
+		GridDebt:            sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(100)),
+		IronCollateralized: sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(1000)),
 	}
 	suite.app.MakerKeeper.SetTotalCollateral(suite.ctx, totalCollateral)
 	res, err = suite.queryClient.TotalCollateral(ctx, &types.QueryTotalCollateralRequest{})

@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	testkeeper "github.com/merlion-zone/merlion/testutil/keeper"
-	"github.com/merlion-zone/merlion/x/voter/types"
+	testkeeper "github.com/gridiron-zone/gridiron/testutil/keeper"
+	"github.com/gridiron-zone/gridiron/x/voter/types"
 	"github.com/stretchr/testify/require"
 )
 

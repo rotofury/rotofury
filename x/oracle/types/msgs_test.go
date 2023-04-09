@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	merlion "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/oracle/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/oracle/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -15,7 +15,7 @@ func TestMsgAggregateExchangeRatePrevote(t *testing.T) {
 		sdk.AccAddress([]byte("addr1_______________")),
 	}
 
-	exchangeRates := sdk.DecCoins{sdk.NewDecCoinFromDec(merlion.AttoLionDenom, sdk.OneDec()), sdk.NewDecCoinFromDec(merlion.MicroUSMDenom, sdk.NewDecWithPrec(32121, 1))}
+	exchangeRates := sdk.DecCoins{sdk.NewDecCoinFromDec(gridiron.AttoIronDenom, sdk.OneDec()), sdk.NewDecCoinFromDec(gridiron.MicroUSMDenom, sdk.NewDecWithPrec(32121, 1))}
 	bz := types.GetAggregateVoteHash("1", exchangeRates.String(), sdk.ValAddress(addrs[0]))
 
 	tests := []struct {

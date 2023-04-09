@@ -26,8 +26,8 @@ import (
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/cosmos/cosmos-sdk/x/crisis"
 	genutilcli "github.com/cosmos/cosmos-sdk/x/genutil/client/cli"
-	"github.com/merlion-zone/merlion/app"
-	merlion "github.com/merlion-zone/merlion/types"
+	"github.com/gridiron-zone/gridiron/app"
+	gridiron "github.com/gridiron-zone/gridiron/types"
 	"github.com/spf13/cast"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
@@ -133,7 +133,7 @@ func NewRootCmd(
 
 	rootCmd := &cobra.Command{
 		Use:   appName + "d",
-		Short: "Merlion App",
+		Short: "Gridiron App",
 		PersistentPreRunE: func(cmd *cobra.Command, _ []string) error {
 			// set the default command outputs
 			cmd.SetOut(cmd.OutOrStdout())
@@ -449,7 +449,7 @@ func initAppConfig() (string, interface{}) {
 	//   own app.toml to override, or use this default value.
 	//
 	// In simapp, we set the min gas prices to 0.
-	srvCfg.MinGasPrices = "0" + merlion.BaseDenom
+	srvCfg.MinGasPrices = "0" + gridiron.BaseDenom
 
 	customAppConfig := CustomAppConfig{
 		Config: servercfg.Config{

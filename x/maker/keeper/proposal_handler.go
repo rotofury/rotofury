@@ -3,8 +3,8 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	merlion "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/maker/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/maker/types"
 )
 
 func HandleRegisterBackingProposal(ctx sdk.Context, k Keeper, p *types.RegisterBackingProposal) error {
@@ -47,15 +47,15 @@ func HandleRegisterBackingProposal(ctx sdk.Context, k Keeper, p *types.RegisterB
 	_, found := k.GetTotalBacking(ctx)
 	if !found {
 		k.SetTotalBacking(ctx, types.TotalBacking{
-			MerMinted:  sdk.NewCoin(merlion.MicroUSMDenom, sdk.ZeroInt()),
-			LionBurned: sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
+			GridMinted:  sdk.NewCoin(gridiron.MicroUSMDenom, sdk.ZeroInt()),
+			IronBurned: sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
 		})
 	}
 
 	k.SetPoolBacking(ctx, types.PoolBacking{
-		MerMinted:  sdk.NewCoin(merlion.MicroUSMDenom, sdk.ZeroInt()),
+		GridMinted:  sdk.NewCoin(gridiron.MicroUSMDenom, sdk.ZeroInt()),
 		Backing:    sdk.NewCoin(params.BackingDenom, sdk.ZeroInt()),
-		LionBurned: sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
+		IronBurned: sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
 	})
 
 	ctx.EventManager().EmitEvents(sdk.Events{
@@ -97,9 +97,9 @@ func HandleRegisterCollateralProposal(ctx sdk.Context, k Keeper, p *types.Regist
 		dec := sdk.NewDecWithPrec(40, 2)
 		params.BasicLoanToValue = &dec
 	}
-	if params.CatalyticLionRatio == nil {
+	if params.CatalyticIronRatio == nil {
 		dec := sdk.NewDecWithPrec(10, 2)
-		params.CatalyticLionRatio = &dec
+		params.CatalyticIronRatio = &dec
 	}
 	if params.LiquidationFee == nil {
 		dec := sdk.NewDecWithPrec(10, 2)
@@ -123,15 +123,15 @@ func HandleRegisterCollateralProposal(ctx sdk.Context, k Keeper, p *types.Regist
 	_, found := k.GetTotalCollateral(ctx)
 	if !found {
 		k.SetTotalCollateral(ctx, types.TotalCollateral{
-			MerDebt:            sdk.NewCoin(merlion.MicroUSMDenom, sdk.ZeroInt()),
-			LionCollateralized: sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
+			GridDebt:            sdk.NewCoin(gridiron.MicroUSMDenom, sdk.ZeroInt()),
+			IronCollateralized: sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
 		})
 	}
 
 	k.SetPoolCollateral(ctx, types.PoolCollateral{
 		Collateral:         sdk.NewCoin(params.CollateralDenom, sdk.ZeroInt()),
-		MerDebt:            sdk.NewCoin(merlion.MicroUSMDenom, sdk.ZeroInt()),
-		LionCollateralized: sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
+		GridDebt:            sdk.NewCoin(gridiron.MicroUSMDenom, sdk.ZeroInt()),
+		IronCollateralized: sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
 	})
 
 	ctx.EventManager().EmitEvents(sdk.Events{
@@ -179,7 +179,7 @@ func setBackingRiskParamsProposal(ctx sdk.Context, k Keeper, patch *types.Backin
 		updated |= 1
 	}
 	updated |= updateInt(params.MaxBacking, patch.MaxBacking)
-	updated |= updateInt(params.MaxMerMint, patch.MaxMerMint)
+	updated |= updateInt(params.MaxGridMint, patch.MaxGridMint)
 	updated |= updateDecimal(params.MintFee, patch.MintFee)
 	updated |= updateDecimal(params.BurnFee, patch.BurnFee)
 	updated |= updateDecimal(params.BuybackFee, patch.BuybackFee)
@@ -217,11 +217,11 @@ func setCollateralRiskParamsProposal(ctx sdk.Context, k Keeper, patch *types.Col
 		updated |= 1
 	}
 	updated |= updateInt(params.MaxCollateral, patch.MaxCollateral)
-	updated |= updateInt(params.MaxMerMint, patch.MaxMerMint)
+	updated |= updateInt(params.MaxGridMint, patch.MaxGridMint)
 	updated |= updateDecimal(params.LiquidationThreshold, patch.LiquidationThreshold)
 	updated |= updateDecimal(params.LoanToValue, patch.LoanToValue)
 	updated |= updateDecimal(params.BasicLoanToValue, patch.BasicLoanToValue)
-	updated |= updateDecimal(params.CatalyticLionRatio, patch.CatalyticLionRatio)
+	updated |= updateDecimal(params.CatalyticIronRatio, patch.CatalyticIronRatio)
 	updated |= updateDecimal(params.LiquidationFee, patch.LiquidationFee)
 	updated |= updateDecimal(params.MintFee, patch.MintFee)
 	updated |= updateDecimal(params.InterestFee, patch.InterestFee)

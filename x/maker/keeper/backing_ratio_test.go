@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	merlion "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/maker/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/maker/types"
 )
 
 func (suite *KeeperTestSuite) TestAdjustBackingRatio() {
@@ -41,7 +41,7 @@ func (suite *KeeperTestSuite) TestAdjustBackingRatio() {
 			expRes:   orgRes,
 		},
 		{
-			name: "mer price not set",
+			name: "grid price not set",
 			malleate: func() {
 				for i := int64(0); i < shortCooldownPeriod-1; i++ {
 					suite.Commit()
@@ -52,13 +52,13 @@ func (suite *KeeperTestSuite) TestAdjustBackingRatio() {
 			expRes:   nil,
 		},
 		{
-			name: "mer price too high",
+			name: "grid price too high",
 			malleate: func() {
 				for i := int64(0); i < shortCooldownPeriod-1; i++ {
 					suite.Commit()
 				}
 				suite.Require().Equal(shortCooldownPeriod, suite.ctx.BlockHeight())
-				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, merlion.MicroUSMDenom, sdk.NewDecWithPrec(101, 2))
+				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, gridiron.MicroUSMDenom, sdk.NewDecWithPrec(101, 2))
 			},
 			expPanic: false,
 			expRes: &types.QueryBackingRatioResponse{
@@ -73,7 +73,7 @@ func (suite *KeeperTestSuite) TestAdjustBackingRatio() {
 					suite.Commit()
 				}
 				suite.Require().Equal(shortCooldownPeriod, suite.ctx.BlockHeight())
-				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, merlion.MicroUSMDenom, sdk.NewDecWithPrec(101, 2))
+				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, gridiron.MicroUSMDenom, sdk.NewDecWithPrec(101, 2))
 				suite.app.MakerKeeper.SetBackingRatio(suite.ctx, types.DefaultBackingRatioStep.Sub(sdk.NewDecWithPrec(1, 4)))
 			},
 			expPanic: false,
@@ -89,7 +89,7 @@ func (suite *KeeperTestSuite) TestAdjustBackingRatio() {
 					suite.Commit()
 				}
 				suite.Require().Equal(shortCooldownPeriod, suite.ctx.BlockHeight())
-				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, merlion.MicroUSMDenom, sdk.NewDecWithPrec(99, 2))
+				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, gridiron.MicroUSMDenom, sdk.NewDecWithPrec(99, 2))
 			},
 			expPanic: false,
 			expRes: &types.QueryBackingRatioResponse{
@@ -98,14 +98,14 @@ func (suite *KeeperTestSuite) TestAdjustBackingRatio() {
 			},
 		},
 		{
-			name: "mer price too low",
+			name: "grid price too low",
 			malleate: func() {
 				for i := int64(0); i < shortCooldownPeriod-1; i++ {
 					suite.Commit()
 				}
 				suite.app.MakerKeeper.SetBackingRatio(suite.ctx, sdk.NewDecWithPrec(9, 1))
 				suite.Require().Equal(shortCooldownPeriod, suite.ctx.BlockHeight())
-				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, merlion.MicroUSMDenom, sdk.NewDecWithPrec(99, 2))
+				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, gridiron.MicroUSMDenom, sdk.NewDecWithPrec(99, 2))
 			},
 			expPanic: false,
 			expRes: &types.QueryBackingRatioResponse{

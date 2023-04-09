@@ -2,8 +2,8 @@ package erc20
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlion-zone/merlion/x/erc20/keeper"
-	"github.com/merlion-zone/merlion/x/erc20/types"
+	"github.com/gridiron-zone/gridiron/x/erc20/keeper"
+	"github.com/gridiron-zone/gridiron/x/erc20/types"
 )
 
 // InitGenesis initializes the capability module's state from a provided genesis

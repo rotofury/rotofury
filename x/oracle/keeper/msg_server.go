@@ -6,7 +6,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	"github.com/merlion-zone/merlion/x/oracle/types"
+	"github.com/gridiron-zone/gridiron/x/oracle/types"
 )
 
 type msgServer struct {

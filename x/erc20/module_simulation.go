@@ -9,8 +9,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
-	"github.com/merlion-zone/merlion/testutil/sample"
-	"github.com/merlion-zone/merlion/x/erc20/types"
+	"github.com/gridiron-zone/gridiron/testutil/sample"
+	"github.com/gridiron-zone/gridiron/x/erc20/types"
 )
 
 // avoid unused import issue

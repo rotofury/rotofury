@@ -1,10 +1,10 @@
 syntax = "proto3";
-package merlion.oracle.v1;
+package gridiron.oracle.v1;
 
 import "gogoproto/gogo.proto";
-import "merlion/oracle/v1/oracle.proto";
+import "gridiron/oracle/v1/oracle.proto";
 
-option go_package = "github.com/merlion-zone/merlion/x/oracle/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/oracle/types";
 
 // GenesisState defines the oracle module's genesis state.
 message GenesisState {

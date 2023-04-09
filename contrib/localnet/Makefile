@@ -1,4 +1,4 @@
 all:
-	docker build --tag merlionzone/localnetnode .
+	docker build --tag gridironzone/localnetnode .
 
 .PHONY: all

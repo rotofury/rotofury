@@ -2,7 +2,7 @@ package keeper
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlion-zone/merlion/x/ve/types"
+	"github.com/gridiron-zone/gridiron/x/ve/types"
 )
 
 // GetParams get all parameters as types.Params

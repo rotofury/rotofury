@@ -2,7 +2,7 @@ package types
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	vetypes "github.com/merlion-zone/merlion/x/ve/types"
+	vetypes "github.com/gridiron-zone/gridiron/x/ve/types"
 )
 
 // NftKeeper defines the expected interface needed to query NFT tokens.

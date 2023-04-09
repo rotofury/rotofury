@@ -2,8 +2,8 @@ package keeper
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlion-zone/merlion/x/gauge/types"
-	vetypes "github.com/merlion-zone/merlion/x/ve/types"
+	"github.com/gridiron-zone/gridiron/x/gauge/types"
+	vetypes "github.com/gridiron-zone/gridiron/x/ve/types"
 )
 
 const (

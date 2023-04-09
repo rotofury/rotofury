@@ -1,10 +1,10 @@
 syntax = "proto3";
-package merlion.vesting.v1;
+package gridiron.vesting.v1;
 
 import "gogoproto/gogo.proto";
 import "cosmos/base/v1beta1/coin.proto";
 
-option go_package = "github.com/merlion-zone/merlion/x/vesting/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/vesting/types";
 
 message Airdrop {
   option (gogoproto.goproto_getters) = false;

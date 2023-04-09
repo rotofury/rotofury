@@ -14,9 +14,9 @@ import (
 	vestingtypes "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
 	"github.com/gorilla/mux"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	"github.com/merlion-zone/merlion/x/vesting/client/cli"
-	"github.com/merlion-zone/merlion/x/vesting/keeper"
-	"github.com/merlion-zone/merlion/x/vesting/types"
+	"github.com/gridiron-zone/gridiron/x/vesting/client/cli"
+	"github.com/gridiron-zone/gridiron/x/vesting/keeper"
+	"github.com/gridiron-zone/gridiron/x/vesting/types"
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 )

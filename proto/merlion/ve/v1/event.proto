@@ -1,10 +1,10 @@
 syntax = "proto3";
-package merlion.ve.v1;
+package gridiron.ve.v1;
 
 import "gogoproto/gogo.proto";
 import "cosmos/base/v1beta1/coin.proto";
 
-option go_package = "github.com/merlion-zone/merlion/x/ve/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/ve/types";
 
 message EventCreate {
   string sender = 1;

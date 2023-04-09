@@ -6,8 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
-	"github.com/merlion-zone/merlion/x/maker/keeper"
-	"github.com/merlion-zone/merlion/x/maker/types"
+	"github.com/gridiron-zone/gridiron/x/maker/keeper"
+	"github.com/gridiron-zone/gridiron/x/maker/types"
 )
 
 // NewHandler ...

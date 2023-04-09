@@ -4,7 +4,7 @@ import (
 	"math"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	merlion "github.com/merlion-zone/merlion/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
 )
 
 const (
@@ -13,13 +13,13 @@ const (
 	MaxVeID   = math.MaxUint64 - 1
 
 	// 4 years, i.e., 209 weeks
-	MaxLockTimeWeeks = merlion.DaysPer4Years/7 + 1
-	MaxLockTime      = MaxLockTimeWeeks * merlion.SecondsPerWeek
+	MaxLockTimeWeeks = gridiron.DaysPer4Years/7 + 1
+	MaxLockTime      = MaxLockTimeWeeks * gridiron.SecondsPerWeek
 
 	MaxUnixTime = math.MaxInt64
 
 	// Regulated period for ve locking time
-	RegulatedPeriod = merlion.SecondsPerWeek
+	RegulatedPeriod = gridiron.SecondsPerWeek
 
 	EmptyEpoch = 0
 	FirstEpoch = 1

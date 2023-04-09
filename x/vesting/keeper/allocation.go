@@ -4,8 +4,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	vestingtypes "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
-	merlion "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/vesting/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/vesting/types"
 	ethermint "github.com/tharsis/ethermint/types"
 )
 
@@ -19,7 +19,7 @@ func (k Keeper) AllocateAtGenesis(ctx sdk.Context, genState types.GenesisState) 
 
 	k.veKeeper.AddTotalEmission(ctx, alloc.VeVestingAmount)
 
-	srAmount := sdk.NewCoin(merlion.BaseDenom, alloc.StrategicReserveAmount)
+	srAmount := sdk.NewCoin(gridiron.BaseDenom, alloc.StrategicReserveAmount)
 	err := k.bankKeeper.MintCoins(ctx, types.ModuleName, sdk.NewCoins(srAmount))
 	if err != nil {
 		panic(err)
@@ -64,7 +64,7 @@ func (k Keeper) ClaimVested(ctx sdk.Context) {
 
 func (k Keeper) createContinuousVestingAccount(ctx sdk.Context, vestingName string, amount sdk.Int, startTime int64, duration int64) {
 	baseAccount := k.accountKeeper.NewAccountWithAddress(ctx, k.getVestingAddress(vestingName))
-	amt := sdk.NewCoin(merlion.BaseDenom, amount)
+	amt := sdk.NewCoin(gridiron.BaseDenom, amount)
 	vestingAccount := vestingtypes.NewContinuousVestingAccount(baseAccount.(*ethermint.EthAccount).BaseAccount, sdk.NewCoins(amt), startTime, startTime+duration)
 	k.accountKeeper.SetAccount(ctx, vestingAccount)
 

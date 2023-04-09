@@ -9,8 +9,8 @@ import (
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/cosmos/cosmos-sdk/x/staking/teststaking"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	"github.com/merlion-zone/merlion/app"
-	mertypes "github.com/merlion-zone/merlion/types"
+	"github.com/gridiron-zone/gridiron/app"
+	gridtypes "github.com/gridiron-zone/gridiron/types"
 	"github.com/stretchr/testify/suite"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmversion "github.com/tendermint/tendermint/proto/tendermint/version"
@@ -20,7 +20,7 @@ import (
 type KeeperTestSuite struct {
 	suite.Suite
 	ctx          sdk.Context
-	app          *app.Merlion
+	app          *app.Gridiron
 	coinMetadata banktypes.Metadata
 }
 
@@ -65,7 +65,7 @@ func (suite *KeeperTestSuite) SetupTest() {
 		Version: tmversion.Consensus{
 			Block: version.BlockProtocol,
 		},
-		ChainID:         "merlion_5000-101",
+		ChainID:         "gridiron_5000-101",
 		Height:          1,
 		Time:            time.Now().UTC(),
 		ProposerAddress: addrs[0].Bytes(),
@@ -73,7 +73,7 @@ func (suite *KeeperTestSuite) SetupTest() {
 
 	// setup validator
 	tstaking := teststaking.NewHelper(suite.T(), suite.ctx, suite.app.StakingKeeper.Keeper)
-	tstaking.Denom = mertypes.AttoLionDenom
+	tstaking.Denom = gridtypes.AttoIronDenom
 
 	// create validator with 50% commission
 	tstaking.Commission = stakingtypes.NewCommissionRates(sdk.NewDecWithPrec(5, 1), sdk.NewDecWithPrec(5, 1), sdk.NewDec(0))

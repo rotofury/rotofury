@@ -1,13 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Merlion Chain - gRPC Gateway docs",
+    "title": "Gridiron Chain - gRPC Gateway docs",
     "description": "A REST interface for state queries and transactions",
     "version": "1.0.0"
   },
   "apis": [
     {
-      "url": "./tmp-swagger-gen/merlion/erc20/v1/query.swagger.json",
+      "url": "./tmp-swagger-gen/gridiron/erc20/v1/query.swagger.json",
       "operationIds": {
         "rename": {
           "Params": "ERC20Params"
@@ -15,7 +15,7 @@
       }
     },
     {
-      "url": "./tmp-swagger-gen/merlion/gauge/v1/query.swagger.json",
+      "url": "./tmp-swagger-gen/gridiron/gauge/v1/query.swagger.json",
       "operationIds": {
         "rename": {
           "Params": "GaugeParams"
@@ -23,7 +23,7 @@
       }
     },
     {
-      "url": "./tmp-swagger-gen/merlion/maker/v1/query.swagger.json",
+      "url": "./tmp-swagger-gen/gridiron/maker/v1/query.swagger.json",
       "operationIds": {
         "rename": {
           "Params": "MakerParams"
@@ -31,7 +31,7 @@
       }
     },
     {
-      "url": "./tmp-swagger-gen/merlion/oracle/v1/query.swagger.json",
+      "url": "./tmp-swagger-gen/gridiron/oracle/v1/query.swagger.json",
       "operationIds": {
         "rename": {
           "Params": "OracleParams"
@@ -39,10 +39,10 @@
       }
     },
     {
-      "url": "./tmp-swagger-gen/merlion/staking/v1/query.swagger.json",
+      "url": "./tmp-swagger-gen/gridiron/staking/v1/query.swagger.json",
     },
     {
-      "url": "./tmp-swagger-gen/merlion/ve/v1/query.swagger.json",
+      "url": "./tmp-swagger-gen/gridiron/ve/v1/query.swagger.json",
       "operationIds": {
         "rename": {
           "Params": "VeParams"
@@ -50,7 +50,7 @@
       }
     },
     {
-      "url": "./tmp-swagger-gen/merlion/vesting/v1/query.swagger.json",
+      "url": "./tmp-swagger-gen/gridiron/vesting/v1/query.swagger.json",
       "operationIds": {
         "rename": {
           "Params": "VestingParams"
@@ -58,7 +58,7 @@
       }
     },
     {
-      "url": "./tmp-swagger-gen/merlion/voter/v1/query.swagger.json",
+      "url": "./tmp-swagger-gen/gridiron/voter/v1/query.swagger.json",
       "operationIds": {
         "rename": {
           "Params": "VoterParams"

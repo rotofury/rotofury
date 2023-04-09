@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  bridging-merliondnode0:
-    container_name: bridging-merliondnode0
-    image: "merlionzone/localnetnode"
+  bridging-gridirondnode0:
+    container_name: bridging-gridirondnode0
+    image: "gridironzone/localnetnode"
     ports:
       - "27656-27657:26656-26657"
       - "8645-8646:8545-8546"
@@ -11,54 +11,54 @@ services:
       - "1417:1317"
     environment:
       - ID=0
-      - LOG=${LOG:-merliond.log}
+      - LOG=${LOG:-gridirond.log}
     volumes:
-      - ./build-bridging:/merlion:Z
+      - ./build-bridging:/gridiron:Z
     networks:
       bridging-localnet:
         ipv4_address: 192.168.11.2
 
-  bridging-merliondnode1:
-    container_name: bridging-merliondnode1
-    image: "merlionzone/localnetnode"
+  bridging-gridirondnode1:
+    container_name: bridging-gridirondnode1
+    image: "gridironzone/localnetnode"
     ports:
       - "27659-27660:26656-26657"
       - "8647-8648:8545-8546"
     environment:
       - ID=1
-      - LOG=${LOG:-merliond.log}
+      - LOG=${LOG:-gridirond.log}
     volumes:
-      - ./build-bridging:/merlion:Z
+      - ./build-bridging:/gridiron:Z
     networks:
       bridging-localnet:
         ipv4_address: 192.168.11.3
 
-  bridging-merliondnode2:
-    container_name: bridging-merliondnode2
-    image: "merlionzone/localnetnode"
+  bridging-gridirondnode2:
+    container_name: bridging-gridirondnode2
+    image: "gridironzone/localnetnode"
     environment:
       - ID=2
-      - LOG=${LOG:-merliond.log}
+      - LOG=${LOG:-gridirond.log}
     ports:
       - "27661-27662:26656-26657"
       - "8649-8650:8545-8546"
     volumes:
-      - ./build-bridging:/merlion:Z
+      - ./build-bridging:/gridiron:Z
     networks:
       bridging-localnet:
         ipv4_address: 192.168.11.4
 
-  bridging-merliondnode3:
-    container_name: bridging-merliondnode3
-    image: "merlionzone/localnetnode"
+  bridging-gridirondnode3:
+    container_name: bridging-gridirondnode3
+    image: "gridironzone/localnetnode"
     environment:
       - ID=3
-      - LOG=${LOG:-merliond.log}
+      - LOG=${LOG:-gridirond.log}
     ports:
       - "27663-27664:26656-26657"
       - "8651-8652:8545-8546"
     volumes:
-      - ./build-bridging:/merlion:Z
+      - ./build-bridging:/gridiron:Z
     networks:
       bridging-localnet:
         ipv4_address: 192.168.11.5

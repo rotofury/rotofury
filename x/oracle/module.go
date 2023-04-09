@@ -17,9 +17,9 @@ import (
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	"github.com/merlion-zone/merlion/x/oracle/client/cli"
-	"github.com/merlion-zone/merlion/x/oracle/keeper"
-	"github.com/merlion-zone/merlion/x/oracle/types"
+	"github.com/gridiron-zone/gridiron/x/oracle/client/cli"
+	"github.com/gridiron-zone/gridiron/x/oracle/keeper"
+	"github.com/gridiron-zone/gridiron/x/oracle/types"
 )
 
 var (

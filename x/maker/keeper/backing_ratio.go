@@ -2,11 +2,11 @@ package keeper
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	merlion "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/maker/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/maker/types"
 )
 
-// AdjustBackingRatio dynamically adjusts the backing ratio, according to mer price change.
+// AdjustBackingRatio dynamically adjusts the backing ratio, according to grid price change.
 func (k Keeper) AdjustBackingRatio(ctx sdk.Context) {
 	// check cooldown period since last update
 	if ctx.BlockHeight()-k.GetBackingRatioLastBlock(ctx) < k.BackingRatioCooldownPeriod(ctx) {
@@ -18,24 +18,24 @@ func (k Keeper) AdjustBackingRatio(ctx sdk.Context) {
 		return
 	}
 	backingRatio := k.GetBackingRatio(ctx)
-	priceBand := merlion.MicroUSMTarget.Mul(k.BackingRatioPriceBand(ctx))
+	priceBand := gridiron.MicroUSMTarget.Mul(k.BackingRatioPriceBand(ctx))
 
-	merPrice, err := k.oracleKeeper.GetExchangeRate(ctx, merlion.MicroUSMDenom)
+	gridPrice, err := k.oracleKeeper.GetExchangeRate(ctx, gridiron.MicroUSMDenom)
 	if err != nil {
 		panic(err)
 	}
 
-	if merPrice.GT(merlion.MicroUSMTarget.Add(priceBand)) {
-		// mer price is too high
+	if gridPrice.GT(gridiron.MicroUSMTarget.Add(priceBand)) {
+		// grid price is too high
 		// decrease backing ratio; min 0%
 		backingRatio = sdk.MaxDec(backingRatio.Sub(ratioStep), sdk.ZeroDec())
-	} else if merPrice.LT(merlion.MicroUSMTarget.Sub(priceBand)) {
-		// mer price is too low
+	} else if gridPrice.LT(gridiron.MicroUSMTarget.Sub(priceBand)) {
+		// grid price is too low
 		// increase backing ratio; max 100%
 		backingRatio = sdk.MinDec(backingRatio.Add(ratioStep), sdk.OneDec())
 	}
 
-	// TODO: consider adjusting BR based on total minted Mer, even though Mer price is within the band
+	// TODO: consider adjusting BR based on total minted Grid, even though Grid price is within the band
 
 	k.SetBackingRatio(ctx, backingRatio)
 	k.SetBackingRatioLastBlock(ctx, ctx.BlockHeight())

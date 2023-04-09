@@ -1,37 +1,37 @@
 syntax = "proto3";
-package merlion.ve.v1;
+package gridiron.ve.v1;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/v1beta1/coin.proto";
 
-option go_package = "github.com/merlion-zone/merlion/x/ve/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/ve/types";
 
 // Msg defines the ve Msg service.
 service Msg {
   // Create creates a veNFT.
   rpc Create(MsgCreate) returns (MsgCreateResponse) {
-    option (google.api.http).get = "/merlion/ve/v1/tx/create";
+    option (google.api.http).get = "/gridiron/ve/v1/tx/create";
   }
 
   // Deposit deposits some coin amount for a veNFT.
   rpc Deposit(MsgDeposit) returns (MsgDepositResponse) {
-    option (google.api.http).get = "/merlion/ve/v1/tx/deposit";
+    option (google.api.http).get = "/gridiron/ve/v1/tx/deposit";
   }
 
   // ExtendTime extends locking duration for a veNFT.
   rpc ExtendTime(MsgExtendTime) returns (MsgExtendTimeResponse) {
-    option (google.api.http).get = "/merlion/ve/v1/tx/extend_time";
+    option (google.api.http).get = "/gridiron/ve/v1/tx/extend_time";
   }
 
   // Merge merges a veNFT (burn it) to another veNFT.
   rpc Merge(MsgMerge) returns (MsgMergeResponse) {
-    option (google.api.http).get = "/merlion/ve/v1/tx/merge";
+    option (google.api.http).get = "/gridiron/ve/v1/tx/merge";
   }
 
   // Withdraw withdraws all coin amount of a veNFT.
   rpc Withdraw(MsgWithdraw) returns (MsgWithdrawResponse) {
-    option (google.api.http).get = "/merlion/ve/v1/tx/withdraw";
+    option (google.api.http).get = "/gridiron/ve/v1/tx/withdraw";
   }
 }
 

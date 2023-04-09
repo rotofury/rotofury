@@ -38,9 +38,9 @@ import (
 	"github.com/tendermint/tendermint/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	merlion "github.com/merlion-zone/merlion/types"
-	makertypes "github.com/merlion-zone/merlion/x/maker/types"
-	customvestingtypes "github.com/merlion-zone/merlion/x/vesting/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
+	makertypes "github.com/gridiron-zone/gridiron/x/maker/types"
+	customvestingtypes "github.com/gridiron-zone/gridiron/x/vesting/types"
 
 	"github.com/tharsis/ethermint/crypto/hd"
 	"github.com/tharsis/ethermint/server/config"
@@ -49,7 +49,7 @@ import (
 	evmtypes "github.com/tharsis/ethermint/x/evm/types"
 	evmoskr "github.com/tharsis/evmos/v4/crypto/keyring"
 
-	"github.com/merlion-zone/merlion/testutil/network"
+	"github.com/gridiron-zone/gridiron/testutil/network"
 )
 
 var (
@@ -100,7 +100,7 @@ func addTestnetFlagsToCmd(cmd *cobra.Command) {
 	cmd.Flags().IntP(flagNumValidators, "v", 4, "Number of validators to initialize the testnet with")
 	cmd.Flags().StringP(flagOutputDir, "o", "./.testnet", "Directory to store initialization data for the testnet")
 	cmd.Flags().String(flags.FlagChainID, "", "Genesis file chain-id, if left blank will be randomly created")
-	cmd.Flags().String(sdkserver.FlagMinGasPrices, fmt.Sprintf("0.000006%s", merlion.BaseDenom), "Minimum gas prices to accept for transactions; all fees in a tx must meet this minimum (e.g. 0.01alion,0.001stake)")
+	cmd.Flags().String(sdkserver.FlagMinGasPrices, fmt.Sprintf("0.000006%s", gridiron.BaseDenom), "Minimum gas prices to accept for transactions; all fees in a tx must meet this minimum (e.g. 0.01airon,0.001stake)")
 	cmd.Flags().String(flags.FlagKeyAlgorithm, string(hd.EthSecp256k1Type), "Key signing algorithm to generate keys for")
 }
 
@@ -135,7 +135,7 @@ or a similar setup where each node has a manually configurable IP address.
 Note, strict routability for addresses is turned off in the config file.
 
 Example:
-	merliond testnet init-files --validators 4 --output-dir ./.testnet --starting-ip-address 192.168.10.2
+	gridirond testnet init-files --validators 4 --output-dir ./.testnet --starting-ip-address 192.168.10.2
 	`,
 		RunE: func(cmd *cobra.Command, _ []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
@@ -163,7 +163,7 @@ Example:
 
 	addTestnetFlagsToCmd(cmd)
 	cmd.Flags().String(flagNodeDirPrefix, "node", "Prefix the directory name for each node with (node results in node0, node1, ...)")
-	cmd.Flags().String(flagNodeDaemonHome, "merliond", "Home directory of the node's daemon configuration")
+	cmd.Flags().String(flagNodeDaemonHome, "gridirond", "Home directory of the node's daemon configuration")
 	cmd.Flags().String(flagStartingIPAddress, "192.168.0.1", "Starting IP address (192.168.0.1 results in persistent peers list ID0@192.168.0.1:46656, ID1@192.168.0.2:46656, ...)")
 	cmd.Flags().Bool(flagPredeterminedMnemonic, false, "Use predetermined mnemonic for key derivation")
 	cmd.Flags().String(flags.FlagKeyringBackend, flags.DefaultKeyringBackend, "Select keyring backend (os|file|test)")
@@ -181,7 +181,7 @@ and generate "validators" directories, populated with necessary validator config
 (private validator, genesis, config, etc.).
 
 Example:
-	merliond testnet --validators 4 --output-dir ./.testnet
+	gridirond testnet --validators 4 --output-dir ./.testnet
 	`,
 		RunE: func(cmd *cobra.Command, _ []string) error {
 			args := startArgs{}
@@ -223,7 +223,7 @@ func initTestnetFiles(
 	args initArgs,
 ) error {
 	if args.chainID == "" {
-		args.chainID = fmt.Sprintf("merlion_%d-1", tmrand.Intn(1000000))
+		args.chainID = fmt.Sprintf("gridiron_%d-1", tmrand.Intn(1000000))
 	}
 
 	nodeIDs := make([]string, args.numValidators)
@@ -341,7 +341,7 @@ func initTestnetFiles(
 
 		accStakingTokens := sdk.TokensFromConsensusPower(5000, ethermint.PowerReduction)
 		coins := sdk.Coins{
-			sdk.NewCoin(merlion.BaseDenom, accStakingTokens),
+			sdk.NewCoin(gridiron.BaseDenom, accStakingTokens),
 		}
 
 		genBalances = append(genBalances, banktypes.Balance{Address: addr.String(), Coins: coins.Sort()})
@@ -355,7 +355,7 @@ func initTestnetFiles(
 		createValMsg, err := stakingtypes.NewMsgCreateValidator(
 			sdk.ValAddress(addr),
 			valPubKeys[i],
-			sdk.NewCoin(merlion.BaseDenom, valTokens),
+			sdk.NewCoin(gridiron.BaseDenom, valTokens),
 			stakingtypes.NewDescription(nodeDirName, "", "", "", ""),
 			stakingtypes.NewCommissionRates(commissionRate, commissionRate, commissionRate),
 			sdk.OneInt(),
@@ -391,7 +391,7 @@ func initTestnetFiles(
 			return err
 		}
 
-		customAppTemplate, customAppConfig := config.AppConfig(merlion.BaseDenom)
+		customAppTemplate, customAppConfig := config.AppConfig(gridiron.BaseDenom)
 		srvconfig.SetConfigTemplate(customAppTemplate)
 		if err := sdkserver.InterceptConfigsPreRunHandler(cmd, customAppTemplate, customAppConfig); err != nil {
 			return err
@@ -400,7 +400,7 @@ func initTestnetFiles(
 		srvconfig.WriteConfigFile(filepath.Join(nodeDir, "config/app.toml"), appConfig)
 	}
 
-	if err := initGenFiles(clientCtx, mbm, args.chainID, merlion.BaseDenom, genAccounts, genBalances, genFiles, args.numValidators); err != nil {
+	if err := initGenFiles(clientCtx, mbm, args.chainID, gridiron.BaseDenom, genAccounts, genBalances, genFiles, args.numValidators); err != nil {
 		return err
 	}
 
@@ -456,7 +456,7 @@ func initGenFiles(
 	var govGenState govtypes.GenesisState
 	clientCtx.Codec.MustUnmarshalJSON(appGenState[govtypes.ModuleName], &govGenState)
 
-	govMinDepositAmt := sdk.NewIntFromBigInt(big.NewInt(0).Exp(big.NewInt(10), big.NewInt(ethermint.BaseDenomUnit), nil)).MulRaw(1) // 1 lion
+	govMinDepositAmt := sdk.NewIntFromBigInt(big.NewInt(0).Exp(big.NewInt(10), big.NewInt(ethermint.BaseDenomUnit), nil)).MulRaw(1) // 1 iron
 	govGenState.DepositParams.MinDeposit[0] = sdk.NewCoin(coinDenom, govMinDepositAmt)
 	govGenState.DepositParams.MaxDepositPeriod = time.Hour * 24 * 14 // 14 days
 	// govGenState.VotingParams.VotingPeriod = time.Hour * 24 * 5       // 5 days

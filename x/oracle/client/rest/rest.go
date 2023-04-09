@@ -9,7 +9,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/rest"
 	govrest "github.com/cosmos/cosmos-sdk/x/gov/client/rest"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
-	"github.com/merlion-zone/merlion/x/oracle/types"
+	"github.com/gridiron-zone/gridiron/x/oracle/types"
 )
 
 type RegisterBackingProposalRequest struct {

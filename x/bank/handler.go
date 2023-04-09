@@ -6,8 +6,8 @@ import (
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
-	"github.com/merlion-zone/merlion/x/bank/keeper"
-	"github.com/merlion-zone/merlion/x/bank/types"
+	"github.com/gridiron-zone/gridiron/x/bank/keeper"
+	"github.com/gridiron-zone/gridiron/x/bank/types"
 )
 
 func NewBankProposalHandler(k bankkeeper.Keeper) govtypes.Handler {

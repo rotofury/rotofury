@@ -8,8 +8,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlion-zone/merlion/app"
-	"github.com/merlion-zone/merlion/x/maker/types"
+	"github.com/gridiron-zone/gridiron/app"
+	"github.com/gridiron-zone/gridiron/x/maker/types"
 	"github.com/stretchr/testify/suite"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmversion "github.com/tendermint/tendermint/proto/tendermint/version"
@@ -21,7 +21,7 @@ import (
 type KeeperTestSuite struct {
 	suite.Suite
 	ctx         sdk.Context
-	app         *app.Merlion
+	app         *app.Gridiron
 	queryClient types.QueryClient
 	accAddress  sdk.AccAddress
 	signer      keyring.Signer
@@ -56,7 +56,7 @@ func (suite *KeeperTestSuite) SetupTest() {
 		Version: tmversion.Consensus{
 			Block: version.BlockProtocol,
 		},
-		ChainID:         "merlion_5000-101",
+		ChainID:         "gridiron_5000-101",
 		Height:          1,
 		Time:            time.Now().UTC(),
 		ProposerAddress: suite.consAddress.Bytes(),

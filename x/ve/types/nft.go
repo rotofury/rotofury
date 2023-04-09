@@ -16,7 +16,7 @@ var VeNftClass = nft.Class{
 	Id:          "veNFT",
 	Name:        "veNFT",
 	Symbol:      "veNFT",
-	Description: "Merlion locks, can be used to boost gauge yields, vote on token emission, and receive bribes",
+	Description: "Gridiron locks, can be used to boost gauge yields, vote on token emission, and receive bribes",
 }
 
 // VeIDFromUint64 converts ve id from integer to string

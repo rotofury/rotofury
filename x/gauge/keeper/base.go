@@ -6,9 +6,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	merlion "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/gauge/types"
-	vetypes "github.com/merlion-zone/merlion/x/ve/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/gauge/types"
+	vetypes "github.com/gridiron-zone/gridiron/x/ve/types"
 )
 
 type Base struct {
@@ -125,7 +125,7 @@ func (b *Base) findPriorRewardPerTicket(ctx sdk.Context, rewardDenom string, tim
 }
 
 func (b *Base) lastTimeRewardAvailable(ctx sdk.Context, rewardDenom string) uint64 {
-	return merlion.Min(uint64(ctx.BlockTime().Unix()), b.GetReward(ctx, rewardDenom).FinishTime)
+	return gridiron.Min(uint64(ctx.BlockTime().Unix()), b.GetReward(ctx, rewardDenom).FinishTime)
 }
 
 func (b *Base) rewardPerTicket(ctx sdk.Context, rewardDenom string) sdk.Int {
@@ -139,7 +139,7 @@ func (b *Base) rewardPerTicket(ctx sdk.Context, rewardDenom string) sdk.Int {
 		return reward.CumulativePerTicket
 	}
 
-	timeFromLast := b.lastTimeRewardAvailable(ctx, rewardDenom) - merlion.Min(reward.LastUpdateTime, reward.FinishTime)
+	timeFromLast := b.lastTimeRewardAvailable(ctx, rewardDenom) - gridiron.Min(reward.LastUpdateTime, reward.FinishTime)
 	rewardFromLast := reward.Rate.MulRaw(int64(timeFromLast)).Quo(totalAmount)
 	return reward.CumulativePerTicket.Add(rewardFromLast)
 }
@@ -171,8 +171,8 @@ func (b *Base) derivedTickets(ctx sdk.Context, veID uint64) sdk.Int {
 
 func (b *Base) calculateRewardPerTicket(ctx sdk.Context, rewardDenom string, timestamp0, timestamp1, startTimestamp uint64, totalAmount sdk.Int) (rewardPerTicket sdk.Int, endTimestamp uint64) {
 	reward := b.GetReward(ctx, rewardDenom)
-	endTimestamp = merlion.Max(timestamp1, startTimestamp)
-	duration := merlion.Min(endTimestamp, reward.FinishTime) - merlion.Min(merlion.Max(timestamp0, startTimestamp), reward.FinishTime)
+	endTimestamp = gridiron.Max(timestamp1, startTimestamp)
+	duration := gridiron.Min(endTimestamp, reward.FinishTime) - gridiron.Min(gridiron.Max(timestamp0, startTimestamp), reward.FinishTime)
 	rewardPerTicket = reward.Rate.MulRaw(int64(duration)).Quo(totalAmount)
 	return rewardPerTicket, endTimestamp
 }
@@ -210,7 +210,7 @@ func (b *Base) updateRewardPerTicket(ctx sdk.Context, rewardDenom string) {
 
 	point := b.GetCheckpoint(ctx, epoch)
 	if point.Amount.IsPositive() {
-		rewardPerTicket, _ := b.calculateRewardPerTicket(ctx, rewardDenom, merlion.Max(point.Timestamp, startTimestamp), b.lastTimeRewardAvailable(ctx, rewardDenom), startTimestamp, point.Amount)
+		rewardPerTicket, _ := b.calculateRewardPerTicket(ctx, rewardDenom, gridiron.Max(point.Timestamp, startTimestamp), b.lastTimeRewardAvailable(ctx, rewardDenom), startTimestamp, point.Amount)
 		rewardCumulativePerTicket = rewardCumulativePerTicket.Add(rewardPerTicket)
 		b.writeRewardPerTicketCheckpoint(ctx, rewardDenom, rewardCumulativePerTicket, now)
 		startTimestamp = now
@@ -228,7 +228,7 @@ func (b *Base) userReward(ctx sdk.Context, rewardDenom string, veID uint64) sdk.
 	}
 
 	userReward := b.GetUserReward(ctx, rewardDenom, veID)
-	startTimestamp := merlion.Max(userReward.LastClaimTime, b.GetRewardCheckpoint(ctx, rewardDenom, FirstEpoch).Timestamp)
+	startTimestamp := gridiron.Max(userReward.LastClaimTime, b.GetRewardCheckpoint(ctx, rewardDenom, FirstEpoch).Timestamp)
 
 	reward := sdk.ZeroInt()
 	startEpoch := b.findPriorEpoch(ctx, veID, "", startTimestamp)

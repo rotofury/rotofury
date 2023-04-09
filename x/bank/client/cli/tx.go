@@ -12,7 +12,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/gov/client/cli"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/gogo/protobuf/proto"
-	"github.com/merlion-zone/merlion/x/bank/types"
+	"github.com/gridiron-zone/gridiron/x/bank/types"
 	"github.com/spf13/cobra"
 )
 
@@ -102,7 +102,7 @@ func getProposalArgs(cmd *cobra.Command) (title, description string, deposit sdk
 func addProposalTxFlagsToCmd(cmd *cobra.Command) {
 	cmd.Flags().String(cli.FlagTitle, "", "title of proposal")
 	cmd.Flags().String(cli.FlagDescription, "", "description of proposal")
-	cmd.Flags().String(cli.FlagDeposit, "1ulion", "deposit of proposal")
+	cmd.Flags().String(cli.FlagDeposit, "1uiron", "deposit of proposal")
 	if err := cmd.MarkFlagRequired(cli.FlagTitle); err != nil {
 		panic(err)
 	}

@@ -5,8 +5,8 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlion-zone/merlion/x/maker/keeper"
-	"github.com/merlion-zone/merlion/x/maker/types"
+	"github.com/gridiron-zone/gridiron/x/maker/keeper"
+	"github.com/gridiron-zone/gridiron/x/maker/types"
 )
 
 // EndBlocker is called at the end of every block

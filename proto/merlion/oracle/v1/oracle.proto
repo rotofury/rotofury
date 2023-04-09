@@ -1,9 +1,9 @@
 syntax = "proto3";
-package merlion.oracle.v1;
+package gridiron.oracle.v1;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/merlion-zone/merlion/x/oracle/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/oracle/types";
 
 // Params defines the parameters for the oracle module.
 message Params {

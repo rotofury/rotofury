@@ -5,15 +5,15 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	mertypes "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/vesting/types"
+	gridtypes "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/vesting/types"
 )
 
 func (suite *KeeperTestSuite) TestKeeper_AllocateAtGenesis() {
 	suite.SetupTest()
 	k := suite.app.VestingKeeper
 	receiver := sdk.AccAddress(suite.address.Bytes())
-	denom := mertypes.BaseDenom
+	denom := gridtypes.BaseDenom
 	amt, _ := new(big.Int).SetString("50000000000000000000000000", 10)
 	amt2, _ := new(big.Int).SetString("200000000000000000000000000", 10)
 	amt3, _ := new(big.Int).SetString("450000000000000000000000000", 10)
@@ -90,7 +90,7 @@ func (suite *KeeperTestSuite) TestKeeper_GetAirdrop_SetAirdrop() {
 	receiver := sdk.AccAddress(suite.address.Bytes())
 	airdrop := types.Airdrop{
 		TargetAddr: receiver.String(),
-		Amount:     sdk.NewCoin(mertypes.BaseDenom, sdk.NewInt(1)),
+		Amount:     sdk.NewCoin(gridtypes.BaseDenom, sdk.NewInt(1)),
 	}
 	k.SetAirdrop(suite.ctx, airdrop.GetTargetAddr(), airdrop)
 	suite.Require().Equal(airdrop, k.GetAirdrop(suite.ctx, airdrop.GetTargetAddr()))
@@ -102,7 +102,7 @@ func (suite *KeeperTestSuite) TestKeeper_DeleteAirdrop() {
 	receiver := sdk.AccAddress(suite.address.Bytes())
 	airdrop := types.Airdrop{
 		TargetAddr: receiver.String(),
-		Amount:     sdk.NewCoin(mertypes.BaseDenom, sdk.NewInt(1)),
+		Amount:     sdk.NewCoin(gridtypes.BaseDenom, sdk.NewInt(1)),
 	}
 	target := airdrop.GetTargetAddr()
 	k.SetAirdrop(suite.ctx, target, airdrop)
@@ -116,7 +116,7 @@ func (suite *KeeperTestSuite) TestKeeper_GetAirdropCompleted_SetAirdropCompleted
 	receiver := sdk.AccAddress(suite.address.Bytes())
 	airdrop := types.Airdrop{
 		TargetAddr: receiver.String(),
-		Amount:     sdk.NewCoin(mertypes.BaseDenom, sdk.NewInt(1)),
+		Amount:     sdk.NewCoin(gridtypes.BaseDenom, sdk.NewInt(1)),
 	}
 	k.SetAirdropCompleted(suite.ctx, airdrop.GetTargetAddr(), airdrop)
 	suite.Require().Equal(airdrop, k.GetAirdropCompleted(suite.ctx, airdrop.GetTargetAddr()))

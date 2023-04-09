@@ -1,9 +1,9 @@
 syntax = "proto3";
-package merlion.voter.v1;
+package gridiron.voter.v1;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/merlion-zone/merlion/x/voter/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/voter/types";
 
 // GenesisState defines the voter module's genesis state.
 message GenesisState { Params params = 1 [ (gogoproto.nullable) = false ]; }

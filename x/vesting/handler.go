@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/merlion-zone/merlion/x/vesting/keeper"
-	"github.com/merlion-zone/merlion/x/vesting/types"
+	"github.com/gridiron-zone/gridiron/x/vesting/keeper"
+	"github.com/gridiron-zone/gridiron/x/vesting/types"
 )
 
 // NewHandler ...

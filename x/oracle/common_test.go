@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/staking"
-	"github.com/merlion-zone/merlion/x/oracle"
-	"github.com/merlion-zone/merlion/x/oracle/keeper"
+	"github.com/gridiron-zone/gridiron/x/oracle"
+	"github.com/gridiron-zone/gridiron/x/oracle/keeper"
 	"github.com/stretchr/testify/require"
 )
 

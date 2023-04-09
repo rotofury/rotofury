@@ -6,7 +6,7 @@ import (
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	"github.com/merlion-zone/merlion/x/staking/types"
+	"github.com/gridiron-zone/gridiron/x/staking/types"
 )
 
 type Keeper struct {

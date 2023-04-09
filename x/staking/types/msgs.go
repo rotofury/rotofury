@@ -4,7 +4,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	vetypes "github.com/merlion-zone/merlion/x/ve/types"
+	vetypes "github.com/gridiron-zone/gridiron/x/ve/types"
 )
 
 const (

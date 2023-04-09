@@ -10,7 +10,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/spf13/cobra"
 
-	"github.com/merlion-zone/merlion/x/oracle/types"
+	"github.com/gridiron-zone/gridiron/x/oracle/types"
 )
 
 // GetQueryCmd returns the cli query commands for this module
@@ -49,11 +49,11 @@ func CmdQueryExchangeRates() *cobra.Command {
 Query the current exchange rate of an asset with an $uUSD. 
 You can find the current list of active denoms by running
 
-$ merliond query oracle exchange-rates 
+$ gridirond query oracle exchange-rates 
 
 Or, can filter with denom
 
-$ merliond query oracle exchange-rates uusd
+$ gridirond query oracle exchange-rates uusd
 `),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
@@ -94,11 +94,11 @@ func CmdQueryActives() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "actives",
 		Args:  cobra.NoArgs,
-		Short: "Query the active list of Mer assets recognized by the oracle",
+		Short: "Query the active list of Grid assets recognized by the oracle",
 		Long: strings.TrimSpace(`
-Query the active list of Mer assets recognized by the types.
+Query the active list of Grid assets recognized by the types.
 
-$ merliond query oracle actives
+$ gridirond query oracle actives
 `),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
@@ -158,7 +158,7 @@ func CmdQueryFeederDelegation() *cobra.Command {
 		Long: strings.TrimSpace(`
 Query the account the validator's oracle voting right is delegated to.
 
-$ merliond query oracle feeder mervaloper...
+$ gridirond query oracle feeder mervaloper...
 `),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
@@ -199,7 +199,7 @@ func CmdQueryMissCounter() *cobra.Command {
 		Long: strings.TrimSpace(`
 Query the # of vote periods missed in this oracle slash window.
 
-$ merliond query oracle miss mervaloper...
+$ gridirond query oracle miss mervaloper...
 `),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
@@ -239,11 +239,11 @@ func CmdQueryAggregatePrevote() *cobra.Command {
 		Long: strings.TrimSpace(`
 Query outstanding oracle aggregate prevotes.
 
-$ merliond query oracle aggregate-prevotes
+$ gridirond query oracle aggregate-prevotes
 
 Or, can filter with voter address
 
-$ merliond query oracle aggregate-prevotes mervaloper...
+$ gridirond query oracle aggregate-prevotes mervaloper...
 `),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
@@ -295,11 +295,11 @@ func CmdQueryAggregateVote() *cobra.Command {
 		Long: strings.TrimSpace(`
 Query outstanding oracle aggregate vote.
 
-$ merliond query oracle aggregate-votes 
+$ gridirond query oracle aggregate-votes 
 
 Or, can filter with voter address
 
-$ merliond query oracle aggregate-votes mervaloper...
+$ gridirond query oracle aggregate-votes mervaloper...
 `),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)

@@ -1,10 +1,10 @@
 syntax = "proto3";
-package merlion.erc20.v1;
+package gridiron.erc20.v1;
 
 import "gogoproto/gogo.proto";
-import "merlion/erc20/v1/erc20.proto";
+import "gridiron/erc20/v1/erc20.proto";
 
-option go_package = "github.com/merlion-zone/merlion/x/erc20/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/erc20/types";
 
 // GenesisState defines the module's genesis state.
 message GenesisState {

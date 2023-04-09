@@ -21,19 +21,24 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/multigravity/v1beta/params";
   }
-  rpc CurrentValset(QueryCurrentValsetRequest) returns (QueryCurrentValsetResponse) {
+  rpc CurrentValset(QueryCurrentValsetRequest)
+      returns (QueryCurrentValsetResponse) {
     option (google.api.http).get = "/multigravity/v1beta/valset/current";
   }
-  rpc ValsetRequest(QueryValsetRequestRequest) returns (QueryValsetRequestResponse) {
+  rpc ValsetRequest(QueryValsetRequestRequest)
+      returns (QueryValsetRequestResponse) {
     option (google.api.http).get = "/multigravity/v1beta/valset";
   }
-  rpc ValsetConfirm(QueryValsetConfirmRequest) returns (QueryValsetConfirmResponse) {
+  rpc ValsetConfirm(QueryValsetConfirmRequest)
+      returns (QueryValsetConfirmResponse) {
     option (google.api.http).get = "/multigravity/v1beta/valset/confirm";
   }
-  rpc ValsetConfirmsByNonce(QueryValsetConfirmsByNonceRequest) returns (QueryValsetConfirmsByNonceResponse) {
+  rpc ValsetConfirmsByNonce(QueryValsetConfirmsByNonceRequest)
+      returns (QueryValsetConfirmsByNonceResponse) {
     option (google.api.http).get = "/multigravity/v1beta/confirms/{nonce}";
   }
-  rpc LastValsetRequests(QueryLastValsetRequestsRequest) returns (QueryLastValsetRequestsResponse) {
+  rpc LastValsetRequests(QueryLastValsetRequestsRequest)
+      returns (QueryLastValsetRequestsResponse) {
     option (google.api.http).get = "/multigravity/v1beta/valset/requests";
   }
   rpc LastPendingValsetRequestByAddr(QueryLastPendingValsetRequestByAddrRequest)
@@ -42,111 +47,123 @@ service Query {
   }
   rpc LastPendingBatchRequestByAddr(QueryLastPendingBatchRequestByAddrRequest)
       returns (QueryLastPendingBatchRequestByAddrResponse) {
-    option (google.api.http).get = "/multigravity/v1beta/batch/last_pending_request_by_addr";
+    option (google.api.http).get =
+        "/multigravity/v1beta/batch/last_pending_request_by_addr";
   }
   rpc LastPendingLogicCallByAddr(QueryLastPendingLogicCallByAddrRequest)
       returns (QueryLastPendingLogicCallByAddrResponse) {
     option (google.api.http).get = "/multigravity/v1beta/logic/{address}";
   }
-  rpc LastEventNonceByAddr(QueryLastEventNonceByAddrRequest) returns (QueryLastEventNonceByAddrResponse) {
-    option (google.api.http).get = "/gravity/v1beta/oracle/eventnonce/{address}";
+  rpc LastEventNonceByAddr(QueryLastEventNonceByAddrRequest)
+      returns (QueryLastEventNonceByAddrResponse) {
+    option (google.api.http).get =
+        "/gravity/v1beta/oracle/eventnonce/{address}";
   }
   rpc BatchFees(QueryBatchFeeRequest) returns (QueryBatchFeeResponse) {
     option (google.api.http).get = "/multigravity/v1beta/batchfees";
   }
-  rpc OutgoingTxBatches(QueryOutgoingTxBatchesRequest) returns (QueryOutgoingTxBatchesResponse) {
+  rpc OutgoingTxBatches(QueryOutgoingTxBatchesRequest)
+      returns (QueryOutgoingTxBatchesResponse) {
     option (google.api.http).get = "/multigravity/v1beta/batch/outgoingtx";
   }
-  rpc OutgoingLogicCalls(QueryOutgoingLogicCallsRequest) returns (QueryOutgoingLogicCallsResponse) {
+  rpc OutgoingLogicCalls(QueryOutgoingLogicCallsRequest)
+      returns (QueryOutgoingLogicCallsResponse) {
     option (google.api.http).get = "/multigravity/v1beta/batch/outgoinglogic";
   }
-  rpc BatchRequestByNonce(QueryBatchRequestByNonceRequest) returns (QueryBatchRequestByNonceResponse) {
-    option (google.api.http).get = "/multigravity/v1beta/batch/request_by_nonce";
+  rpc BatchRequestByNonce(QueryBatchRequestByNonceRequest)
+      returns (QueryBatchRequestByNonceResponse) {
+    option (google.api.http).get =
+        "/multigravity/v1beta/batch/request_by_nonce";
   }
-  rpc BatchConfirms(QueryBatchConfirmsRequest) returns (QueryBatchConfirmsResponse) {
+  rpc BatchConfirms(QueryBatchConfirmsRequest)
+      returns (QueryBatchConfirmsResponse) {
     option (google.api.http).get = "/multigravity/v1beta/batch/confirms";
   }
-  rpc LogicConfirms(QueryLogicConfirmsRequest) returns (QueryLogicConfirmsResponse) {
+  rpc LogicConfirms(QueryLogicConfirmsRequest)
+      returns (QueryLogicConfirmsResponse) {
     option (google.api.http).get = "/multigravity/v1beta/logic/confirms";
   }
-  rpc ERC20ToDenom(QueryERC20ToDenomRequest) returns (QueryERC20ToDenomResponse) {
-    option (google.api.http).get = "/multigravity/v1beta/cosmos_originated/erc20_to_denom";
+  rpc ERC20ToDenom(QueryERC20ToDenomRequest)
+      returns (QueryERC20ToDenomResponse) {
+    option (google.api.http).get =
+        "/multigravity/v1beta/cosmos_originated/erc20_to_denom";
   }
-  rpc DenomToERC20(QueryDenomToERC20Request) returns (QueryDenomToERC20Response) {
-    option (google.api.http).get = "/multigravity/v1beta/cosmos_originated/denom_to_erc20";
+  rpc DenomToERC20(QueryDenomToERC20Request)
+      returns (QueryDenomToERC20Response) {
+    option (google.api.http).get =
+        "/multigravity/v1beta/cosmos_originated/denom_to_erc20";
   }
-  rpc GetAttestations(QueryAttestationsRequest) returns (QueryAttestationsResponse) {
+  rpc GetAttestations(QueryAttestationsRequest)
+      returns (QueryAttestationsResponse) {
     option (google.api.http).get = "/multigravity/v1beta/query_attestations";
   }
   rpc GetDelegateKeyByValidator(gravity.v1.QueryDelegateKeysByValidatorAddress)
       returns (gravity.v1.QueryDelegateKeysByValidatorAddressResponse) {
-    option (google.api.http).get = "/multigravity/v1beta/query_delegate_keys_by_validator";
+    option (google.api.http).get =
+        "/multigravity/v1beta/query_delegate_keys_by_validator";
   }
-  rpc GetDelegateKeyByEth(gravity.v1.QueryDelegateKeysByEthAddress) returns (gravity.v1.QueryDelegateKeysByEthAddressResponse) {
-    option (google.api.http).get = "/multigravity/v1beta/query_delegate_keys_by_eth";
+  rpc GetDelegateKeyByEth(gravity.v1.QueryDelegateKeysByEthAddress)
+      returns (gravity.v1.QueryDelegateKeysByEthAddressResponse) {
+    option (google.api.http).get =
+        "/multigravity/v1beta/query_delegate_keys_by_eth";
   }
-  rpc GetDelegateKeyByOrchestrator(gravity.v1.QueryDelegateKeysByOrchestratorAddress)
+  rpc GetDelegateKeyByOrchestrator(
+      gravity.v1.QueryDelegateKeysByOrchestratorAddress)
       returns (gravity.v1.QueryDelegateKeysByOrchestratorAddressResponse) {
-    option (google.api.http).get = "/multigravity/v1beta/query_delegate_keys_by_orchestrator";
+    option (google.api.http).get =
+        "/multigravity/v1beta/query_delegate_keys_by_orchestrator";
   }
 
-  rpc GetPendingSendToEth(QueryPendingSendToEth) returns (QueryPendingSendToEthResponse) {
-    option (google.api.http).get = "/multigravity/v1beta/query_pending_send_to_eth";
+  rpc GetPendingSendToEth(QueryPendingSendToEth)
+      returns (QueryPendingSendToEthResponse) {
+    option (google.api.http).get =
+        "/multigravity/v1beta/query_pending_send_to_eth";
   }
-  rpc GetPendingIbcAutoForwards(QueryPendingIbcAutoForwards) returns (QueryPendingIbcAutoForwardsResponse) {
-    option (google.api.http).get = "/multigravity/v1beta/query_pending_ibc_auto_forwards";
+  rpc GetPendingIbcAutoForwards(QueryPendingIbcAutoForwards)
+      returns (QueryPendingIbcAutoForwardsResponse) {
+    option (google.api.http).get =
+        "/multigravity/v1beta/query_pending_ibc_auto_forwards";
   }
 }
 
 message QueryChainsRequest {}
-message QueryChainsResponse {
-  repeated string chain_identifiers = 1;
-}
+message QueryChainsResponse { repeated string chain_identifiers = 1; }
 
-message QueryParamsRequest {
-  string chain_identifier = 1;
-}
+message QueryParamsRequest { string chain_identifier = 1; }
 message QueryParamsResponse {
-  gravity.v1.Params params = 1 [(gogoproto.nullable) = false];
+  gravity.v1.Params params = 1 [ (gogoproto.nullable) = false ];
 }
 
-message QueryCurrentValsetRequest {
-  string chain_identifier = 1;
-}
+message QueryCurrentValsetRequest { string chain_identifier = 1; }
 message QueryCurrentValsetResponse {
-  gravity.v1.Valset valset = 1 [(gogoproto.nullable) = false];
+  gravity.v1.Valset valset = 1 [ (gogoproto.nullable) = false ];
 }
 
 message QueryValsetRequestRequest {
   uint64 nonce = 1;
   string chain_identifier = 2;
 }
-message QueryValsetRequestResponse {
-  gravity.v1.Valset valset = 1;
-}
+message QueryValsetRequestResponse { gravity.v1.Valset valset = 1; }
 
 message QueryValsetConfirmRequest {
   uint64 nonce = 1;
   string address = 2;
   string chain_identifier = 3;
 }
-message QueryValsetConfirmResponse {
-  gravity.v1.MsgValsetConfirm confirm = 1;
-}
+message QueryValsetConfirmResponse { gravity.v1.MsgValsetConfirm confirm = 1; }
 
 message QueryValsetConfirmsByNonceRequest {
   uint64 nonce = 1;
   string chain_identifier = 2;
 }
 message QueryValsetConfirmsByNonceResponse {
-  repeated gravity.v1.MsgValsetConfirm confirms = 1 [(gogoproto.nullable) = false];
+  repeated gravity.v1.MsgValsetConfirm confirms = 1
+      [ (gogoproto.nullable) = false ];
 }
 
-message QueryLastValsetRequestsRequest {
-  string chain_identifier = 1;
-}
+message QueryLastValsetRequestsRequest { string chain_identifier = 1; }
 message QueryLastValsetRequestsResponse {
-  repeated gravity.v1.Valset valsets = 1 [(gogoproto.nullable) = false];
+  repeated gravity.v1.Valset valsets = 1 [ (gogoproto.nullable) = false ];
 }
 
 message QueryLastPendingValsetRequestByAddrRequest {
@@ -154,14 +171,12 @@ message QueryLastPendingValsetRequestByAddrRequest {
   string chain_identifier = 2;
 }
 message QueryLastPendingValsetRequestByAddrResponse {
-  repeated gravity.v1.Valset valsets = 1 [(gogoproto.nullable) = false];
+  repeated gravity.v1.Valset valsets = 1 [ (gogoproto.nullable) = false ];
 }
 
-message QueryBatchFeeRequest {
-  string chain_identifier = 1;
-}
+message QueryBatchFeeRequest { string chain_identifier = 1; }
 message QueryBatchFeeResponse {
-  repeated gravity.v1.BatchFees batch_fees = 1 [(gogoproto.nullable) = false];
+  repeated gravity.v1.BatchFees batch_fees = 1 [ (gogoproto.nullable) = false ];
 }
 
 message QueryLastPendingBatchRequestByAddrRequest {
@@ -169,7 +184,8 @@ message QueryLastPendingBatchRequestByAddrRequest {
   string chain_identifier = 2;
 }
 message QueryLastPendingBatchRequestByAddrResponse {
-  repeated gravity.v1.OutgoingTxBatch batch = 1 [(gogoproto.nullable) = false];
+  repeated gravity.v1.OutgoingTxBatch batch = 1
+      [ (gogoproto.nullable) = false ];
 }
 
 message QueryLastPendingLogicCallByAddrRequest {
@@ -177,21 +193,20 @@ message QueryLastPendingLogicCallByAddrRequest {
   string chain_identifier = 2;
 }
 message QueryLastPendingLogicCallByAddrResponse {
-  repeated gravity.v1.OutgoingLogicCall call = 1 [(gogoproto.nullable) = false];
+  repeated gravity.v1.OutgoingLogicCall call = 1
+      [ (gogoproto.nullable) = false ];
 }
 
-message QueryOutgoingTxBatchesRequest {
-  string chain_identifier = 1;
-}
+message QueryOutgoingTxBatchesRequest { string chain_identifier = 1; }
 message QueryOutgoingTxBatchesResponse {
-  repeated gravity.v1.OutgoingTxBatch batches = 1 [(gogoproto.nullable) = false];
+  repeated gravity.v1.OutgoingTxBatch batches = 1
+      [ (gogoproto.nullable) = false ];
 }
 
-message QueryOutgoingLogicCallsRequest {
-  string chain_identifier = 1;
-}
+message QueryOutgoingLogicCallsRequest { string chain_identifier = 1; }
 message QueryOutgoingLogicCallsResponse {
-  repeated gravity.v1.OutgoingLogicCall calls = 1 [(gogoproto.nullable) = false];
+  repeated gravity.v1.OutgoingLogicCall calls = 1
+      [ (gogoproto.nullable) = false ];
 }
 
 message QueryBatchRequestByNonceRequest {
@@ -200,7 +215,7 @@ message QueryBatchRequestByNonceRequest {
   string chain_identifier = 3;
 }
 message QueryBatchRequestByNonceResponse {
-  gravity.v1.OutgoingTxBatch batch = 1 [(gogoproto.nullable) = false];
+  gravity.v1.OutgoingTxBatch batch = 1 [ (gogoproto.nullable) = false ];
 }
 
 message QueryBatchConfirmsRequest {
@@ -209,25 +224,25 @@ message QueryBatchConfirmsRequest {
   string chain_identifier = 3;
 }
 message QueryBatchConfirmsResponse {
-  repeated gravity.v1.MsgConfirmBatch confirms = 1 [(gogoproto.nullable) = false];
+  repeated gravity.v1.MsgConfirmBatch confirms = 1
+      [ (gogoproto.nullable) = false ];
 }
 
 message QueryLogicConfirmsRequest {
-  bytes  invalidation_id = 1;
+  bytes invalidation_id = 1;
   uint64 invalidation_nonce = 2;
   string chain_identifier = 3;
 }
 message QueryLogicConfirmsResponse {
-  repeated gravity.v1.MsgConfirmLogicCall confirms = 1 [(gogoproto.nullable) = false];
+  repeated gravity.v1.MsgConfirmLogicCall confirms = 1
+      [ (gogoproto.nullable) = false ];
 }
 
 message QueryLastEventNonceByAddrRequest {
   string address = 1;
   string chain_identifier = 2;
 }
-message QueryLastEventNonceByAddrResponse {
-  uint64 event_nonce = 1;
-}
+message QueryLastEventNonceByAddrResponse { uint64 event_nonce = 1; }
 
 message QueryERC20ToDenomRequest {
   string erc20 = 1;
@@ -235,7 +250,7 @@ message QueryERC20ToDenomRequest {
 }
 message QueryERC20ToDenomResponse {
   string denom = 1;
-  bool   cosmos_originated = 2;
+  bool cosmos_originated = 2;
 }
 
 message QueryDenomToERC20Request {
@@ -244,7 +259,7 @@ message QueryDenomToERC20Request {
 }
 message QueryDenomToERC20Response {
   string erc20 = 1;
-  bool   cosmos_originated = 2;
+  bool cosmos_originated = 2;
 }
 
 // QueryAttestationsRequest defines the request structure for getting recent
@@ -270,7 +285,8 @@ message QueryAttestationsRequest {
   string chain_identifier = 6;
 }
 message QueryAttestationsResponse {
-  repeated gravity.v1.Attestation attestations = 1 [(gogoproto.nullable) = false];
+  repeated gravity.v1.Attestation attestations = 1
+      [ (gogoproto.nullable) = false ];
 }
 
 message QueryPendingSendToEth {
@@ -278,15 +294,18 @@ message QueryPendingSendToEth {
   string chain_identifier = 2;
 }
 message QueryPendingSendToEthResponse {
-  repeated gravity.v1.OutgoingTransferTx transfers_in_batches = 1 [(gogoproto.nullable) = false];
-  repeated gravity.v1.OutgoingTransferTx unbatched_transfers = 2 [(gogoproto.nullable) = false];
+  repeated gravity.v1.OutgoingTransferTx transfers_in_batches = 1
+      [ (gogoproto.nullable) = false ];
+  repeated gravity.v1.OutgoingTransferTx unbatched_transfers = 2
+      [ (gogoproto.nullable) = false ];
 }
 
-message QueryPendingIbcAutoForwards{
-  // limit defines the number of pending forwards to return, in order of their SendToCosmos.EventNonce
+message QueryPendingIbcAutoForwards {
+  // limit defines the number of pending forwards to return, in order of their
+  // SendToCosmos.EventNonce
   uint64 limit = 1;
   string chain_identifier = 2;
 }
-message QueryPendingIbcAutoForwardsResponse{
+message QueryPendingIbcAutoForwardsResponse {
   repeated gravity.v1.PendingIbcAutoForward pending_ibc_auto_forwards = 1;
 }

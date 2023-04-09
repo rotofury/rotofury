@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/cosmos/cosmos-sdk/client"
-	"github.com/merlion-zone/merlion/x/gauge/types"
+	"github.com/gridiron-zone/gridiron/x/gauge/types"
 	"github.com/spf13/cobra"
 )
 

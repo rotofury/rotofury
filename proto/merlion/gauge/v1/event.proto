@@ -1,4 +1,4 @@
 syntax = "proto3";
-package merlion.gauge.v1;
+package gridiron.gauge.v1;
 
-option go_package = "github.com/merlion-zone/merlion/x/gauge/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/gauge/types";

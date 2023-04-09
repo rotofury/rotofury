@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/merlion-zone/merlion/x/voter/types"
+	"github.com/gridiron-zone/gridiron/x/voter/types"
 )
 
 type msgServer struct {

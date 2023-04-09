@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	merlion "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/erc20/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/erc20/types"
 )
 
 // RegisterInvariants registers the erc20 module invariants
@@ -24,7 +24,7 @@ func ConsistentBalanceInvariant(k Keeper) sdk.Invariant {
 
 		// Only iterate on native coins
 		k.bankKeeper.IterateAllBalances(ctx, func(addr sdk.AccAddress, balance sdk.Coin) bool {
-			if strings.Contains(balance.Denom, merlion.DisplayDenom) {
+			if strings.Contains(balance.Denom, gridiron.DisplayDenom) {
 				// skip gas token
 				return false
 			}

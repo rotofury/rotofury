@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	"github.com/ethereum/go-ethereum/common"
-	testkeeper "github.com/merlion-zone/merlion/testutil/keeper"
-	"github.com/merlion-zone/merlion/x/erc20/types"
+	testkeeper "github.com/gridiron-zone/gridiron/testutil/keeper"
+	"github.com/gridiron-zone/gridiron/x/erc20/types"
 	"github.com/stretchr/testify/require"
 )
 

@@ -6,8 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
-	"github.com/merlion-zone/merlion/x/oracle/keeper"
-	"github.com/merlion-zone/merlion/x/oracle/types"
+	"github.com/gridiron-zone/gridiron/x/oracle/keeper"
+	"github.com/gridiron-zone/gridiron/x/oracle/types"
 )
 
 // NewHandler returns a handler for oracle messages.

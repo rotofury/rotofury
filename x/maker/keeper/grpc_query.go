@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	merlion "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/maker/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/maker/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -88,9 +88,9 @@ func (k Keeper) CollateralOfAccount(c context.Context, req *types.QueryCollatera
 		collateral = types.AccountCollateral{
 			Account:             account.String(),
 			Collateral:          sdk.NewCoin(req.CollateralDenom, sdk.ZeroInt()),
-			MerDebt:             sdk.NewCoin(merlion.MicroUSMDenom, sdk.ZeroInt()),
-			LionCollateralized:  sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
-			LastInterest:        sdk.NewCoin(merlion.MicroUSMDenom, sdk.ZeroInt()),
+			GridDebt:             sdk.NewCoin(gridiron.MicroUSMDenom, sdk.ZeroInt()),
+			IronCollateralized:  sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
+			LastInterest:        sdk.NewCoin(gridiron.MicroUSMDenom, sdk.ZeroInt()),
 			LastSettlementBlock: ctx.BlockHeight(),
 		}
 	}
@@ -146,28 +146,28 @@ func (k Keeper) Params(c context.Context, req *types.QueryParamsRequest) (*types
 
 func (k Keeper) EstimateMintBySwapIn(c context.Context, req *types.EstimateMintBySwapInRequest) (*types.EstimateMintBySwapInResponse, error) {
 	ctx := sdk.UnwrapSDKContext(c)
-	backingIn, lionIn, mintFee, err := k.calculateMintBySwapIn(ctx, req.MintOut, req.BackingDenom, req.FullBacking)
+	backingIn, ironIn, mintFee, err := k.calculateMintBySwapIn(ctx, req.MintOut, req.BackingDenom, req.FullBacking)
 	if err != nil {
 		return nil, err
 	}
 
 	return &types.EstimateMintBySwapInResponse{
 		BackingIn: backingIn,
-		LionIn:    lionIn,
+		IronIn:    ironIn,
 		MintFee:   mintFee,
 	}, nil
 }
 
 func (k Keeper) EstimateMintBySwapOut(c context.Context, req *types.EstimateMintBySwapOutRequest) (*types.EstimateMintBySwapOutResponse, error) {
 	ctx := sdk.UnwrapSDKContext(c)
-	backingIn, lionIn, mintOut, mintFee, err := k.calculateMintBySwapOut(ctx, req.BackingInMax, req.LionInMax, req.FullBacking)
+	backingIn, ironIn, mintOut, mintFee, err := k.calculateMintBySwapOut(ctx, req.BackingInMax, req.IronInMax, req.FullBacking)
 	if err != nil {
 		return nil, err
 	}
 
 	return &types.EstimateMintBySwapOutResponse{
 		BackingIn: backingIn,
-		LionIn:    lionIn,
+		IronIn:    ironIn,
 		MintOut:   mintOut,
 		MintFee:   mintFee,
 	}, nil
@@ -175,7 +175,7 @@ func (k Keeper) EstimateMintBySwapOut(c context.Context, req *types.EstimateMint
 
 func (k Keeper) EstimateBurnBySwapIn(c context.Context, req *types.EstimateBurnBySwapInRequest) (*types.EstimateBurnBySwapInResponse, error) {
 	ctx := sdk.UnwrapSDKContext(c)
-	burnIn, backingOut, lionOut, burnFee, err := k.calculateBurnBySwapIn(ctx, req.BackingOutMax, req.LionOutMax)
+	burnIn, backingOut, ironOut, burnFee, err := k.calculateBurnBySwapIn(ctx, req.BackingOutMax, req.IronOutMax)
 	if err != nil {
 		return nil, err
 	}
@@ -183,41 +183,41 @@ func (k Keeper) EstimateBurnBySwapIn(c context.Context, req *types.EstimateBurnB
 	return &types.EstimateBurnBySwapInResponse{
 		BurnIn:     burnIn,
 		BackingOut: backingOut,
-		LionOut:    lionOut,
+		IronOut:    ironOut,
 		BurnFee:    burnFee,
 	}, nil
 }
 
 func (k Keeper) EstimateBurnBySwapOut(c context.Context, req *types.EstimateBurnBySwapOutRequest) (*types.EstimateBurnBySwapOutResponse, error) {
 	ctx := sdk.UnwrapSDKContext(c)
-	backingOut, lionOut, burnFee, err := k.calculateBurnBySwapOut(ctx, req.BurnIn, req.BackingDenom)
+	backingOut, ironOut, burnFee, err := k.calculateBurnBySwapOut(ctx, req.BurnIn, req.BackingDenom)
 	if err != nil {
 		return nil, err
 	}
 
 	return &types.EstimateBurnBySwapOutResponse{
 		BackingOut: backingOut,
-		LionOut:    lionOut,
+		IronOut:    ironOut,
 		BurnFee:    burnFee,
 	}, nil
 }
 
 func (k Keeper) EstimateBuyBackingIn(c context.Context, req *types.EstimateBuyBackingInRequest) (*types.EstimateBuyBackingInResponse, error) {
 	ctx := sdk.UnwrapSDKContext(c)
-	lionIn, buybackFee, err := k.calculateBuyBackingIn(ctx, req.BackingOut)
+	ironIn, buybackFee, err := k.calculateBuyBackingIn(ctx, req.BackingOut)
 	if err != nil {
 		return nil, err
 	}
 
 	return &types.EstimateBuyBackingInResponse{
-		LionIn:     lionIn,
+		IronIn:     ironIn,
 		BuybackFee: buybackFee,
 	}, nil
 }
 
 func (k Keeper) EstimateBuyBackingOut(c context.Context, req *types.EstimateBuyBackingOutRequest) (*types.EstimateBuyBackingOutResponse, error) {
 	ctx := sdk.UnwrapSDKContext(c)
-	backingOut, buybackFee, err := k.calculateBuyBackingOut(ctx, req.LionIn, req.BackingDenom)
+	backingOut, buybackFee, err := k.calculateBuyBackingOut(ctx, req.IronIn, req.BackingDenom)
 	if err != nil {
 		return nil, err
 	}
@@ -230,7 +230,7 @@ func (k Keeper) EstimateBuyBackingOut(c context.Context, req *types.EstimateBuyB
 
 func (k Keeper) EstimateSellBackingIn(c context.Context, req *types.EstimateSellBackingInRequest) (*types.EstimateSellBackingInResponse, error) {
 	ctx := sdk.UnwrapSDKContext(c)
-	backingIn, sellbackFee, err := k.calculateSellBackingIn(ctx, req.LionOut, req.BackingDenom)
+	backingIn, sellbackFee, err := k.calculateSellBackingIn(ctx, req.IronOut, req.BackingDenom)
 	if err != nil {
 		return nil, err
 	}
@@ -243,13 +243,13 @@ func (k Keeper) EstimateSellBackingIn(c context.Context, req *types.EstimateSell
 
 func (k Keeper) EstimateSellBackingOut(c context.Context, req *types.EstimateSellBackingOutRequest) (*types.EstimateSellBackingOutResponse, error) {
 	ctx := sdk.UnwrapSDKContext(c)
-	lionOut, sellbackFee, err := k.calculateSellBackingOut(ctx, req.BackingIn)
+	ironOut, sellbackFee, err := k.calculateSellBackingOut(ctx, req.BackingIn)
 	if err != nil {
 		return nil, err
 	}
 
 	return &types.EstimateSellBackingOutResponse{
-		LionOut:     lionOut,
+		IronOut:     ironOut,
 		SellbackFee: sellbackFee,
 	}, nil
 }

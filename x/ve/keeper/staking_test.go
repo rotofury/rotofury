@@ -2,8 +2,8 @@ package keeper_test
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlion-zone/merlion/x/ve/keeper"
-	"github.com/merlion-zone/merlion/x/ve/types"
+	"github.com/gridiron-zone/gridiron/x/ve/keeper"
+	"github.com/gridiron-zone/gridiron/x/ve/types"
 )
 
 func (suite *KeeperTestSuite) TestKeeper_SlashLockedAmountByUser() {
@@ -12,7 +12,7 @@ func (suite *KeeperTestSuite) TestKeeper_SlashLockedAmountByUser() {
 	sender := sdk.AccAddress(suite.address.Bytes())
 	k := suite.app.VeKeeper
 	impl := keeper.NewMsgServerImpl(k)
-	denom := "alion"
+	denom := "airon"
 	veID := uint64(1)
 	lockAmt := sdk.NewCoin(denom, sdk.NewInt(100))
 	res, err := impl.Create(ctx, &types.MsgCreate{

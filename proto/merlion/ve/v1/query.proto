@@ -1,40 +1,40 @@
 syntax = "proto3";
-package merlion.ve.v1;
+package gridiron.ve.v1;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "cosmos/nft/v1beta1/nft.proto";
-import "merlion/ve/v1/genesis.proto";
+import "gridiron/ve/v1/genesis.proto";
 
-option go_package = "github.com/merlion-zone/merlion/x/ve/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/ve/types";
 
 // Query defines the ve gRPC querier service.
 service Query {
   // TotalVotingPower queries the total voting power.
   rpc TotalVotingPower(QueryTotalVotingPowerRequest)
       returns (QueryTotalVotingPowerResponse) {
-    option (google.api.http).get = "/merlion/ve/v1/total_voting_power";
+    option (google.api.http).get = "/gridiron/ve/v1/total_voting_power";
   }
 
   // VotingPower queries the voting power of a veNFT.
   rpc VotingPower(QueryVotingPowerRequest) returns (QueryVotingPowerResponse) {
-    option (google.api.http).get = "/merlion/ve/v1/voting_power/{ve_id}";
+    option (google.api.http).get = "/gridiron/ve/v1/voting_power/{ve_id}";
   }
 
   // VeNfts queries all veNFTs of a given owner.
   rpc VeNfts(QueryVeNftsRequest) returns (QueryVeNftsResponse) {
-    option (google.api.http).get = "/merlion/ve/v1/venfts";
+    option (google.api.http).get = "/gridiron/ve/v1/venfts";
   }
 
   // VeNft queries an veNFT based on its id.
   rpc VeNft(QueryVeNftRequest) returns (QueryVeNftResponse) {
-    option (google.api.http).get = "/merlion/ve/v1/venfts/{id}";
+    option (google.api.http).get = "/gridiron/ve/v1/venfts/{id}";
   }
 
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/merlion/ve/v1/params";
+    option (google.api.http).get = "/gridiron/ve/v1/params";
   }
 }
 

@@ -9,11 +9,11 @@ import (
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	ethermint "github.com/tharsis/ethermint/types"
 
-	merlion "github.com/merlion-zone/merlion/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
 )
 
 const (
-	AccountAddressPrefix = "mer"
+	AccountAddressPrefix = "grid"
 )
 
 // SetBech32Prefixes sets the global prefixes to be used when serializing addresses and public keys to Bech32 strings.
@@ -39,29 +39,29 @@ func SetBip44CoinType(config *sdk.Config) {
 
 // RegisterDenoms registers the base and display denominations to the SDK.
 func RegisterDenoms() {
-	if err := sdk.RegisterDenom(merlion.DisplayDenom, sdk.OneDec()); err != nil {
+	if err := sdk.RegisterDenom(gridiron.DisplayDenom, sdk.OneDec()); err != nil {
 		panic(err)
 	}
 
-	if err := sdk.RegisterDenom(merlion.BaseDenom, sdk.NewDecWithPrec(1, ethermint.BaseDenomUnit)); err != nil {
+	if err := sdk.RegisterDenom(gridiron.BaseDenom, sdk.NewDecWithPrec(1, ethermint.BaseDenomUnit)); err != nil {
 		panic(err)
 	}
 
 	mgravitytypes.SetGasCoinMetata(banktypes.Metadata{
-		Description: "The native gas token of the Merlion.",
+		Description: "The native gas token of the Gridiron.",
 		DenomUnits: []*banktypes.DenomUnit{{
-			Denom:    merlion.DisplayDenom,
+			Denom:    gridiron.DisplayDenom,
 			Exponent: ethermint.BaseDenomUnit,
 			Aliases:  []string{},
 		}, {
-			Denom:    merlion.BaseDenom,
+			Denom:    gridiron.BaseDenom,
 			Exponent: 0,
 			Aliases:  []string{},
 		}},
-		Base:    merlion.BaseDenom,
-		Display: merlion.DisplayDenom,
-		Name:    strings.ToUpper(merlion.DisplayDenom),
-		Symbol:  strings.ToUpper(merlion.DisplayDenom),
+		Base:    gridiron.BaseDenom,
+		Display: gridiron.DisplayDenom,
+		Name:    strings.ToUpper(gridiron.DisplayDenom),
+		Symbol:  strings.ToUpper(gridiron.DisplayDenom),
 	})
 }
 

@@ -1,4 +1,4 @@
-module github.com/merlion-zone/merlion
+module github.com/gridiron-zone/gridiron
 
 go 1.18
 
@@ -85,7 +85,7 @@ require (
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0 // indirect
 	github.com/gsterjov/go-libsecret v0.0.0-20161001094733-a6f4afe4910c // indirect
-	github.com/gtank/merlin v0.1.1 // indirect
+	github.com/gtank/gridlin v0.1.1 // indirect
 	github.com/gtank/ristretto255 v0.1.2 // indirect
 	github.com/hashicorp/go-immutable-radix v1.3.1 // indirect
 	github.com/hashicorp/golang-lru v0.5.5-0.20210104140557-80c98217689d // indirect
@@ -158,8 +158,8 @@ require (
 )
 
 replace (
-	github.com/Gravity-Bridge/Gravity-Bridge/module => github.com/merlion-zone/gravity/module v0.0.0-20220726103435-1f23555a12c8
-	github.com/cosmos/cosmos-sdk => github.com/merlion-zone/cosmos-sdk v0.45.4-merlion.6
+	github.com/Gravity-Bridge/Gravity-Bridge/module => github.com/gridiron-zone/gravity/module v0.0.0-20220726103435-1f23555a12c8
+	github.com/cosmos/cosmos-sdk => github.com/gridiron-zone/cosmos-sdk v0.45.4-gridiron.6
 	github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
 	github.com/keybase/go-keychain => github.com/99designs/go-keychain v0.0.0-20191008050251-8e49817e8af4
 	github.com/tendermint/tendermint => github.com/tendermint/tendermint v0.34.19

@@ -1,6 +1,6 @@
 package keeper_test
 
-import "github.com/merlion-zone/merlion/x/vesting/types"
+import "github.com/gridiron-zone/gridiron/x/vesting/types"
 
 func (suite *KeeperTestSuite) TestKeeper_GetParams() {
 	suite.SetupTest()

@@ -3,8 +3,8 @@ package oracle
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlion-zone/merlion/x/oracle/keeper"
-	"github.com/merlion-zone/merlion/x/oracle/types"
+	"github.com/gridiron-zone/gridiron/x/oracle/keeper"
+	"github.com/gridiron-zone/gridiron/x/oracle/types"
 )
 
 // Tally calculates the median and returns it. Sets the set of voters to be rewarded, i.e., voted within
@@ -43,12 +43,12 @@ func ballotIsPassing(ballot types.ExchangeRateBallot, thresholdVotes sdk.Int) (s
 	return ballotPower, !ballotPower.IsZero() && ballotPower.GTE(thresholdVotes)
 }
 
-// PickReferenceMer chooses Reference Mer with the highest voter turnout.
+// PickReferenceGridb chooses Reference Grid with the highest voter turnout.
 // If the voting power of the two denominations is the same,
-// select reference Mer in alphabetical order.
-func PickReferenceMer(ctx sdk.Context, k keeper.Keeper, voteTargets map[string]struct{}, voteMap map[string]types.ExchangeRateBallot) string {
+// select reference Grid in alphabetical order.
+func PickReferenceGridb(ctx sdk.Context, k keeper.Keeper, voteTargets map[string]struct{}, voteMap map[string]types.ExchangeRateBallot) string {
 	largestBallotPower := int64(0)
-	referenceMer := ""
+	referenceGridb := ""
 
 	stakingKeeper := k.StakingKeeper()
 	totalBondedPower := sdk.TokensToConsensusPower(stakingKeeper.TotalBondedTokens(ctx), stakingKeeper.PowerReduction(ctx))
@@ -76,12 +76,12 @@ func PickReferenceMer(ctx sdk.Context, k keeper.Keeper, voteTargets map[string]s
 		}
 
 		if ballotPower > largestBallotPower || largestBallotPower == 0 {
-			referenceMer = denom
+			referenceGridb = denom
 			largestBallotPower = ballotPower
-		} else if largestBallotPower == ballotPower && referenceMer > denom {
-			referenceMer = denom
+		} else if largestBallotPower == ballotPower && referenceGridb > denom {
+			referenceGridb = denom
 		}
 	}
 
-	return referenceMer
+	return referenceGridb
 }

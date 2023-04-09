@@ -3,7 +3,7 @@ package keeper
 import (
 	"bytes"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlion-zone/merlion/x/oracle/types"
+	"github.com/gridiron-zone/gridiron/x/oracle/types"
 	"github.com/stretchr/testify/require"
 	"sort"
 	"testing"

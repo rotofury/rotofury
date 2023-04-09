@@ -3,8 +3,8 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	merlion "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/oracle/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/oracle/types"
 )
 
 func HandleRegisterTargetProposal(ctx sdk.Context, k Keeper, p *types.RegisterTargetProposal) error {
@@ -15,7 +15,7 @@ func HandleRegisterTargetProposal(ctx sdk.Context, k Keeper, p *types.RegisterTa
 	}
 
 	// Check if the coin exists by ensuring the supply is set
-	if !k.bankKeeper.HasSupply(ctx, params.Denom) && params.Denom != merlion.MicroUSMDenom {
+	if !k.bankKeeper.HasSupply(ctx, params.Denom) && params.Denom != gridiron.MicroUSMDenom {
 		return sdkerrors.Wrapf(
 			sdkerrors.ErrInvalidCoins,
 			"target denom '%s' cannot have a supply of 0", params.Denom,

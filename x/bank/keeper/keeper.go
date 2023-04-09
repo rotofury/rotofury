@@ -11,8 +11,8 @@ import (
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
-	merlion "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/bank/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/bank/types"
 )
 
 // Keeper manages transfers between accounts.
@@ -176,7 +176,7 @@ func (k Keeper) MintCoins(ctx sdk.Context, moduleName string, amounts sdk.Coins)
 		return err
 	}
 	for _, coin := range nativeCoins {
-		if !strings.Contains(coin.Denom, merlion.DisplayDenom) && !k.erc20Keeper().IsDenomRegistered(ctx, coin.Denom) {
+		if !strings.Contains(coin.Denom, gridiron.DisplayDenom) && !k.erc20Keeper().IsDenomRegistered(ctx, coin.Denom) {
 			if _, err := k.erc20Keeper().RegisterCoin(ctx, coin.Denom); err != nil {
 				return err
 			}

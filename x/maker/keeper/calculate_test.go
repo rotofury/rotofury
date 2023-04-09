@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	merlion "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/maker/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/maker/types"
 )
 
 func (suite *KeeperTestSuite) TestEstimateMintBySwapIn() {
@@ -18,13 +18,13 @@ func (suite *KeeperTestSuite) TestEstimateMintBySwapIn() {
 		expRes   *types.EstimateMintBySwapInResponse
 	}{
 		{
-			name: "mer price too low",
+			name: "grid price too low",
 			malleate: func() {
-				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, merlion.MicroUSMDenom, sdk.NewDecWithPrec(1009, 3))
+				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, gridiron.MicroUSMDenom, sdk.NewDecWithPrec(1009, 3))
 			},
 			req:     &types.EstimateMintBySwapInRequest{BackingDenom: suite.bcDenom},
 			expPass: false,
-			expErr:  types.ErrMerPriceTooLow,
+			expErr:  types.ErrGridPriceTooLow,
 		},
 		{
 			name:    "backing denom not found",
@@ -39,25 +39,25 @@ func (suite *KeeperTestSuite) TestEstimateMintBySwapIn() {
 			expErr:  types.ErrBackingCoinDisabled,
 		},
 		{
-			name: "mer over ceiling",
+			name: "grid over ceiling",
 			req: &types.EstimateMintBySwapInRequest{
-				MintOut:      sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(2_500000)),
+				MintOut:      sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(2_500000)),
 				BackingDenom: suite.bcDenom,
 			},
 			expPass: false,
-			expErr:  types.ErrMerCeiling,
+			expErr:  types.ErrGridCeiling,
 		},
 		{
 			name: "default full backing",
 			req: &types.EstimateMintBySwapInRequest{
-				MintOut:      sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(1_000000)),
+				MintOut:      sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(1_000000)),
 				BackingDenom: suite.bcDenom,
 			},
 			expPass: true,
 			expRes: &types.EstimateMintBySwapInResponse{
 				BackingIn: sdk.NewCoin(suite.bcDenom, sdk.NewInt(1015152)), // 1_000000 * (1+0.005) / 0.99
-				LionIn:    sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
-				MintFee:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(5000)),
+				IronIn:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
+				MintFee:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(5000)),
 			},
 		},
 		{
@@ -66,15 +66,15 @@ func (suite *KeeperTestSuite) TestEstimateMintBySwapIn() {
 				suite.app.MakerKeeper.SetBackingRatio(suite.ctx, sdk.NewDecWithPrec(80, 2))
 			},
 			req: &types.EstimateMintBySwapInRequest{
-				MintOut:      sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(1_000000)),
+				MintOut:      sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(1_000000)),
 				BackingDenom: suite.bcDenom,
 				FullBacking:  true,
 			},
 			expPass: true,
 			expRes: &types.EstimateMintBySwapInResponse{
 				BackingIn: sdk.NewCoin(suite.bcDenom, sdk.NewInt(1015152)), // 1_000000 * (1+0.005) / 0.99
-				LionIn:    sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
-				MintFee:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(5000)),
+				IronIn:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
+				MintFee:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(5000)),
 			},
 		},
 		{
@@ -83,14 +83,14 @@ func (suite *KeeperTestSuite) TestEstimateMintBySwapIn() {
 				suite.app.MakerKeeper.SetBackingRatio(suite.ctx, sdk.ZeroDec())
 			},
 			req: &types.EstimateMintBySwapInRequest{
-				MintOut:      sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(1_000000)),
+				MintOut:      sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(1_000000)),
 				BackingDenom: suite.bcDenom,
 			},
 			expPass: true,
 			expRes: &types.EstimateMintBySwapInResponse{
 				BackingIn: sdk.NewCoin(suite.bcDenom, sdk.ZeroInt()),
-				LionIn:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10050_000000_000000)), // 1_000000 * (1+0.005) / 10**-10
-				MintFee:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(5000)),
+				IronIn:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10050_000000_000000)), // 1_000000 * (1+0.005) / 10**-10
+				MintFee:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(5000)),
 			},
 		},
 		{
@@ -99,20 +99,20 @@ func (suite *KeeperTestSuite) TestEstimateMintBySwapIn() {
 				suite.app.MakerKeeper.SetBackingRatio(suite.ctx, sdk.NewDecWithPrec(80, 2))
 			},
 			req: &types.EstimateMintBySwapInRequest{
-				MintOut:      sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(1_000000)),
+				MintOut:      sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(1_000000)),
 				BackingDenom: suite.bcDenom,
 			},
 			expPass: true,
 			expRes: &types.EstimateMintBySwapInResponse{
 				BackingIn: sdk.NewCoin(suite.bcDenom, sdk.NewInt(812121)),                     // 1_000000 * (1+0.005) * 0.8 / 0.99
-				LionIn:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(2010_000000_000000)), // 1_000000 * (1+0.005) * 0.2 / 10**-10
-				MintFee:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(5000)),
+				IronIn:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(2010_000000_000000)), // 1_000000 * (1+0.005) * 0.2 / 10**-10
+				MintFee:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(5000)),
 			},
 		},
 		{
 			name: "backing over ceiling",
 			req: &types.EstimateMintBySwapInRequest{
-				MintOut:      sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(1_500000)),
+				MintOut:      sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(1_500000)),
 				BackingDenom: suite.bcDenom,
 			},
 			expPass: false,
@@ -124,7 +124,7 @@ func (suite *KeeperTestSuite) TestEstimateMintBySwapIn() {
 		suite.Run(fmt.Sprintf("Case %s", tc.name), func() {
 			suite.SetupTest() // reset
 			suite.setupEstimationTest()
-			suite.app.OracleKeeper.SetExchangeRate(suite.ctx, merlion.MicroUSMDenom, sdk.NewDecWithPrec(101, 2))
+			suite.app.OracleKeeper.SetExchangeRate(suite.ctx, gridiron.MicroUSMDenom, sdk.NewDecWithPrec(101, 2))
 			if tc.malleate != nil {
 				tc.malleate()
 			}
@@ -152,13 +152,13 @@ func (suite *KeeperTestSuite) TestEstimateMintBySwapOut() {
 		expRes   *types.EstimateMintBySwapOutResponse
 	}{
 		{
-			name: "mer price too low",
+			name: "grid price too low",
 			malleate: func() {
-				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, merlion.MicroUSMDenom, sdk.NewDecWithPrec(989, 3))
+				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, gridiron.MicroUSMDenom, sdk.NewDecWithPrec(989, 3))
 			},
 			req:     &types.EstimateMintBySwapOutRequest{BackingInMax: sdk.NewCoin(suite.bcDenom, sdk.ZeroInt())},
 			expPass: false,
-			expErr:  types.ErrMerPriceTooLow,
+			expErr:  types.ErrGridPriceTooLow,
 		},
 		{
 			name:    "backing denom not found",
@@ -180,9 +180,9 @@ func (suite *KeeperTestSuite) TestEstimateMintBySwapOut() {
 			expPass: true,
 			expRes: &types.EstimateMintBySwapOutResponse{
 				BackingIn: sdk.NewCoin(suite.bcDenom, sdk.NewInt(1_000000)),
-				LionIn:    sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
-				MintOut:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(985050)), // 1_000000 * 0.99 * (1 - 0.005)
-				MintFee:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(4950)),   // 1_000000 * 0.99 * 0.005
+				IronIn:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
+				MintOut:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(985050)), // 1_000000 * 0.99 * (1 - 0.005)
+				MintFee:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(4950)),   // 1_000000 * 0.99 * 0.005
 			},
 		},
 		{
@@ -197,9 +197,9 @@ func (suite *KeeperTestSuite) TestEstimateMintBySwapOut() {
 			expPass: true,
 			expRes: &types.EstimateMintBySwapOutResponse{
 				BackingIn: sdk.NewCoin(suite.bcDenom, sdk.NewInt(1_000000)),
-				LionIn:    sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
-				MintOut:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(985050)), // 1_000000 * 0.99 * (1 - 0.005)
-				MintFee:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(4950)),   // 1_000000 * 0.99 * 0.005
+				IronIn:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
+				MintOut:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(985050)), // 1_000000 * 0.99 * (1 - 0.005)
+				MintFee:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(4950)),   // 1_000000 * 0.99 * 0.005
 			},
 		},
 		{
@@ -209,31 +209,31 @@ func (suite *KeeperTestSuite) TestEstimateMintBySwapOut() {
 			},
 			req: &types.EstimateMintBySwapOutRequest{
 				BackingInMax: sdk.NewCoin(suite.bcDenom, sdk.NewInt(1_000000)),
-				LionInMax:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
+				IronInMax:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
 			},
 			expPass: true,
 			expRes: &types.EstimateMintBySwapOutResponse{
 				BackingIn: sdk.NewCoin(suite.bcDenom, sdk.ZeroInt()),
-				LionIn:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
-				MintOut:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(995000)), // 10**16 * 10**-10 * (1 - 0.005)
-				MintFee:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(5000)),   // 10**16 * 10**-10 * 0.005
+				IronIn:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
+				MintOut:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(995000)), // 10**16 * 10**-10 * (1 - 0.005)
+				MintFee:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(5000)),   // 10**16 * 10**-10 * 0.005
 			},
 		},
 		{
-			name: "zero lion using backing",
+			name: "zero iron using backing",
 			malleate: func() {
 				suite.app.MakerKeeper.SetBackingRatio(suite.ctx, sdk.NewDecWithPrec(80, 2))
 			},
 			req: &types.EstimateMintBySwapOutRequest{
 				BackingInMax: sdk.NewCoin(suite.bcDenom, sdk.NewInt(500000)),
-				LionInMax:    sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
+				IronInMax:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
 			},
 			expPass: true,
 			expRes: &types.EstimateMintBySwapOutResponse{
 				BackingIn: sdk.NewCoin(suite.bcDenom, sdk.NewInt(500000)),
-				LionIn:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(1237_500000_000000)), // 500000 * 0.99 / 0.8 * 0.2 / (10**-10)
-				MintOut:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(615656)),             // 500000 * 0.99 / 0.8 * (1 - 0.005)
-				MintFee:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(3094)),               // 500000 * 0.99 / 0.8 * 0.005
+				IronIn:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(1237_500000_000000)), // 500000 * 0.99 / 0.8 * 0.2 / (10**-10)
+				MintOut:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(615656)),             // 500000 * 0.99 / 0.8 * (1 - 0.005)
+				MintFee:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(3094)),               // 500000 * 0.99 / 0.8 * 0.005
 			},
 		},
 		{
@@ -243,57 +243,57 @@ func (suite *KeeperTestSuite) TestEstimateMintBySwapOut() {
 			},
 			req: &types.EstimateMintBySwapOutRequest{
 				BackingInMax: sdk.NewCoin(suite.bcDenom, sdk.NewInt(500000)),
-				LionInMax:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
+				IronInMax:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
 			},
 			expPass: true,
 			expRes: &types.EstimateMintBySwapOutResponse{
 				BackingIn: sdk.NewCoin(suite.bcDenom, sdk.NewInt(500000)),
-				LionIn:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(1237_500000_000000)), // 500000 * 0.99 / 0.8 * 0.2 / (10**-10)
-				MintOut:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(615656)),             // 500000 * 0.99 / 0.8 * (1 - 0.005)
-				MintFee:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(3094)),               // 500000 * 0.99 / 0.8 * 0.005
+				IronIn:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(1237_500000_000000)), // 500000 * 0.99 / 0.8 * 0.2 / (10**-10)
+				MintOut:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(615656)),             // 500000 * 0.99 / 0.8 * (1 - 0.005)
+				MintFee:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(3094)),               // 500000 * 0.99 / 0.8 * 0.005
 			},
 		},
 		{
-			name: "zero backing using lion",
+			name: "zero backing using iron",
 			malleate: func() {
 				suite.app.MakerKeeper.SetBackingRatio(suite.ctx, sdk.NewDecWithPrec(20, 2))
 			},
 			req: &types.EstimateMintBySwapOutRequest{
 				BackingInMax: sdk.NewCoin(suite.bcDenom, sdk.ZeroInt()),
-				LionInMax:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
+				IronInMax:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
 			},
 			expPass: true,
 			expRes: &types.EstimateMintBySwapOutResponse{
 				BackingIn: sdk.NewCoin(suite.bcDenom, sdk.NewInt(252525)), // 10**16 * 10**-10 / 0.8 * 0.2 / 0.99
-				LionIn:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
-				MintOut:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(1243750)), // 10**16 * 10**-10 / 0.8 * (1 - 0.005))
-				MintFee:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(6250)),    // 10**16 * 10**-10 / 0.8 * 0.005
+				IronIn:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
+				MintOut:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(1243750)), // 10**16 * 10**-10 / 0.8 * (1 - 0.005))
+				MintFee:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(6250)),    // 10**16 * 10**-10 / 0.8 * 0.005
 			},
 		},
 		{
-			name: "fractional using max lion",
+			name: "fractional using max iron",
 			malleate: func() {
 				suite.app.MakerKeeper.SetBackingRatio(suite.ctx, sdk.NewDecWithPrec(20, 2))
 			},
 			req: &types.EstimateMintBySwapOutRequest{
 				BackingInMax: sdk.NewCoin(suite.bcDenom, sdk.NewInt(1_000000)),
-				LionInMax:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
+				IronInMax:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
 			},
 			expPass: true,
 			expRes: &types.EstimateMintBySwapOutResponse{
 				BackingIn: sdk.NewCoin(suite.bcDenom, sdk.NewInt(252525)), // 10**16 * 10**-10 / 0.8 * 0.2 / 0.99
-				LionIn:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
-				MintOut:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(1243750)), // 10**16 * 10**-10 / 0.8 * (1 - 0.005)
-				MintFee:   sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(6250)),    // 10**16 * 10**-10 / 0.8 * 0.005
+				IronIn:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
+				MintOut:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(1243750)), // 10**16 * 10**-10 / 0.8 * (1 - 0.005)
+				MintFee:   sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(6250)),    // 10**16 * 10**-10 / 0.8 * 0.005
 			},
 		},
 		{
-			name: "mer over ceiling",
+			name: "grid over ceiling",
 			req: &types.EstimateMintBySwapOutRequest{
 				BackingInMax: sdk.NewCoin(suite.bcDenom, sdk.NewInt(2_500000)),
 			},
 			expPass: false,
-			expErr:  types.ErrMerCeiling,
+			expErr:  types.ErrGridCeiling,
 		},
 		{
 			name: "backing over ceiling",
@@ -309,7 +309,7 @@ func (suite *KeeperTestSuite) TestEstimateMintBySwapOut() {
 		suite.Run(fmt.Sprintf("Case %s", tc.name), func() {
 			suite.SetupTest() // reset
 			suite.setupEstimationTest()
-			suite.app.OracleKeeper.SetExchangeRate(suite.ctx, merlion.MicroUSMDenom, sdk.NewDecWithPrec(101, 2))
+			suite.app.OracleKeeper.SetExchangeRate(suite.ctx, gridiron.MicroUSMDenom, sdk.NewDecWithPrec(101, 2))
 			if tc.malleate != nil {
 				tc.malleate()
 			}
@@ -337,13 +337,13 @@ func (suite *KeeperTestSuite) TestEstimateBurnBySwapIn() {
 		expRes   *types.EstimateBurnBySwapInResponse
 	}{
 		{
-			name: "mer price too high",
+			name: "grid price too high",
 			malleate: func() {
-				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, merlion.MicroUSMDenom, sdk.NewDecWithPrec(991, 3))
+				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, gridiron.MicroUSMDenom, sdk.NewDecWithPrec(991, 3))
 			},
 			req:     &types.EstimateBurnBySwapInRequest{BackingOutMax: sdk.NewCoin(suite.bcDenom, sdk.ZeroInt())},
 			expPass: false,
-			expErr:  types.ErrMerPriceTooHigh,
+			expErr:  types.ErrGridPriceTooHigh,
 		},
 		{
 			name:    "backing denom not found",
@@ -373,10 +373,10 @@ func (suite *KeeperTestSuite) TestEstimateBurnBySwapIn() {
 			},
 			expPass: true,
 			expRes: &types.EstimateBurnBySwapInResponse{
-				BurnIn:     sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(995976)), // 1_000000 * 0.99 / (1-0.006)
+				BurnIn:     sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(995976)), // 1_000000 * 0.99 / (1-0.006)
 				BackingOut: sdk.NewCoin(suite.bcDenom, sdk.NewInt(1_000000)),
-				LionOut:    sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
-				BurnFee:    sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(5976)), // 1_000000 * 0.99 / (1-0.006) * 0.006
+				IronOut:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
+				BurnFee:    sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(5976)), // 1_000000 * 0.99 / (1-0.006) * 0.006
 			},
 		},
 		{
@@ -386,31 +386,31 @@ func (suite *KeeperTestSuite) TestEstimateBurnBySwapIn() {
 			},
 			req: &types.EstimateBurnBySwapInRequest{
 				BackingOutMax: sdk.NewCoin(suite.bcDenom, sdk.NewInt(1_000000)),
-				LionOutMax:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
+				IronOutMax:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
 			},
 			expPass: true,
 			expRes: &types.EstimateBurnBySwapInResponse{
-				BurnIn:     sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(1006036)), // 10**16 * 10**-10 / (1-0.006)
+				BurnIn:     sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(1006036)), // 10**16 * 10**-10 / (1-0.006)
 				BackingOut: sdk.NewCoin(suite.bcDenom, sdk.ZeroInt()),
-				LionOut:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
-				BurnFee:    sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(6036)), // 10**16 * 10**-10 / (1-0.006) * 0.006
+				IronOut:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
+				BurnFee:    sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(6036)), // 10**16 * 10**-10 / (1-0.006) * 0.006
 			},
 		},
 		{
-			name: "zero lion using backing",
+			name: "zero iron using backing",
 			malleate: func() {
 				suite.app.MakerKeeper.SetBackingRatio(suite.ctx, sdk.NewDecWithPrec(80, 2))
 			},
 			req: &types.EstimateBurnBySwapInRequest{
 				BackingOutMax: sdk.NewCoin(suite.bcDenom, sdk.NewInt(500000)),
-				LionOutMax:    sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
+				IronOutMax:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
 			},
 			expPass: true,
 			expRes: &types.EstimateBurnBySwapInResponse{
-				BurnIn:     sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(622485)), // 500000 * 0.99 / 0.8 / (1-0.006)
+				BurnIn:     sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(622485)), // 500000 * 0.99 / 0.8 / (1-0.006)
 				BackingOut: sdk.NewCoin(suite.bcDenom, sdk.NewInt(500000)),
-				LionOut:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(1237_500000_000000)), // 500000 * 0.99 / 0.8 * 0.2 / (10**-10)
-				BurnFee:    sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(3735)),               // 500000 * 0.99 / 0.8 / (1-0.006) * 0.006
+				IronOut:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(1237_500000_000000)), // 500000 * 0.99 / 0.8 * 0.2 / (10**-10)
+				BurnFee:    sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(3735)),               // 500000 * 0.99 / 0.8 / (1-0.006) * 0.006
 			},
 		},
 		{
@@ -420,48 +420,48 @@ func (suite *KeeperTestSuite) TestEstimateBurnBySwapIn() {
 			},
 			req: &types.EstimateBurnBySwapInRequest{
 				BackingOutMax: sdk.NewCoin(suite.bcDenom, sdk.NewInt(500000)),
-				LionOutMax:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
+				IronOutMax:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
 			},
 			expPass: true,
 			expRes: &types.EstimateBurnBySwapInResponse{
-				BurnIn:     sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(622485)), // 500000 * 0.99 / 0.8 / (1-0.006)
+				BurnIn:     sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(622485)), // 500000 * 0.99 / 0.8 / (1-0.006)
 				BackingOut: sdk.NewCoin(suite.bcDenom, sdk.NewInt(500000)),
-				LionOut:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(1237_500000_000000)), // 500000 * 0.99 / 0.8 * 0.2 / (10**-10)
-				BurnFee:    sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(3735)),               // 500000 * 0.99 / 0.8 / (1-0.006) * 0.006
+				IronOut:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(1237_500000_000000)), // 500000 * 0.99 / 0.8 * 0.2 / (10**-10)
+				BurnFee:    sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(3735)),               // 500000 * 0.99 / 0.8 / (1-0.006) * 0.006
 			},
 		},
 		{
-			name: "zero backing using lion",
+			name: "zero backing using iron",
 			malleate: func() {
 				suite.app.MakerKeeper.SetBackingRatio(suite.ctx, sdk.NewDecWithPrec(20, 2))
 			},
 			req: &types.EstimateBurnBySwapInRequest{
 				BackingOutMax: sdk.NewCoin(suite.bcDenom, sdk.ZeroInt()),
-				LionOutMax:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
+				IronOutMax:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
 			},
 			expPass: true,
 			expRes: &types.EstimateBurnBySwapInResponse{
-				BurnIn:     sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(1257545)), // 10**16 * 10**-10 / 0.8 / (1-0.006)
+				BurnIn:     sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(1257545)), // 10**16 * 10**-10 / 0.8 / (1-0.006)
 				BackingOut: sdk.NewCoin(suite.bcDenom, sdk.NewInt(252525)),          // 10**16 * 10**-10 / 0.8 * 0.2 / 0.99
-				LionOut:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
-				BurnFee:    sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(7545)), // 10**16 * 10**-10 / 0.8 / (1-0.006) * 0.006
+				IronOut:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
+				BurnFee:    sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(7545)), // 10**16 * 10**-10 / 0.8 / (1-0.006) * 0.006
 			},
 		},
 		{
-			name: "fractional using max lion",
+			name: "fractional using max iron",
 			malleate: func() {
 				suite.app.MakerKeeper.SetBackingRatio(suite.ctx, sdk.NewDecWithPrec(20, 2))
 			},
 			req: &types.EstimateBurnBySwapInRequest{
 				BackingOutMax: sdk.NewCoin(suite.bcDenom, sdk.NewInt(1_000000)),
-				LionOutMax:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
+				IronOutMax:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
 			},
 			expPass: true,
 			expRes: &types.EstimateBurnBySwapInResponse{
-				BurnIn:     sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(1257545)), // 10**16 * 10**-10 / 0.8 / (1-0.006)
+				BurnIn:     sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(1257545)), // 10**16 * 10**-10 / 0.8 / (1-0.006)
 				BackingOut: sdk.NewCoin(suite.bcDenom, sdk.NewInt(252525)),          // 10**16 * 10**-10 / 0.8 * 0.2 / 0.99
-				LionOut:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
-				BurnFee:    sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(7545)), // 10**16 * 10**-10 / 0.8 / (1-0.006) * 0.006
+				IronOut:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
+				BurnFee:    sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(7545)), // 10**16 * 10**-10 / 0.8 / (1-0.006) * 0.006
 			},
 		},
 	}
@@ -470,7 +470,7 @@ func (suite *KeeperTestSuite) TestEstimateBurnBySwapIn() {
 		suite.Run(fmt.Sprintf("Case %s", tc.name), func() {
 			suite.SetupTest() // reset
 			suite.setupEstimationTest()
-			suite.app.OracleKeeper.SetExchangeRate(suite.ctx, merlion.MicroUSMDenom, sdk.NewDecWithPrec(99, 2))
+			suite.app.OracleKeeper.SetExchangeRate(suite.ctx, gridiron.MicroUSMDenom, sdk.NewDecWithPrec(99, 2))
 			if tc.malleate != nil {
 				tc.malleate()
 			}
@@ -498,13 +498,13 @@ func (suite *KeeperTestSuite) TestEstimateBurnBySwapOut() {
 		expRes   *types.EstimateBurnBySwapOutResponse
 	}{
 		{
-			name: "mer price too high",
+			name: "grid price too high",
 			malleate: func() {
-				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, merlion.MicroUSMDenom, sdk.NewDecWithPrec(1011, 3))
+				suite.app.OracleKeeper.SetExchangeRate(suite.ctx, gridiron.MicroUSMDenom, sdk.NewDecWithPrec(1011, 3))
 			},
 			req:     &types.EstimateBurnBySwapOutRequest{BackingDenom: suite.bcDenom},
 			expPass: false,
-			expErr:  types.ErrMerPriceTooHigh,
+			expErr:  types.ErrGridPriceTooHigh,
 		},
 		{
 			name:    "backing denom not found",
@@ -527,7 +527,7 @@ func (suite *KeeperTestSuite) TestEstimateBurnBySwapOut() {
 				suite.app.MakerKeeper.SetPoolBacking(suite.ctx, poolBacking)
 			},
 			req: &types.EstimateBurnBySwapOutRequest{
-				BurnIn:       sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(1)),
+				BurnIn:       sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(1)),
 				BackingDenom: suite.bcDenom,
 			},
 			expPass: false,
@@ -539,7 +539,7 @@ func (suite *KeeperTestSuite) TestEstimateBurnBySwapOut() {
 				suite.app.BankKeeper.BurnCoins(suite.ctx, types.ModuleName, sdk.NewCoins(sdk.NewCoin(suite.bcDenom, sdk.NewInt(1000_000000))))
 			},
 			req: &types.EstimateBurnBySwapOutRequest{
-				BurnIn:       sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(1)),
+				BurnIn:       sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(1)),
 				BackingDenom: suite.bcDenom,
 			},
 			expPass: false,
@@ -548,14 +548,14 @@ func (suite *KeeperTestSuite) TestEstimateBurnBySwapOut() {
 		{
 			name: "full backing",
 			req: &types.EstimateBurnBySwapOutRequest{
-				BurnIn:       sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(1_000000)),
+				BurnIn:       sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(1_000000)),
 				BackingDenom: suite.bcDenom,
 			},
 			expPass: true,
 			expRes: &types.EstimateBurnBySwapOutResponse{
 				BackingOut: sdk.NewCoin(suite.bcDenom, sdk.NewInt(1_004040)), // 1_000000 * (1-0.006) / 0.99
-				LionOut:    sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
-				BurnFee:    sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(6000)), // 1_000000 * 0.006
+				IronOut:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
+				BurnFee:    sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(6000)), // 1_000000 * 0.006
 			},
 		},
 		{
@@ -564,14 +564,14 @@ func (suite *KeeperTestSuite) TestEstimateBurnBySwapOut() {
 				suite.app.MakerKeeper.SetBackingRatio(suite.ctx, sdk.ZeroDec())
 			},
 			req: &types.EstimateBurnBySwapOutRequest{
-				BurnIn:       sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(1_000000)),
+				BurnIn:       sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(1_000000)),
 				BackingDenom: suite.bcDenom,
 			},
 			expPass: true,
 			expRes: &types.EstimateBurnBySwapOutResponse{
 				BackingOut: sdk.NewCoin(suite.bcDenom, sdk.ZeroInt()),                          // 1_000000 * (1-0.006) / 0.99
-				LionOut:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(9940_000000_000000)), // 1_000000 * (1-0.006) / 10**-10
-				BurnFee:    sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(6000)),               // 1_000000 * 0.006
+				IronOut:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(9940_000000_000000)), // 1_000000 * (1-0.006) / 10**-10
+				BurnFee:    sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(6000)),               // 1_000000 * 0.006
 			},
 		},
 		{
@@ -580,14 +580,14 @@ func (suite *KeeperTestSuite) TestEstimateBurnBySwapOut() {
 				suite.app.MakerKeeper.SetBackingRatio(suite.ctx, sdk.NewDecWithPrec(80, 2))
 			},
 			req: &types.EstimateBurnBySwapOutRequest{
-				BurnIn:       sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(1_000000)),
+				BurnIn:       sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(1_000000)),
 				BackingDenom: suite.bcDenom,
 			},
 			expPass: true,
 			expRes: &types.EstimateBurnBySwapOutResponse{
 				BackingOut: sdk.NewCoin(suite.bcDenom, sdk.NewInt(803232)),                     // 1_000000 * (1-0.006) * 0.8 / 0.99
-				LionOut:    sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(19880_00000_000000)), // 1_000000 * (1-0.006) * 0.2 / 10**-10
-				BurnFee:    sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(6000)),               // 1_000000 * 0.006
+				IronOut:    sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(19880_00000_000000)), // 1_000000 * (1-0.006) * 0.2 / 10**-10
+				BurnFee:    sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(6000)),               // 1_000000 * 0.006
 			},
 		},
 	}
@@ -596,7 +596,7 @@ func (suite *KeeperTestSuite) TestEstimateBurnBySwapOut() {
 		suite.Run(fmt.Sprintf("Case %s", tc.name), func() {
 			suite.SetupTest() // reset
 			suite.setupEstimationTest()
-			suite.app.OracleKeeper.SetExchangeRate(suite.ctx, merlion.MicroUSMDenom, sdk.NewDecWithPrec(99, 2))
+			suite.app.OracleKeeper.SetExchangeRate(suite.ctx, gridiron.MicroUSMDenom, sdk.NewDecWithPrec(99, 2))
 			if tc.malleate != nil {
 				tc.malleate()
 			}
@@ -675,7 +675,7 @@ func (suite *KeeperTestSuite) TestEstimateBuyBackingIn() {
 			},
 			expPass: true,
 			expRes: &types.EstimateBuyBackingInResponse{
-				LionIn:     sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(29909_28600_000000)), // [3*10**5 / (1-0.007)] * 0.99 / 10**-10
+				IronIn:     sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(29909_28600_000000)), // [3*10**5 / (1-0.007)] * 0.99 / 10**-10
 				BuybackFee: sdk.NewCoin(suite.bcDenom, sdk.NewInt(2115)),                       // [3*10**5 / (1-0.007)] * 0.007
 			},
 		},
@@ -726,7 +726,7 @@ func (suite *KeeperTestSuite) TestEstimateBuyBackingOut() {
 			name: "excess backing insufficient",
 			req: &types.EstimateBuyBackingOutRequest{
 				BackingDenom: suite.bcDenom,
-				LionIn:       sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(5000_000000_000000)),
+				IronIn:       sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(5000_000000_000000)),
 			},
 			expPass: false, // 0.5*10**16 * 10**-10 > 9*10**6 * 0.99 * 1 - 8.5*10**6
 			expErr:  types.ErrBackingCoinInsufficient,
@@ -741,7 +741,7 @@ func (suite *KeeperTestSuite) TestEstimateBuyBackingOut() {
 			},
 			req: &types.EstimateBuyBackingOutRequest{
 				BackingDenom: suite.bcDenom,
-				LionIn:       sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(3000_000000_000000)),
+				IronIn:       sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(3000_000000_000000)),
 			},
 			expPass: false,
 			expErr:  types.ErrBackingCoinInsufficient,
@@ -753,7 +753,7 @@ func (suite *KeeperTestSuite) TestEstimateBuyBackingOut() {
 			},
 			req: &types.EstimateBuyBackingOutRequest{
 				BackingDenom: suite.bcDenom,
-				LionIn:       sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(3000_000000_000000)),
+				IronIn:       sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(3000_000000_000000)),
 			},
 			expPass: false,
 			expErr:  types.ErrBackingCoinInsufficient,
@@ -762,7 +762,7 @@ func (suite *KeeperTestSuite) TestEstimateBuyBackingOut() {
 			name: "correct",
 			req: &types.EstimateBuyBackingOutRequest{
 				BackingDenom: suite.bcDenom,
-				LionIn:       sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(3000_000000_000000)),
+				IronIn:       sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(3000_000000_000000)),
 			},
 			expPass: true,
 			expRes: &types.EstimateBuyBackingOutResponse{
@@ -816,37 +816,37 @@ func (suite *KeeperTestSuite) TestEstimateSellBackingIn() {
 		{
 			name: "pool backing over ceiling",
 			req: &types.EstimateSellBackingInRequest{
-				LionOut:      sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(20000_000000_000000)),
+				IronOut:      sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(20000_000000_000000)),
 				BackingDenom: suite.bcDenom,
 			},
 			expPass: false,
 			expErr:  types.ErrBackingCeiling,
 		},
 		{
-			name: "lion insufficient",
+			name: "iron insufficient",
 			req: &types.EstimateSellBackingInRequest{
-				LionOut:      sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
+				IronOut:      sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
 				BackingDenom: suite.bcDenom,
 			},
 			expPass: false,
-			expErr:  types.ErrLionCoinInsufficient,
+			expErr:  types.ErrIronCoinInsufficient,
 		},
 		{
 			name: "correct",
 			malleate: func() {
 				totalBacking, found := suite.app.MakerKeeper.GetTotalBacking(suite.ctx)
 				suite.Require().True(found)
-				totalBacking.MerMinted.Amount = sdk.NewInt(10_000000)
+				totalBacking.GridMinted.Amount = sdk.NewInt(10_000000)
 				suite.app.MakerKeeper.SetTotalBacking(suite.ctx, totalBacking)
 			},
 			req: &types.EstimateSellBackingInRequest{
-				LionOut:      sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(10000_000000_000000)),
+				IronOut:      sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(10000_000000_000000)),
 				BackingDenom: suite.bcDenom,
 			},
 			expPass: true,
 			expRes: &types.EstimateSellBackingInResponse{
 				BackingIn:   sdk.NewCoin(suite.bcDenom, sdk.NewInt(1_006578)),                 // 1*10**16 / (1+0.0075-0.004) * 10**-10 / 0.99
-				SellbackFee: sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(39_860488_290982)), // 1*10**16 / (1+0.0075-0.004) * 0.004
+				SellbackFee: sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(39_860488_290982)), // 1*10**16 / (1+0.0075-0.004) * 0.004
 			},
 		},
 	}
@@ -899,24 +899,24 @@ func (suite *KeeperTestSuite) TestEstimateSellBackingOut() {
 			expErr:  types.ErrBackingCeiling,
 		},
 		{
-			name:    "lion insufficient",
+			name:    "iron insufficient",
 			req:     &types.EstimateSellBackingOutRequest{BackingIn: sdk.NewCoin(suite.bcDenom, sdk.NewInt(1_000000))},
 			expPass: false,
-			expErr:  types.ErrLionCoinInsufficient,
+			expErr:  types.ErrIronCoinInsufficient,
 		},
 		{
 			name: "correct",
 			malleate: func() {
 				totalBacking, found := suite.app.MakerKeeper.GetTotalBacking(suite.ctx)
 				suite.Require().True(found)
-				totalBacking.MerMinted.Amount = sdk.NewInt(10_000000)
+				totalBacking.GridMinted.Amount = sdk.NewInt(10_000000)
 				suite.app.MakerKeeper.SetTotalBacking(suite.ctx, totalBacking)
 			},
 			req:     &types.EstimateSellBackingOutRequest{BackingIn: sdk.NewCoin(suite.bcDenom, sdk.NewInt(1_000000))},
 			expPass: true,
 			expRes: &types.EstimateSellBackingOutResponse{
-				LionOut:     sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(9934_650000_000000)), // 1*10**6 * 0.99 / 10**-10 * (1+0.0075-0.004)
-				SellbackFee: sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(39_600000_000000)),   // 1*10**6 * 0.99 / 10**-10 * 0.004
+				IronOut:     sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(9934_650000_000000)), // 1*10**6 * 0.99 / 10**-10 * (1+0.0075-0.004)
+				SellbackFee: sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(39_600000_000000)),   // 1*10**6 * 0.99 / 10**-10 * 0.004
 			},
 		},
 	}
@@ -946,8 +946,8 @@ func (suite *KeeperTestSuite) setupEstimationTest() {
 	suite.app.OracleKeeper.SetExchangeRate(suite.ctx, suite.bcDenom, sdk.NewDecWithPrec(99, 2))
 	suite.app.OracleKeeper.SetExchangeRate(suite.ctx, "eth", sdk.NewDec(1000_000000))
 	suite.app.OracleKeeper.SetExchangeRate(suite.ctx, "fil", sdk.NewDec(5_000000))
-	suite.app.OracleKeeper.SetExchangeRate(suite.ctx, merlion.AttoLionDenom, sdk.NewDecWithPrec(100, 12))
-	suite.app.OracleKeeper.SetExchangeRate(suite.ctx, merlion.MicroUSMDenom, sdk.NewDecWithPrec(1005, 3))
+	suite.app.OracleKeeper.SetExchangeRate(suite.ctx, gridiron.AttoIronDenom, sdk.NewDecWithPrec(100, 12))
+	suite.app.OracleKeeper.SetExchangeRate(suite.ctx, gridiron.MicroUSMDenom, sdk.NewDecWithPrec(1005, 3))
 
 	// set risk params
 	brp, brp2 := suite.dummyBackingRiskParams()
@@ -960,32 +960,32 @@ func (suite *KeeperTestSuite) setupEstimationTest() {
 
 	// set pool and total backing
 	suite.app.MakerKeeper.SetPoolBacking(suite.ctx, types.PoolBacking{
-		MerMinted:  sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(8_000000)),
+		GridMinted:  sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(8_000000)),
 		Backing:    sdk.NewCoin(suite.bcDenom, sdk.NewInt(9_000000)),
-		LionBurned: sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
+		IronBurned: sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
 	})
 	suite.app.BankKeeper.MintCoins(suite.ctx, types.ModuleName, sdk.NewCoins(sdk.NewCoin(suite.bcDenom, sdk.NewInt(1000_000000))))
 	suite.app.MakerKeeper.SetTotalBacking(suite.ctx, types.TotalBacking{
-		MerMinted:  sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(8_500000)),
-		LionBurned: sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
+		GridMinted:  sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(8_500000)),
+		IronBurned: sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
 	})
 
 	// set account, pool and total collateral
 	suite.app.MakerKeeper.SetAccountCollateral(suite.ctx, suite.accAddress, types.AccountCollateral{
 		Account:             suite.accAddress.String(),
 		Collateral:          sdk.NewCoin(suite.bcDenom, sdk.NewInt(10_000000)),
-		MerDebt:             sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(6_000000)),
-		LionCollateralized:  sdk.NewCoin(merlion.AttoLionDenom, sdk.NewInt(3e15)),
-		LastInterest:        sdk.NewCoin(merlion.MicroUSMDenom, sdk.ZeroInt()),
+		GridDebt:             sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(6_000000)),
+		IronCollateralized:  sdk.NewCoin(gridiron.AttoIronDenom, sdk.NewInt(3e15)),
+		LastInterest:        sdk.NewCoin(gridiron.MicroUSMDenom, sdk.ZeroInt()),
 		LastSettlementBlock: 0,
 	})
 	suite.app.MakerKeeper.SetPoolCollateral(suite.ctx, types.PoolCollateral{
 		Collateral:         sdk.NewCoin(suite.bcDenom, sdk.NewInt(15_000000)),
-		MerDebt:            sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(8_000000)),
-		LionCollateralized: sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
+		GridDebt:            sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(8_000000)),
+		IronCollateralized: sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
 	})
 	suite.app.MakerKeeper.SetTotalCollateral(suite.ctx, types.TotalCollateral{
-		MerDebt:            sdk.NewCoin(merlion.MicroUSMDenom, sdk.NewInt(10_000000)),
-		LionCollateralized: sdk.NewCoin(merlion.AttoLionDenom, sdk.ZeroInt()),
+		GridDebt:            sdk.NewCoin(gridiron.MicroUSMDenom, sdk.NewInt(10_000000)),
+		IronCollateralized: sdk.NewCoin(gridiron.AttoIronDenom, sdk.ZeroInt()),
 	})
 }

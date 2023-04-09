@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlion-zone/merlion/x/ve/keeper"
-	"github.com/merlion-zone/merlion/x/ve/types"
+	"github.com/gridiron-zone/gridiron/x/ve/keeper"
+	"github.com/gridiron-zone/gridiron/x/ve/types"
 	"github.com/tharsis/ethermint/crypto/ethsecp256k1"
 )
 
@@ -16,7 +16,7 @@ func (suite *KeeperTestSuite) TestVeCreate() {
 	require.NoError(err)
 	receiver := sdk.AccAddress(priv.PubKey().Address())
 	sender := sdk.AccAddress(suite.address.Bytes())
-	denom := "1alion"
+	denom := "1airon"
 	impl := keeper.NewMsgServerImpl(suite.app.VeKeeper)
 	testCases := []struct {
 		name         string
@@ -27,9 +27,9 @@ func (suite *KeeperTestSuite) TestVeCreate() {
 		lockDuration uint64
 	}{
 		{"receiver is different from sender", true, sender, receiver.String(), denom, types.RegulatedPeriod},
-		{"invalid denom", false, sender, receiver.String(), "1lion", types.RegulatedPeriod},
+		{"invalid denom", false, sender, receiver.String(), "1iron", types.RegulatedPeriod},
 		{"invalid sender", false, []byte("xxx"), receiver.String(), denom, types.RegulatedPeriod},
-		{"invalid receiver", false, sender, "xxx", "1alion", types.RegulatedPeriod},
+		{"invalid receiver", false, sender, "xxx", "1airon", types.RegulatedPeriod},
 		{"unlock time is past time", false, sender, receiver.String(), denom, 0},
 		{"unlock time is future time", false, sender, receiver.String(), denom, 10000 * types.MaxLockTime},
 	}
@@ -65,7 +65,7 @@ func (suite *KeeperTestSuite) TestVeDeposit() {
 	require.NoError(err)
 	receiver := sdk.AccAddress(priv.PubKey().Address())
 	impl := keeper.NewMsgServerImpl(suite.app.VeKeeper)
-	denom := "alion"
+	denom := "airon"
 	res, err := impl.Create(ctx, &types.MsgCreate{
 		Sender:       sender.String(),
 		To:           receiver.String(),
@@ -82,7 +82,7 @@ func (suite *KeeperTestSuite) TestVeDeposit() {
 		amount sdk.Coin
 		veID   string
 	}{
-		{"invalid denom", false, sender, sdk.NewCoin("lion", sdk.NewInt(1)), "ve-100"},
+		{"invalid denom", false, sender, sdk.NewCoin("iron", sdk.NewInt(1)), "ve-100"},
 		{"invalid sender", false, []byte("xxx"), sdk.NewCoin(denom, sdk.NewInt(1)), "ve-100"},
 		{"invalid ve id", false, sender, sdk.NewCoin(denom, sdk.NewInt(1)), "ve-100"},
 		{"nothing is locked for ve", false, sender, sdk.NewCoin(denom, sdk.NewInt(1)), "ve-200"},
@@ -112,7 +112,7 @@ func (suite *KeeperTestSuite) TestVeExtendTime() {
 	ctx := sdk.WrapSDKContext(suite.ctx)
 	impl := keeper.NewMsgServerImpl(suite.app.VeKeeper)
 	sender := sdk.AccAddress(suite.address.Bytes())
-	denom := "alion"
+	denom := "airon"
 	// Create Valid VeID
 	for i := 1; i <= 3; i++ {
 		res, err := impl.Create(ctx, &types.MsgCreate{
@@ -172,7 +172,7 @@ func (suite *KeeperTestSuite) TestVeMerge() {
 	ctx := sdk.WrapSDKContext(suite.ctx)
 	impl := keeper.NewMsgServerImpl(suite.app.VeKeeper)
 	sender := sdk.AccAddress(suite.address.Bytes())
-	denom := "alion"
+	denom := "airon"
 	// Create Valid VeID
 	for i := 1; i <= 2; i++ {
 		res, err := impl.Create(ctx, &types.MsgCreate{
@@ -241,7 +241,7 @@ func (suite *KeeperTestSuite) TestVeWithdraw() {
 	ctx := sdk.WrapSDKContext(suite.ctx)
 	impl := keeper.NewMsgServerImpl(suite.app.VeKeeper)
 	sender := sdk.AccAddress(suite.address.Bytes())
-	denom := "alion"
+	denom := "airon"
 	// Create Valid VeID
 	for i := 1; i <= 2; i++ {
 		res, err := impl.Create(ctx, &types.MsgCreate{
@@ -306,7 +306,7 @@ func (suite *KeeperTestSuite) TestKeeper_DepositFor() {
 	ctx := sdk.WrapSDKContext(suite.ctx)
 	impl := keeper.NewMsgServerImpl(suite.app.VeKeeper)
 	sender := sdk.AccAddress(suite.address.Bytes())
-	denom := "alion"
+	denom := "airon"
 	// Create Valid VeID
 	for i := 1; i <= 2; i++ {
 		res, err := impl.Create(ctx, &types.MsgCreate{

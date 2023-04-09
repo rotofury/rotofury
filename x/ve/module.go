@@ -16,9 +16,9 @@ import (
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	"github.com/merlion-zone/merlion/x/ve/client/cli"
-	"github.com/merlion-zone/merlion/x/ve/keeper"
-	"github.com/merlion-zone/merlion/x/ve/types"
+	"github.com/gridiron-zone/gridiron/x/ve/client/cli"
+	"github.com/gridiron-zone/gridiron/x/ve/keeper"
+	"github.com/gridiron-zone/gridiron/x/ve/types"
 )
 
 var (

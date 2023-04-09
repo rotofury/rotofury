@@ -1,9 +1,9 @@
 syntax = "proto3";
-package merlion.vesting.v1;
+package gridiron.vesting.v1;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/merlion-zone/merlion/x/vesting/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/vesting/types";
 
 // GenesisState defines the vesting module's genesis state.
 message GenesisState {

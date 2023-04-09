@@ -1,29 +1,30 @@
 syntax = "proto3";
-package merlion.vesting.v1;
+package gridiron.vesting.v1;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
-import "merlion/vesting/v1/genesis.proto";
-import "merlion/vesting/v1/vesting.proto";
+import "gridiron/vesting/v1/genesis.proto";
+import "gridiron/vesting/v1/vesting.proto";
 
-option go_package = "github.com/merlion-zone/merlion/x/vesting/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/vesting/types";
 
 // Query defines the vesting gRPC querier service.
 service Query {
   // Airdrops queries airdrop targets.
   rpc Airdrops(QueryAirdropsRequest) returns (QueryAirdropsResponse) {
-    option (google.api.http).get = "/merlion/vesting/v1/airdrops";
+    option (google.api.http).get = "/gridiron/vesting/v1/airdrops";
   }
 
   // Airdrops queries airdrop target for given address.
   rpc Airdrop(QueryAirdropRequest) returns (QueryAirdropResponse) {
-    option (google.api.http).get = "/merlion/vesting/v1/airdrops/{target_addr}";
+    option (google.api.http).get =
+        "/gridiron/vesting/v1/airdrops/{target_addr}";
   }
 
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/merlion/vesting/v1/params";
+    option (google.api.http).get = "/gridiron/vesting/v1/params";
   }
 }
 

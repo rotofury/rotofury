@@ -1,130 +1,134 @@
 syntax = "proto3";
-package merlion.maker.v1;
+package gridiron.maker.v1;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
-import "merlion/maker/v1/genesis.proto";
-import "merlion/maker/v1/maker.proto";
+import "gridiron/maker/v1/genesis.proto";
+import "gridiron/maker/v1/maker.proto";
 import "cosmos/base/v1beta1/coin.proto";
 
-option go_package = "github.com/merlion-zone/merlion/x/maker/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/maker/types";
 
 // Query defines the maker gRPC querier service.
 service Query {
   // AllBackingRiskParams queries risk params of all the backing pools.
   rpc AllBackingRiskParams(QueryAllBackingRiskParamsRequest)
       returns (QueryAllBackingRiskParamsResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/all_backing_risk_params";
+    option (google.api.http).get = "/gridiron/maker/v1/all_backing_risk_params";
   }
 
   // AllCollateralRiskParams queries risk params of all the collateral pools.
   rpc AllCollateralRiskParams(QueryAllCollateralRiskParamsRequest)
       returns (QueryAllCollateralRiskParamsResponse) {
     option (google.api.http).get =
-        "/merlion/maker/v1/all_collateral_risk_params";
+        "/gridiron/maker/v1/all_collateral_risk_params";
   }
 
   // AllBackingPools queries all the backing pools.
   rpc AllBackingPools(QueryAllBackingPoolsRequest)
       returns (QueryAllBackingPoolsResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/all_backing_pools";
+    option (google.api.http).get = "/gridiron/maker/v1/all_backing_pools";
   }
 
   // AllCollateralPools queries all the collateral pools.
   rpc AllCollateralPools(QueryAllCollateralPoolsRequest)
       returns (QueryAllCollateralPoolsResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/all_collateral_pools";
+    option (google.api.http).get = "/gridiron/maker/v1/all_collateral_pools";
   }
 
   // BackingPool queries a backing pool.
   rpc BackingPool(QueryBackingPoolRequest) returns (QueryBackingPoolResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/backing_pool";
+    option (google.api.http).get = "/gridiron/maker/v1/backing_pool";
   }
 
   // CollateralPool queries a collateral pool.
   rpc CollateralPool(QueryCollateralPoolRequest)
       returns (QueryCollateralPoolResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/collateral_pool";
+    option (google.api.http).get = "/gridiron/maker/v1/collateral_pool";
   }
 
   // CollateralOfAccount queries the collateral of an account.
   rpc CollateralOfAccount(QueryCollateralOfAccountRequest)
       returns (QueryCollateralOfAccountResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/collateral_account";
+    option (google.api.http).get = "/gridiron/maker/v1/collateral_account";
   }
 
   // TotalBacking queries the total backing.
   rpc TotalBacking(QueryTotalBackingRequest)
       returns (QueryTotalBackingResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/total_backing";
+    option (google.api.http).get = "/gridiron/maker/v1/total_backing";
   }
 
   // TotalCollateral queries the total collateral.
   rpc TotalCollateral(QueryTotalCollateralRequest)
       returns (QueryTotalCollateralResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/total_collateral";
+    option (google.api.http).get = "/gridiron/maker/v1/total_collateral";
   }
 
   // BackingRatio queries the backing ratio.
   rpc BackingRatio(QueryBackingRatioRequest)
       returns (QueryBackingRatioResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/backing_ratio";
+    option (google.api.http).get = "/gridiron/maker/v1/backing_ratio";
   }
 
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/params";
+    option (google.api.http).get = "/gridiron/maker/v1/params";
   }
 
   // EstimateMintBySwapIn estimates input of minting by swap.
   rpc EstimateMintBySwapIn(EstimateMintBySwapInRequest)
       returns (EstimateMintBySwapInResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/estimate_mint_by_swap_in";
+    option (google.api.http).get =
+        "/gridiron/maker/v1/estimate_mint_by_swap_in";
   }
 
   // EstimateMintBySwapOut estimates output of minting by swap.
   rpc EstimateMintBySwapOut(EstimateMintBySwapOutRequest)
       returns (EstimateMintBySwapOutResponse) {
     option (google.api.http).get =
-        "/merlion/maker/v1/estimate_mint_by_swap_out";
+        "/gridiron/maker/v1/estimate_mint_by_swap_out";
   }
 
   // EstimateBurnBySwapIn estimates input of burning by swap.
   rpc EstimateBurnBySwapIn(EstimateBurnBySwapInRequest)
       returns (EstimateBurnBySwapInResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/estimate_burn_by_swap_in";
+    option (google.api.http).get =
+        "/gridiron/maker/v1/estimate_burn_by_swap_in";
   }
 
   // EstimateBurnBySwapOut estimates output of burning by swap.
   rpc EstimateBurnBySwapOut(EstimateBurnBySwapOutRequest)
       returns (EstimateBurnBySwapOutResponse) {
     option (google.api.http).get =
-        "/merlion/maker/v1/estimate_burn_by_swap_out";
+        "/gridiron/maker/v1/estimate_burn_by_swap_out";
   }
 
   // EstimateBuyBackingIn estimates inpput of buying backing assets.
   rpc EstimateBuyBackingIn(EstimateBuyBackingInRequest)
       returns (EstimateBuyBackingInResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/estimate_buy_backing_in";
+    option (google.api.http).get = "/gridiron/maker/v1/estimate_buy_backing_in";
   }
 
   // EstimateBuyBackingOut estimates output of buying backing assets.
   rpc EstimateBuyBackingOut(EstimateBuyBackingOutRequest)
       returns (EstimateBuyBackingOutResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/estimate_buy_backing_out";
+    option (google.api.http).get =
+        "/gridiron/maker/v1/estimate_buy_backing_out";
   }
 
   // EstimateSellBackingIn estimates input of selling backing assets.
   rpc EstimateSellBackingIn(EstimateSellBackingInRequest)
       returns (EstimateSellBackingInResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/estimate_sell_backing_in";
+    option (google.api.http).get =
+        "/gridiron/maker/v1/estimate_sell_backing_in";
   }
 
   // EstimateSellBackingOut estimates output of selling backing assets.
   rpc EstimateSellBackingOut(EstimateSellBackingOutRequest)
       returns (EstimateSellBackingOutResponse) {
     option (google.api.http).get =
-        "/merlion/maker/v1/estimate_sell_backing_out";
+        "/gridiron/maker/v1/estimate_sell_backing_out";
   }
 }
 
@@ -213,32 +217,32 @@ message EstimateMintBySwapInRequest {
 
 message EstimateMintBySwapInResponse {
   cosmos.base.v1beta1.Coin backing_in = 1 [ (gogoproto.nullable) = false ];
-  cosmos.base.v1beta1.Coin lion_in = 2 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin iron_in = 2 [ (gogoproto.nullable) = false ];
   cosmos.base.v1beta1.Coin mint_fee = 3 [ (gogoproto.nullable) = false ];
 }
 
 message EstimateMintBySwapOutRequest {
   cosmos.base.v1beta1.Coin backing_in_max = 1 [ (gogoproto.nullable) = false ];
-  cosmos.base.v1beta1.Coin lion_in_max = 2 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin iron_in_max = 2 [ (gogoproto.nullable) = false ];
   bool full_backing = 3;
 }
 
 message EstimateMintBySwapOutResponse {
   cosmos.base.v1beta1.Coin backing_in = 1 [ (gogoproto.nullable) = false ];
-  cosmos.base.v1beta1.Coin lion_in = 2 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin iron_in = 2 [ (gogoproto.nullable) = false ];
   cosmos.base.v1beta1.Coin mint_out = 3 [ (gogoproto.nullable) = false ];
   cosmos.base.v1beta1.Coin mint_fee = 4 [ (gogoproto.nullable) = false ];
 }
 
 message EstimateBurnBySwapInRequest {
   cosmos.base.v1beta1.Coin backing_out_max = 1 [ (gogoproto.nullable) = false ];
-  cosmos.base.v1beta1.Coin lion_out_max = 2 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin iron_out_max = 2 [ (gogoproto.nullable) = false ];
 }
 
 message EstimateBurnBySwapInResponse {
   cosmos.base.v1beta1.Coin burn_in = 1 [ (gogoproto.nullable) = false ];
   cosmos.base.v1beta1.Coin backing_out = 2 [ (gogoproto.nullable) = false ];
-  cosmos.base.v1beta1.Coin lion_out = 3 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin iron_out = 3 [ (gogoproto.nullable) = false ];
   cosmos.base.v1beta1.Coin burn_fee = 4 [ (gogoproto.nullable) = false ];
 }
 
@@ -249,7 +253,7 @@ message EstimateBurnBySwapOutRequest {
 
 message EstimateBurnBySwapOutResponse {
   cosmos.base.v1beta1.Coin backing_out = 1 [ (gogoproto.nullable) = false ];
-  cosmos.base.v1beta1.Coin lion_out = 2 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin iron_out = 2 [ (gogoproto.nullable) = false ];
   cosmos.base.v1beta1.Coin burn_fee = 3 [ (gogoproto.nullable) = false ];
 }
 
@@ -258,12 +262,12 @@ message EstimateBuyBackingInRequest {
 }
 
 message EstimateBuyBackingInResponse {
-  cosmos.base.v1beta1.Coin lion_in = 1 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin iron_in = 1 [ (gogoproto.nullable) = false ];
   cosmos.base.v1beta1.Coin buyback_fee = 2 [ (gogoproto.nullable) = false ];
 }
 
 message EstimateBuyBackingOutRequest {
-  cosmos.base.v1beta1.Coin lion_in = 1 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin iron_in = 1 [ (gogoproto.nullable) = false ];
   string backing_denom = 2;
 }
 
@@ -273,7 +277,7 @@ message EstimateBuyBackingOutResponse {
 }
 
 message EstimateSellBackingInRequest {
-  cosmos.base.v1beta1.Coin lion_out = 1 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin iron_out = 1 [ (gogoproto.nullable) = false ];
   string backing_denom = 2;
 }
 
@@ -287,6 +291,6 @@ message EstimateSellBackingOutRequest {
 }
 
 message EstimateSellBackingOutResponse {
-  cosmos.base.v1beta1.Coin lion_out = 1 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin iron_out = 1 [ (gogoproto.nullable) = false ];
   cosmos.base.v1beta1.Coin sellback_fee = 2 [ (gogoproto.nullable) = false ];
 }

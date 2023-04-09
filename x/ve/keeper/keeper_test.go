@@ -9,9 +9,9 @@ import (
 	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/merlion-zone/merlion/app"
-	merlion "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/ve/types"
+	"github.com/gridiron-zone/gridiron/app"
+	gridiron "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/ve/types"
 	"github.com/stretchr/testify/suite"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmversion "github.com/tendermint/tendermint/proto/tendermint/version"
@@ -23,7 +23,7 @@ import (
 type KeeperTestSuite struct {
 	suite.Suite
 	ctx sdk.Context
-	app *app.Merlion
+	app *app.Gridiron
 
 	address common.Address
 	signer  keyring.Signer
@@ -54,7 +54,7 @@ func (suite *KeeperTestSuite) SetupTest() {
 		Version: tmversion.Consensus{
 			Block: version.BlockProtocol,
 		},
-		ChainID:         "merlion_5000-101",
+		ChainID:         "gridiron_5000-101",
 		Height:          1,
 		Time:            time.Now().UTC(),
 		ProposerAddress: consAddress.Bytes(),
@@ -69,7 +69,7 @@ func (suite *KeeperTestSuite) SetupTest() {
 	err = suite.app.StakingKeeper.SetValidatorByConsAddr(suite.ctx, validator)
 	require.NoError(err)
 
-	amount := sdk.NewInt64Coin(merlion.BaseDenom, 10000)
+	amount := sdk.NewInt64Coin(gridiron.BaseDenom, 10000)
 	err = app.FundAccount(suite.app.BankKeeper, suite.ctx, sdk.AccAddress(suite.address.Bytes()), sdk.NewCoins(amount))
 	require.NoError(err)
 }

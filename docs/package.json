@@ -1,7 +1,7 @@
 {
   "name": "docs",
   "version": "1.0.0",
-  "description": "Merlion Documentation",
+  "description": "Gridiron Documentation",
   "scripts": {
     "serve": "vuepress dev",
     "build": "vuepress build",
@@ -11,7 +11,7 @@
     "postbuild": "./post.sh"
   },
   "keywords": [
-    "merlion",
+    "gridiron",
     "ethereum",
     "cosmos",
     "blockchain",

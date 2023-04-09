@@ -3,10 +3,10 @@ package gauge_test
 import (
 	"testing"
 
-	keepertest "github.com/merlion-zone/merlion/testutil/keeper"
-	"github.com/merlion-zone/merlion/testutil/nullify"
-	"github.com/merlion-zone/merlion/x/gauge"
-	"github.com/merlion-zone/merlion/x/gauge/types"
+	keepertest "github.com/gridiron-zone/gridiron/testutil/keeper"
+	"github.com/gridiron-zone/gridiron/testutil/nullify"
+	"github.com/gridiron-zone/gridiron/x/gauge"
+	"github.com/gridiron-zone/gridiron/x/gauge/types"
 	"github.com/stretchr/testify/require"
 )
 

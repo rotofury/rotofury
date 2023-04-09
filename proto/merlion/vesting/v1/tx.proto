@@ -1,24 +1,24 @@
 syntax = "proto3";
-package merlion.vesting.v1;
+package gridiron.vesting.v1;
 
 import "google/api/annotations.proto";
 import "gogoproto/gogo.proto";
-import "merlion/vesting/v1/vesting.proto";
+import "gridiron/vesting/v1/vesting.proto";
 
-option go_package = "github.com/merlion-zone/merlion/x/vesting/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/vesting/types";
 
 // Msg defines the vesting Msg service.
 service Msg {
   // AddAirdrops adds airdrop targets.
   // Should only be called by core team multisig.
   rpc AddAirdrops(MsgAddAirdrops) returns (MsgAddAirdropsResponse) {
-    option (google.api.http).get = "/merlion/vesting/v1/tx/add_airdrops";
+    option (google.api.http).get = "/gridiron/vesting/v1/tx/add_airdrops";
   }
 
   // ExecuteAirdrops performs airdrops.
   // Should only be called by core team multisig.
   rpc ExecuteAirdrops(MsgExecuteAirdrops) returns (MsgExecuteAirdropsResponse) {
-    option (google.api.http).get = "/merlion/vesting/v1/tx/exec_airdrops";
+    option (google.api.http).get = "/gridiron/vesting/v1/tx/exec_airdrops";
   }
 
   // SetAllocationAddress sets allocation address of team vesting or
@@ -26,7 +26,7 @@ service Msg {
   rpc SetAllocationAddress(MsgSetAllocationAddress)
       returns (MsgSetAllocationAddressResponse) {
     option (google.api.http).get =
-        "/merlion/vesting/v1/tx/set_allocation_address";
+        "/gridiron/vesting/v1/tx/set_allocation_address";
   }
 }
 

@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlion-zone/merlion/app"
-	"github.com/merlion-zone/merlion/x/vesting/types"
+	"github.com/gridiron-zone/gridiron/app"
+	"github.com/gridiron-zone/gridiron/x/vesting/types"
 	"github.com/stretchr/testify/require"
 )
 

@@ -2,7 +2,7 @@ package keeper_test
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlion-zone/merlion/types"
+	"github.com/gridiron-zone/gridiron/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -11,7 +11,7 @@ func (suite *KeeperTestSuite) TestKeeper_HasBalance() {
 	var (
 		t          = suite.T()
 		k          = suite.app.BankKeeper
-		denom      = types.AttoLionDenom
+		denom      = types.AttoIronDenom
 		amt        = sdk.NewCoin(denom, sdk.NewInt(100))
 		erc20Denom = "erc20/0xd567B3d7B8FE3C79a1AD8dA978812cfC4Fa05e75"
 	)
@@ -34,7 +34,7 @@ func (suite *KeeperTestSuite) TestKeeper_GetAllBalances() {
 	var (
 		t     = suite.T()
 		k     = suite.app.BankKeeper
-		denom = types.AttoLionDenom
+		denom = types.AttoIronDenom
 	)
 	bal := k.GetAllBalances(suite.ctx, suite.addrs[0])
 	require.Equal(t, sdk.NewCoins(sdk.NewCoin(denom, sdk.NewInt(1134))), bal)
@@ -45,7 +45,7 @@ func (suite *KeeperTestSuite) TestKeeper_GetBalance() {
 	var (
 		t     = suite.T()
 		k     = suite.app.BankKeeper
-		denom = types.AttoLionDenom
+		denom = types.AttoIronDenom
 	)
 	// Raw balance check
 	bal := k.GetBalance(suite.ctx, suite.addrs[0], denom)
@@ -57,7 +57,7 @@ func (suite *KeeperTestSuite) TestKeeper_SpendableCoins() {
 	var (
 		t     = suite.T()
 		k     = suite.app.BankKeeper
-		denom = types.AttoLionDenom
+		denom = types.AttoIronDenom
 	)
 	bal := k.SpendableCoins(suite.ctx, suite.addrs[0])
 	require.Equal(t, sdk.NewCoins(sdk.NewCoin(denom, sdk.NewInt(1134))), bal)

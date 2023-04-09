@@ -16,7 +16,7 @@ var (
 
 // Default parameter values
 var (
-	DefaultTotalAmount                = sdk.NewInt(1000_000_000).Mul(ethermint.PowerReduction) // one billion
+	DefaultTotalAmount                = sdk.NewInt(1000_000_000).Mul(ethermint.PowerReduction) // one biliron
 	DefaultAirdropAmountRate          = sdk.NewDecWithPrec(5, 2)                               // 5%
 	DefaultVeVestingAmountRate        = sdk.NewDecWithPrec(45, 2)                              // 45%
 	DefaultStakingRewardAmountRate    = sdk.NewDecWithPrec(5, 2)                               // 5%

@@ -1,12 +1,12 @@
 syntax = "proto3";
-package merlion.oracle.v1;
+package gridiron.oracle.v1;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/v1beta1/coin.proto";
-import "merlion/oracle/v1/oracle.proto";
+import "gridiron/oracle/v1/oracle.proto";
 
-option go_package = "github.com/merlion-zone/merlion/x/oracle/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/oracle/types";
 
 // Query defines the gRPC querier service.
 service Query {
@@ -14,74 +14,74 @@ service Query {
   rpc ExchangeRate(QueryExchangeRateRequest)
       returns (QueryExchangeRateResponse) {
     option (google.api.http).get =
-        "/merlion/oracle/v1/denoms/{denom}/exchange_rate";
+        "/gridiron/oracle/v1/denoms/{denom}/exchange_rate";
   }
 
   // ExchangeRates returns exchange rates of all denoms.
   rpc ExchangeRates(QueryExchangeRatesRequest)
       returns (QueryExchangeRatesResponse) {
-    option (google.api.http).get = "/merlion/oracle/v1/denoms/exchange_rates";
+    option (google.api.http).get = "/gridiron/oracle/v1/denoms/exchange_rates";
   }
 
   // Actives returns all active denoms.
   rpc Actives(QueryActivesRequest) returns (QueryActivesResponse) {
-    option (google.api.http).get = "/merlion/oracle/v1/denoms/actives";
+    option (google.api.http).get = "/gridiron/oracle/v1/denoms/actives";
   }
 
   // VoteTargets returns all vote target denoms.
   rpc VoteTargets(QueryVoteTargetsRequest) returns (QueryVoteTargetsResponse) {
-    option (google.api.http).get = "/merlion/oracle/v1/denoms/vote_targets";
+    option (google.api.http).get = "/gridiron/oracle/v1/denoms/vote_targets";
   }
 
   // Targets returns all target denoms (including vote targets).
   rpc Targets(QueryTargetsRequest) returns (QueryTargetsResponse) {
-    option (google.api.http).get = "/merlion/oracle/v1/denoms/targets";
+    option (google.api.http).get = "/gridiron/oracle/v1/denoms/targets";
   }
 
   // FeederDelegation returns feeder delegation of a validator.
   rpc FeederDelegation(QueryFeederDelegationRequest)
       returns (QueryFeederDelegationResponse) {
     option (google.api.http).get =
-        "/merlion/oracle/v1/validators/{validator_addr}/feeder";
+        "/gridiron/oracle/v1/validators/{validator_addr}/feeder";
   }
 
   // MissCounter returns oracle miss counter of a validator.
   rpc MissCounter(QueryMissCounterRequest) returns (QueryMissCounterResponse) {
     option (google.api.http).get =
-        "/merlion/oracle/v1/validators/{validator_addr}/miss";
+        "/gridiron/oracle/v1/validators/{validator_addr}/miss";
   }
 
   // AggregatePrevote returns an aggregate prevote of a validator.
   rpc AggregatePrevote(QueryAggregatePrevoteRequest)
       returns (QueryAggregatePrevoteResponse) {
     option (google.api.http).get =
-        "/merlion/oracle/v1/validators/{validator_addr}/aggregate_prevote";
+        "/gridiron/oracle/v1/validators/{validator_addr}/aggregate_prevote";
   }
 
   // AggregatePrevotes returns aggregate prevotes of all validators.
   rpc AggregatePrevotes(QueryAggregatePrevotesRequest)
       returns (QueryAggregatePrevotesResponse) {
     option (google.api.http).get =
-        "/merlion/oracle/v1/validators/aggregate_prevotes";
+        "/gridiron/oracle/v1/validators/aggregate_prevotes";
   }
 
   // AggregateVote returns an aggregate vote of a validator.
   rpc AggregateVote(QueryAggregateVoteRequest)
       returns (QueryAggregateVoteResponse) {
     option (google.api.http).get =
-        "/merlion/oracle/v1/valdiators/{validator_addr}/aggregate_vote";
+        "/gridiron/oracle/v1/valdiators/{validator_addr}/aggregate_vote";
   }
 
   // AggregateVotes returns aggregate votes of all validators.
   rpc AggregateVotes(QueryAggregateVotesRequest)
       returns (QueryAggregateVotesResponse) {
     option (google.api.http).get =
-        "/merlion/oracle/v1/validators/aggregate_votes";
+        "/gridiron/oracle/v1/validators/aggregate_votes";
   }
 
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/merlionzone/merlion/oracle/params";
+    option (google.api.http).get = "/gridironzone/gridiron/oracle/params";
   }
 }
 

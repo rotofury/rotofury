@@ -2,7 +2,7 @@ package keeper_test
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlion-zone/merlion/x/maker/types"
+	"github.com/gridiron-zone/gridiron/x/maker/types"
 )
 
 func (suite *KeeperTestSuite) TestSetGetBackingRiskParams() {
@@ -68,7 +68,7 @@ func (suite *KeeperTestSuite) TestSetGetCollateralRiskParams() {
 
 func (suite *KeeperTestSuite) dummyBackingRiskParams() (brp, brp2 types.BackingRiskParams) {
 	maxBacking := sdk.NewInt(10_100000)
-	maxMerMint := sdk.NewInt(10_000000)
+	maxGridMint := sdk.NewInt(10_000000)
 	mintFee := sdk.NewDecWithPrec(5, 3)
 	burnFee := sdk.NewDecWithPrec(6, 3)
 	buybackFee := sdk.NewDecWithPrec(7, 3)
@@ -77,7 +77,7 @@ func (suite *KeeperTestSuite) dummyBackingRiskParams() (brp, brp2 types.BackingR
 		BackingDenom: suite.bcDenom,
 		Enabled:      true,
 		MaxBacking:   &maxBacking,
-		MaxMerMint:   &maxMerMint,
+		MaxGridMint:   &maxGridMint,
 		MintFee:      &mintFee,
 		BurnFee:      &burnFee,
 		BuybackFee:   &buybackFee,
@@ -85,7 +85,7 @@ func (suite *KeeperTestSuite) dummyBackingRiskParams() (brp, brp2 types.BackingR
 	}
 
 	maxBacking2 := sdk.NewInt(200)
-	maxMerMint2 := sdk.NewInt(2000_000000)
+	maxGridMint2 := sdk.NewInt(2000_000000)
 	mintFee2 := sdk.NewDecWithPrec(6, 3)
 	burnFee2 := sdk.NewDecWithPrec(7, 3)
 	buybackFee2 := sdk.NewDecWithPrec(8, 3)
@@ -94,7 +94,7 @@ func (suite *KeeperTestSuite) dummyBackingRiskParams() (brp, brp2 types.BackingR
 		BackingDenom: "eth",
 		Enabled:      false,
 		MaxBacking:   &maxBacking2,
-		MaxMerMint:   &maxMerMint2,
+		MaxGridMint:   &maxGridMint2,
 		MintFee:      &mintFee2,
 		BurnFee:      &burnFee2,
 		BuybackFee:   &buybackFee2,
@@ -106,11 +106,11 @@ func (suite *KeeperTestSuite) dummyBackingRiskParams() (brp, brp2 types.BackingR
 
 func (suite *KeeperTestSuite) dummyCollateralRiskParams() (crp, crp2 types.CollateralRiskParams) {
 	maxCollateral := sdk.NewInt(16_000000)
-	maxMerMint := sdk.NewInt(10_000000)
+	maxGridMint := sdk.NewInt(10_000000)
 	liquidationThreshold := sdk.NewDecWithPrec(90, 2)
 	loanToValue := sdk.NewDecWithPrec(80, 2)
 	basicLoanToValue := sdk.NewDecWithPrec(50, 2)
-	catalyticLionRatio := sdk.NewDecWithPrec(5, 2)
+	catalyticIronRatio := sdk.NewDecWithPrec(5, 2)
 	liquidationFee := sdk.NewDecWithPrec(10, 2)
 	mintFee := sdk.NewDecWithPrec(1, 2)
 	interestFee := sdk.NewDec(4)
@@ -118,22 +118,22 @@ func (suite *KeeperTestSuite) dummyCollateralRiskParams() (crp, crp2 types.Colla
 		CollateralDenom:      suite.bcDenom,
 		Enabled:              true,
 		MaxCollateral:        &maxCollateral,
-		MaxMerMint:           &maxMerMint,
+		MaxGridMint:           &maxGridMint,
 		LiquidationThreshold: &liquidationThreshold,
 		LoanToValue:          &loanToValue,
 		BasicLoanToValue:     &basicLoanToValue,
-		CatalyticLionRatio:   &catalyticLionRatio,
+		CatalyticIronRatio:   &catalyticIronRatio,
 		LiquidationFee:       &liquidationFee,
 		MintFee:              &mintFee,
 		InterestFee:          &interestFee,
 	}
 
 	maxCollateral2 := sdk.NewInt(200)
-	maxMerMint2 := sdk.NewInt(20)
+	maxGridMint2 := sdk.NewInt(20)
 	liquidationThreshold2 := sdk.NewDecWithPrec(91, 2)
 	loanToValue2 := sdk.NewDecWithPrec(71, 2)
 	basicLoanToValue2 := sdk.NewDecWithPrec(51, 2)
-	catalyticLionRatio2 := sdk.NewDecWithPrec(6, 2)
+	catalyticIronRatio2 := sdk.NewDecWithPrec(6, 2)
 	liquidationFee2 := sdk.NewDecWithPrec(11, 2)
 	mintFee2 := sdk.NewDecWithPrec(2, 2)
 	interestFee2 := sdk.NewDecWithPrec(4, 2)
@@ -141,11 +141,11 @@ func (suite *KeeperTestSuite) dummyCollateralRiskParams() (crp, crp2 types.Colla
 		CollateralDenom:      "eth",
 		Enabled:              false,
 		MaxCollateral:        &maxCollateral2,
-		MaxMerMint:           &maxMerMint2,
+		MaxGridMint:           &maxGridMint2,
 		LiquidationThreshold: &liquidationThreshold2,
 		LoanToValue:          &loanToValue2,
 		BasicLoanToValue:     &basicLoanToValue2,
-		CatalyticLionRatio:   &catalyticLionRatio2,
+		CatalyticIronRatio:   &catalyticIronRatio2,
 		LiquidationFee:       &liquidationFee2,
 		MintFee:              &mintFee2,
 		InterestFee:          &interestFee2,

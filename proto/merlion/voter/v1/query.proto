@@ -1,17 +1,17 @@
 syntax = "proto3";
-package merlion.voter.v1;
+package gridiron.voter.v1;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
-import "merlion/voter/v1/genesis.proto";
+import "gridiron/voter/v1/genesis.proto";
 
-option go_package = "github.com/merlion-zone/merlion/x/voter/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/voter/types";
 
 // Query defines the gRPC querier service.
 service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/merlion/voter/v1/params";
+    option (google.api.http).get = "/gridiron/voter/v1/params";
   }
 }
 

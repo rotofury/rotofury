@@ -3,15 +3,15 @@
 ##
 ## Input parameters
 ##
-BINARY=/merlion/${BINARY:-merliond}
+BINARY=/gridiron/${BINARY:-gridirond}
 ID=${ID:-0}
-LOG=${LOG:-merliond.log}
+LOG=${LOG:-gridirond.log}
 
 ##
 ## Assert linux binary
 ##
 if ! [ -f "${BINARY}" ]; then
-	echo "The binary $(basename "${BINARY}") cannot be found. Please add the binary to the shared folder. Please use the BINARY environment variable if the name of the binary is not 'merliond' E.g.: -e BINARY=merliond_my_test_version"
+	echo "The binary $(basename "${BINARY}") cannot be found. Please add the binary to the shared folder. Please use the BINARY environment variable if the name of the binary is not 'gridirond' E.g.: -e BINARY=gridirond_my_test_version"
 	exit 1
 fi
 BINARY_CHECK="$(file "$BINARY" | grep 'ELF 64-bit LSB executable, x86-64')"
@@ -23,10 +23,10 @@ fi
 ##
 ## Run binary with all parameters
 ##
-export MERLION_HOME="/merlion/node${ID}/merliond"
+export GRIDIRON_HOME="/gridiron/node${ID}/gridirond"
 
-if [ -d "$(dirname "${MERLION_HOME}"/"${LOG}")" ]; then
-  "${BINARY}" --home "${MERLION_HOME}" --trace "$@" | tee "${MERLION_HOME}/${LOG}"
+if [ -d "$(dirname "${GRIDIRON_HOME}"/"${LOG}")" ]; then
+  "${BINARY}" --home "${GRIDIRON_HOME}" --trace "$@" | tee "${GRIDIRON_HOME}/${LOG}"
 else
-  "${BINARY}" --home "${MERLION_HOME}" --trace "$@"
+  "${BINARY}" --home "${GRIDIRON_HOME}" --trace "$@"
 fi

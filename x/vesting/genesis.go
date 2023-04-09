@@ -2,8 +2,8 @@ package vesting
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlion-zone/merlion/x/vesting/keeper"
-	"github.com/merlion-zone/merlion/x/vesting/types"
+	"github.com/gridiron-zone/gridiron/x/vesting/keeper"
+	"github.com/gridiron-zone/gridiron/x/vesting/types"
 )
 
 // InitGenesis initializes the vesting module's state from a provided genesis

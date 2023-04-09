@@ -3,7 +3,7 @@ package keeper_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	"github.com/merlion-zone/merlion/types"
+	"github.com/gridiron-zone/gridiron/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -12,7 +12,7 @@ func (suite *KeeperTestSuite) TestKeeper_InputOutputCoins() {
 	var (
 		t      = suite.T()
 		k      = suite.app.BankKeeper
-		denom  = types.AttoLionDenom
+		denom  = types.AttoIronDenom
 		amt    = sdk.NewCoins(sdk.NewCoin(denom, sdk.NewInt(100)))
 		amtOut = sdk.NewCoins(sdk.NewCoin(denom, sdk.NewInt(200)))
 		inputs = []banktypes.Input{
@@ -49,7 +49,7 @@ func (suite *KeeperTestSuite) TestKeeper_SendCoins() {
 	var (
 		t     = suite.T()
 		k     = suite.app.BankKeeper
-		denom = types.AttoLionDenom
+		denom = types.AttoIronDenom
 		amt   = sdk.NewCoins(sdk.NewCoin(denom, sdk.NewInt(100)))
 	)
 	// Raw balance check

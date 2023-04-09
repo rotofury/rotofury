@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlion-zone/merlion/app"
-	mertypes "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/vesting/types"
+	"github.com/gridiron-zone/gridiron/app"
+	gridtypes "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/vesting/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -35,7 +35,7 @@ func TestMsgAddAirdrops_ValidateBasic(t *testing.T) {
 			airdrops: []types.Airdrop{
 				{
 					TargetAddr: "mer1mnfm9c7cdgqnkk66sganp78m0ydmcr4ppeaeg5",
-					Amount:     sdk.NewCoin(mertypes.AttoLionDenom, sdk.NewInt(1)),
+					Amount:     sdk.NewCoin(gridtypes.AttoIronDenom, sdk.NewInt(1)),
 				},
 			},
 			valid: true,

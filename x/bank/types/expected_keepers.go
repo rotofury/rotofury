@@ -2,7 +2,7 @@ package types
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	erc20types "github.com/merlion-zone/merlion/x/erc20/types"
+	erc20types "github.com/gridiron-zone/gridiron/x/erc20/types"
 )
 
 type Erc20Keeper interface {

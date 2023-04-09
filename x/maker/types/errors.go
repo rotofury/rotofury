@@ -8,8 +8,8 @@ import (
 
 // x/maker module sentinel errors
 var (
-	ErrMerPriceTooLow  = sdkerrors.Register(ModuleName, 2, "mer stablecoin price too low")
-	ErrMerPriceTooHigh = sdkerrors.Register(ModuleName, 3, "mer stablecoin price too high")
+	ErrGridPriceTooLow  = sdkerrors.Register(ModuleName, 2, "grid stablecoin price too low")
+	ErrGridPriceTooHigh = sdkerrors.Register(ModuleName, 3, "grid stablecoin price too high")
 
 	ErrBackingParamsInvalid    = sdkerrors.Register(ModuleName, 4, "backing params invalid")
 	ErrCollateralParamsInvalid = sdkerrors.Register(ModuleName, 5, "collateral params invalid")
@@ -22,17 +22,17 @@ var (
 	ErrBackingCoinNotFound         = sdkerrors.Register(ModuleName, 10, "backing coin not found")
 	ErrCollateralCoinNotFound      = sdkerrors.Register(ModuleName, 11, "collateral coin not found")
 
-	ErrMerSlippage         = sdkerrors.Register(ModuleName, 12, "mer over slippage")
+	ErrGridSlippage         = sdkerrors.Register(ModuleName, 12, "grid over slippage")
 	ErrBackingCoinSlippage = sdkerrors.Register(ModuleName, 13, "backing coin over slippage")
-	ErrLionCoinSlippage    = sdkerrors.Register(ModuleName, 14, "lion coin over slippage")
+	ErrIronCoinSlippage    = sdkerrors.Register(ModuleName, 14, "iron coin over slippage")
 
 	ErrBackingCeiling    = sdkerrors.Register(ModuleName, 15, "total backing coin over ceiling")
 	ErrCollateralCeiling = sdkerrors.Register(ModuleName, 16, "total collateral coin over ceiling")
-	ErrMerCeiling        = sdkerrors.Register(ModuleName, 17, "total mer coin over ceiling")
+	ErrGridCeiling        = sdkerrors.Register(ModuleName, 17, "total grid coin over ceiling")
 
 	ErrBackingCoinInsufficient    = sdkerrors.Register(ModuleName, 18, "backing coin balance insufficient")
 	ErrCollateralCoinInsufficient = sdkerrors.Register(ModuleName, 19, "collateral coin balance insufficient")
-	ErrLionCoinInsufficient       = sdkerrors.Register(ModuleName, 20, "insufficient available lion coin")
+	ErrIronCoinInsufficient       = sdkerrors.Register(ModuleName, 20, "insufficient available iron coin")
 
 	ErrAccountNoCollateral           = sdkerrors.Register(ModuleName, 21, "account has no collateral")
 	ErrAccountInsufficientCollateral = sdkerrors.Register(ModuleName, 22, "account collateral insufficient")

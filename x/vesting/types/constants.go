@@ -1,6 +1,6 @@
 package types
 
-import merlion "github.com/merlion-zone/merlion/types"
+import gridiron "github.com/gridiron-zone/gridiron/types"
 
 const (
 	StakingRewardVestingName = "staking_reward_vesting"
@@ -11,9 +11,9 @@ const (
 	// Not used now, maybe future.
 	StrategicReservePoolName = "strategic_reserve_pool"
 
-	StakingRewardVestingTime = merlion.SecondsPer4Years
-	CommunityPoolVestingTime = merlion.SecondsPer4Years
-	TeamVestingTime          = merlion.SecondsPer4Years
+	StakingRewardVestingTime = gridiron.SecondsPer4Years
+	CommunityPoolVestingTime = gridiron.SecondsPer4Years
+	TeamVestingTime          = gridiron.SecondsPer4Years
 
 	ClaimVestedPeriod = 10
 )

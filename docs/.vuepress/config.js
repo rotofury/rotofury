@@ -1,6 +1,6 @@
 module.exports = {
   theme: 'cosmos',
-  title: 'Merlion Documentation',
+  title: 'Gridiron Documentation',
   locales: {
     '/': {
       lang: 'en-US',
@@ -50,14 +50,14 @@ module.exports = {
     '!cosmos-sdk/**',
     '!ibc-go/**'],
   themeConfig: {
-    repo: 'merlion-zone/merlion',
-    docsRepo: 'merlion-zone/merlion',
+    repo: 'gridiron-zone/gridiron',
+    docsRepo: 'gridiron-zone/gridiron',
     docsBranch: 'main',
     docsDir: 'docs',
     editLinks: true,
     custom: true,
     logo: {
-      src: '/merlion-black.svg',
+      src: '/gridiron-black.svg',
     },
     topbar: {
       banner: false,
@@ -110,14 +110,14 @@ module.exports = {
       title: 'Help & Support',
       chat: {
         title: 'Developer Chat',
-        text: 'Chat with Merlion developers on Discord.',
-        url: 'https://discord.gg/merlion',
+        text: 'Chat with Gridiron developers on Discord.',
+        url: 'https://discord.gg/gridiron',
         bg: 'linear-gradient(103.75deg, #1B1E36 0%, #22253F 100%)',
       },
       forum: {
-        title: 'Merlion Developer Forum',
-        text: 'Join the Merlion Developer Forum to learn more.',
-        url: 'https://forum.cosmos.network/c/merlion', // TODO: replace with commonwealth link
+        title: 'Gridiron Developer Forum',
+        text: 'Join the Gridiron Developer Forum to learn more.',
+        url: 'https://forum.cosmos.network/c/gridiron', // TODO: replace with commonwealth link
         bg: 'linear-gradient(221.79deg, #3D6B99 -1.08%, #336699 95.88%)',
         logo: 'ethereum-white',
       },
@@ -128,34 +128,34 @@ module.exports = {
       },
     },
     footer: {
-      logo: '/merlion-black.svg',
+      logo: '/gridiron-black.svg',
       textLink: {
-        text: 'merlion.zone',
-        url: 'https://merlion.zone',
+        text: 'gridiron.zone',
+        url: 'https://gridiron.zone',
       },
       services: [
         {
           service: 'github',
-          url: 'https://github.com/merlion-zone/merlion',
+          url: 'https://github.com/gridiron-zone/gridiron',
         },
         {
           service: 'medium',
-          url: 'https://blog.merlion.zone',
+          url: 'https://blog.gridiron.zone',
         },
         {
           service: 'twitter',
-          url: 'https://twitter.com/MerlionZone',
+          url: 'https://twitter.com/GridironZone',
         },
         {
           service: 'telegram',
-          url: 'https://t.me/MerlionZone',
+          url: 'https://t.me/GridironZone',
         },
         {
           service: 'discord',
-          url: 'https://discord.gg/merlion',
+          url: 'https://discord.gg/gridiron',
         },
       ],
-      smallprint: 'This website is maintained by Merlion Dev Team',
+      smallprint: 'This website is maintained by Gridiron Dev Team',
     },
   },
 }

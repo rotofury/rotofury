@@ -8,7 +8,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/query"
 	"github.com/cosmos/cosmos-sdk/x/bank/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	mertypes "github.com/merlion-zone/merlion/types"
+	gridtypes "github.com/gridiron-zone/gridiron/types"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -19,7 +19,7 @@ func (suite *KeeperTestSuite) TestKeeper_Balance() {
 	var (
 		t     = suite.T()
 		k     = suite.app.BankKeeper
-		denom = mertypes.AttoLionDenom
+		denom = gridtypes.AttoIronDenom
 	)
 
 	res, err := k.Balance(sdk.WrapSDKContext(suite.ctx), nil)
@@ -51,7 +51,7 @@ func (suite *KeeperTestSuite) TestKeeper_AllBalances() {
 	var (
 		t     = suite.T()
 		k     = suite.app.BankKeeper
-		denom = mertypes.AttoLionDenom
+		denom = gridtypes.AttoIronDenom
 	)
 
 	req := &types.QueryAllBalancesRequest{
@@ -69,7 +69,7 @@ func (suite *KeeperTestSuite) TestKeeper_SpendableBalances() {
 	var (
 		t     = suite.T()
 		k     = suite.app.BankKeeper
-		denom = mertypes.AttoLionDenom
+		denom = gridtypes.AttoIronDenom
 	)
 
 	req := &types.QuerySpendableBalancesRequest{
@@ -87,7 +87,7 @@ func (suite *KeeperTestSuite) TestKeeper_TotalSupply() {
 	var (
 		t     = suite.T()
 		k     = suite.app.BankKeeper
-		denom = mertypes.AttoLionDenom
+		denom = gridtypes.AttoIronDenom
 	)
 
 	req := &types.QueryTotalSupplyRequest{
@@ -107,7 +107,7 @@ func (suite *KeeperTestSuite) TestKeeper_SupplyOf() {
 	var (
 		t     = suite.T()
 		k     = suite.app.BankKeeper
-		denom = mertypes.AttoLionDenom
+		denom = gridtypes.AttoIronDenom
 	)
 
 	res, err := k.SupplyOf(sdk.WrapSDKContext(suite.ctx), nil)
@@ -149,11 +149,11 @@ func (suite *KeeperTestSuite) TestKeeper_DenomsMetadata() {
 	var (
 		t        = suite.T()
 		k        = suite.app.BankKeeper
-		denom    = mertypes.MicroUSMDenom
+		denom    = gridtypes.MicroUSMDenom
 		base     = denom
 		display  = base[1:]
 		uusmMeta = banktypes.Metadata{
-			Description: "The native stable token of the Merlion.",
+			Description: "The native stable token of the Gridiron.",
 			DenomUnits: []*banktypes.DenomUnit{
 				{Denom: "u" + display, Exponent: uint32(0), Aliases: []string{"micro" + display}}, // e.g., uusm
 				{Denom: "m" + display, Exponent: uint32(3), Aliases: []string{"milli" + display}}, // e.g., musm
@@ -188,11 +188,11 @@ func (suite *KeeperTestSuite) TestKeeper_DenomMetadata() {
 	var (
 		t        = suite.T()
 		k        = suite.app.BankKeeper
-		denom    = mertypes.MicroUSMDenom
+		denom    = gridtypes.MicroUSMDenom
 		base     = denom
 		display  = base[1:]
 		uusmMeta = banktypes.Metadata{
-			Description: "The native stable token of the Merlion.",
+			Description: "The native stable token of the Gridiron.",
 			DenomUnits: []*banktypes.DenomUnit{
 				{Denom: "u" + display, Exponent: uint32(0), Aliases: []string{"micro" + display}}, // e.g., uusm
 				{Denom: "m" + display, Exponent: uint32(3), Aliases: []string{"milli" + display}}, // e.g., musm

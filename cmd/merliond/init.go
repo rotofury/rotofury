@@ -15,7 +15,7 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/cosmos/go-bip39"
 	"github.com/gogo/protobuf/proto"
-	merlion "github.com/merlion-zone/merlion/types"
+	gridiron "github.com/gridiron-zone/gridiron/types"
 	evmtypes "github.com/tharsis/ethermint/x/evm/types"
 
 	genutilcli "github.com/cosmos/cosmos-sdk/x/genutil/client/cli"
@@ -88,7 +88,7 @@ func InitCmd(mbm module.BasicManager, defaultNodeHome string) *cobra.Command {
 
 			chainID, _ := cmd.Flags().GetString(flags.FlagChainID)
 			if chainID == "" {
-				chainID = fmt.Sprintf("merlion_5000-%v", tmrand.Str(6))
+				chainID = fmt.Sprintf("gridiron_5000-%v", tmrand.Str(6))
 			}
 
 			// Get bip39 mnemonic
@@ -164,22 +164,22 @@ func InitCmd(mbm module.BasicManager, defaultNodeHome string) *cobra.Command {
 func overwriteDefaultGenState(cdc codec.JSONCodec, appState map[string]json.RawMessage) ([]byte, error) {
 	var stakingGenState stakingtypes.GenesisState
 	cdc.MustUnmarshalJSON(appState[stakingtypes.ModuleName], &stakingGenState)
-	stakingGenState.Params.BondDenom = merlion.AttoLionDenom
+	stakingGenState.Params.BondDenom = gridiron.AttoIronDenom
 	appState[stakingtypes.ModuleName] = cdc.MustMarshalJSON(&stakingGenState)
 
 	var govGenState govtypes.GenesisState
 	cdc.MustUnmarshalJSON(appState[govtypes.ModuleName], &govGenState)
-	govGenState.DepositParams.MinDeposit[0].Denom = merlion.AttoLionDenom
+	govGenState.DepositParams.MinDeposit[0].Denom = gridiron.AttoIronDenom
 	appState[govtypes.ModuleName] = cdc.MustMarshalJSON(&govGenState)
 
 	var crisisGenState crisistypes.GenesisState
 	cdc.MustUnmarshalJSON(appState[crisistypes.ModuleName], &crisisGenState)
-	crisisGenState.ConstantFee.Denom = merlion.AttoLionDenom
+	crisisGenState.ConstantFee.Denom = gridiron.AttoIronDenom
 	appState[crisistypes.ModuleName] = cdc.MustMarshalJSON(&crisisGenState)
 
 	var evmGenState evmtypes.GenesisState
 	cdc.MustUnmarshalJSON(appState[evmtypes.ModuleName], &evmGenState)
-	evmGenState.Params.EvmDenom = merlion.AttoLionDenom
+	evmGenState.Params.EvmDenom = gridiron.AttoIronDenom
 	appState[evmtypes.ModuleName] = cdc.MustMarshalJSON(&evmGenState)
 
 	return json.MarshalIndent(appState, "", " ")

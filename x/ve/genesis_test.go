@@ -7,16 +7,16 @@ import (
 	"github.com/stretchr/testify/suite"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	"github.com/merlion-zone/merlion/app"
-	merlion "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/ve"
-	"github.com/merlion-zone/merlion/x/ve/types"
+	"github.com/gridiron-zone/gridiron/app"
+	gridiron "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/ve"
+	"github.com/gridiron-zone/gridiron/x/ve/types"
 )
 
 type GenesisTestSuite struct {
 	suite.Suite
 	ctx sdk.Context
-	app *app.Merlion
+	app *app.Gridiron
 }
 
 func TestGenesisTestSuite(t *testing.T) {
@@ -37,7 +37,7 @@ func (suite *GenesisTestSuite) TestVeInitGenesis() {
 	})
 
 	params := veKeeper.GetParams(suite.ctx)
-	suite.Require().Equal(params.GetLockDenom(), merlion.BaseDenom)
+	suite.Require().Equal(params.GetLockDenom(), gridiron.BaseDenom)
 	suite.Require().Equal(sdk.ZeroInt(), veKeeper.GetTotalLockedAmount(suite.ctx))
 	suite.Require().EqualValues(types.FirstVeID, veKeeper.GetNextVeID(suite.ctx))
 	suite.Require().EqualValues(types.EmptyEpoch, veKeeper.GetEpoch(suite.ctx))
@@ -58,5 +58,5 @@ func (suite *GenesisTestSuite) TestVeExportGenesis() {
 	})
 
 	genesisExported := ve.ExportGenesis(suite.ctx, veKeeper)
-	suite.Require().Equal(genesisExported.Params.GetLockDenom(), merlion.BaseDenom)
+	suite.Require().Equal(genesisExported.Params.GetLockDenom(), gridiron.BaseDenom)
 }

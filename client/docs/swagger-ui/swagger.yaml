@@ -1,10 +1,10 @@
 swagger: '2.0'
 info:
-  title: Merlion Chain - gRPC Gateway docs
+  title: Gridiron Chain - gRPC Gateway docs
   description: A REST interface for state queries and transactions
   version: 1.0.0
 paths:
-  /merlion/erc20/v1/params:
+  /gridiron/erc20/v1/params:
     get:
       summary: Params retrieves the erc20 module params
       operationId: ERC20Params
@@ -44,7 +44,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/erc20/v1/token_pairs:
+  /gridiron/erc20/v1/token_pairs:
     get:
       summary: Retrieves registered token pairs
       operationId: TokenPairs
@@ -192,7 +192,7 @@ paths:
           format: boolean
       tags:
         - Query
-  '/merlion/erc20/v1/token_pairs/{token}':
+  '/gridiron/erc20/v1/token_pairs/{token}':
     get:
       summary: Retrieves a registered token pair
       operationId: TokenPair
@@ -271,7 +271,7 @@ paths:
           type: string
       tags:
         - Query
-  /merlionzone/merlion/gauge/params:
+  /gridironzone/gridiron/gauge/params:
     get:
       summary: Parameters queries the parameters of the module.
       operationId: GaugeParams
@@ -311,7 +311,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/maker/v1/all_backing_pools:
+  /gridiron/maker/v1/all_backing_pools:
     get:
       summary: AllBackingPools queries all the backing pools.
       operationId: AllBackingPools
@@ -326,8 +326,8 @@ paths:
                 items:
                   type: object
                   properties:
-                    mer_minted:
-                      title: total minted mer
+                    grid_minted:
+                      title: total minted grid
                       type: object
                       properties:
                         denom:
@@ -358,8 +358,8 @@ paths:
                         custom method
 
                         signatures required by gogoproto.
-                    lion_burned:
-                      title: total burned lion
+                    iron_burned:
+                      title: total burned iron
                       type: object
                       properties:
                         denom:
@@ -398,7 +398,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/maker/v1/all_backing_risk_params:
+  /gridiron/maker/v1/all_backing_risk_params:
     get:
       summary: AllBackingRiskParams queries risk params of all the backing pools.
       operationId: AllBackingRiskParams
@@ -423,9 +423,9 @@ paths:
                     max_backing:
                       type: string
                       title: maximum total backing amount
-                    max_mer_mint:
+                    max_grid_mint:
                       type: string
-                      title: maximum mintable Mer amount
+                      title: maximum mintable Grid amount
                     mint_fee:
                       type: string
                       title: mint fee rate
@@ -465,7 +465,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/maker/v1/all_collateral_pools:
+  /gridiron/maker/v1/all_collateral_pools:
     get:
       summary: AllCollateralPools queries all the collateral pools.
       operationId: AllCollateralPools
@@ -496,9 +496,9 @@ paths:
                         custom method
 
                         signatures required by gogoproto.
-                    mer_debt:
+                    grid_debt:
                       title: >-
-                        total existing mer debt, including minted by collateral,
+                        total existing grid debt, including minted by collateral,
                         mint fee, last
 
                         interest
@@ -516,8 +516,8 @@ paths:
                         custom method
 
                         signatures required by gogoproto.
-                    mer_by_lion:
-                      title: total minted merl by burning lion
+                    grid_by_iron:
+                      title: total minted gridl by burning iron
                       type: object
                       properties:
                         denom:
@@ -532,8 +532,8 @@ paths:
                         custom method
 
                         signatures required by gogoproto.
-                    lion_burned:
-                      title: total burned lion
+                    iron_burned:
+                      title: total burned iron
                       type: object
                       properties:
                         denom:
@@ -572,7 +572,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/maker/v1/all_collateral_risk_params:
+  /gridiron/maker/v1/all_collateral_risk_params:
     get:
       summary: AllCollateralRiskParams queries risk params of all the collateral pools.
       operationId: AllCollateralRiskParams
@@ -597,9 +597,9 @@ paths:
                     max_collateral:
                       type: string
                       title: maximum total collateral amount
-                    max_mer_mint:
+                    max_grid_mint:
                       type: string
-                      title: maximum total mintable Mer amount
+                      title: maximum total mintable Grid amount
                     liquidation_threshold:
                       type: string
                       title: >-
@@ -619,10 +619,10 @@ paths:
                         borrowed with a
 
                         specific collateral
-                    catalytic_lion_ratio:
+                    catalytic_iron_ratio:
                       type: string
                       title: >-
-                        catalytic ratio of burned Lion to minted stablecoins, to
+                        catalytic ratio of burned Iron to minted stablecoins, to
                         maximize the LTV
 
                         in [basic-LTV, LTV]
@@ -666,7 +666,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/maker/v1/backing_pool:
+  /gridiron/maker/v1/backing_pool:
     get:
       summary: BackingPool queries a backing pool.
       operationId: BackingPool
@@ -679,8 +679,8 @@ paths:
               backing_pool:
                 type: object
                 properties:
-                  mer_minted:
-                    title: total minted mer
+                  grid_minted:
+                    title: total minted grid
                     type: object
                     properties:
                       denom:
@@ -711,8 +711,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  lion_burned:
-                    title: total burned lion
+                  iron_burned:
+                    title: total burned iron
                     type: object
                     properties:
                       denom:
@@ -756,7 +756,7 @@ paths:
           type: string
       tags:
         - Query
-  /merlion/maker/v1/backing_ratio:
+  /gridiron/maker/v1/backing_ratio:
     get:
       summary: BackingRatio queries the backing ratio.
       operationId: BackingRatio
@@ -795,7 +795,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/maker/v1/collateral_account:
+  /gridiron/maker/v1/collateral_account:
     get:
       summary: CollateralOfAccount queries the collateral of an account.
       operationId: CollateralOfAccount
@@ -827,9 +827,9 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  mer_debt:
+                  grid_debt:
                     title: >-
-                      remaining mer debt, including minted by collateral, mint
+                      remaining grid debt, including minted by collateral, mint
                       fee, last interest
                     type: object
                     properties:
@@ -845,8 +845,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  mer_by_lion:
-                    title: minted mer by burning lion
+                  grid_by_iron:
+                    title: minted grid by burning iron
                     type: object
                     properties:
                       denom:
@@ -861,8 +861,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  lion_burned:
-                    title: total burned lion
+                  iron_burned:
+                    title: total burned iron
                     type: object
                     properties:
                       denom:
@@ -930,7 +930,7 @@ paths:
           type: string
       tags:
         - Query
-  /merlion/maker/v1/collateral_pool:
+  /gridiron/maker/v1/collateral_pool:
     get:
       summary: CollateralPool queries a collateral pool.
       operationId: CollateralPool
@@ -959,9 +959,9 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  mer_debt:
+                  grid_debt:
                     title: >-
-                      total existing mer debt, including minted by collateral,
+                      total existing grid debt, including minted by collateral,
                       mint fee, last
 
                       interest
@@ -979,8 +979,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  mer_by_lion:
-                    title: total minted merl by burning lion
+                  grid_by_iron:
+                    title: total minted gridl by burning iron
                     type: object
                     properties:
                       denom:
@@ -995,8 +995,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  lion_burned:
-                    title: total burned lion
+                  iron_burned:
+                    title: total burned iron
                     type: object
                     properties:
                       denom:
@@ -1040,7 +1040,7 @@ paths:
           type: string
       tags:
         - Query
-  /merlion/maker/v1/estimate_burn_by_collateral_in:
+  /gridiron/maker/v1/estimate_burn_by_collateral_in:
     get:
       summary: EstimateBurnByCollateralIn estimates input of burning by collateral.
       operationId: EstimateBurnByCollateralIn
@@ -1083,7 +1083,7 @@ paths:
               total_coll:
                 type: object
                 properties:
-                  mer_debt:
+                  grid_debt:
                     type: object
                     properties:
                       denom:
@@ -1099,11 +1099,11 @@ paths:
 
                       signatures required by gogoproto.
                     title: >-
-                      total existing mer debt, including minted by collateral,
+                      total existing grid debt, including minted by collateral,
                       mint fee, last
 
                       interest
-                  mer_by_lion:
+                  grid_by_iron:
                     type: object
                     properties:
                       denom:
@@ -1118,8 +1118,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                    title: total minted merl by burning lion
-                  lion_burned:
+                    title: total minted gridl by burning iron
+                  iron_burned:
                     type: object
                     properties:
                       denom:
@@ -1134,7 +1134,7 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                    title: total burned lion
+                    title: total burned iron
               pool_coll:
                 type: object
                 properties:
@@ -1154,9 +1154,9 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  mer_debt:
+                  grid_debt:
                     title: >-
-                      total existing mer debt, including minted by collateral,
+                      total existing grid debt, including minted by collateral,
                       mint fee, last
 
                       interest
@@ -1174,8 +1174,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  mer_by_lion:
-                    title: total minted merl by burning lion
+                  grid_by_iron:
+                    title: total minted gridl by burning iron
                     type: object
                     properties:
                       denom:
@@ -1190,8 +1190,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  lion_burned:
-                    title: total burned lion
+                  iron_burned:
+                    title: total burned iron
                     type: object
                     properties:
                       denom:
@@ -1228,9 +1228,9 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  mer_debt:
+                  grid_debt:
                     title: >-
-                      remaining mer debt, including minted by collateral, mint
+                      remaining grid debt, including minted by collateral, mint
                       fee, last interest
                     type: object
                     properties:
@@ -1246,8 +1246,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  mer_by_lion:
-                    title: minted mer by burning lion
+                  grid_by_iron:
+                    title: minted grid by burning iron
                     type: object
                     properties:
                       denom:
@@ -1262,8 +1262,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  lion_burned:
-                    title: total burned lion
+                  iron_burned:
+                    title: total burned iron
                     type: object
                     properties:
                       denom:
@@ -1339,7 +1339,7 @@ paths:
           type: string
       tags:
         - Query
-  /merlion/maker/v1/estimate_burn_by_swap_out:
+  /gridiron/maker/v1/estimate_burn_by_swap_out:
     get:
       summary: EstimateBurnBySwapOut estimates output of burning by swap.
       operationId: EstimateBurnBySwapOut
@@ -1364,7 +1364,7 @@ paths:
                   method
 
                   signatures required by gogoproto.
-              lion_out:
+              iron_out:
                 type: object
                 properties:
                   denom:
@@ -1431,7 +1431,7 @@ paths:
           type: string
       tags:
         - Query
-  /merlion/maker/v1/estimate_buy_backing_out:
+  /gridiron/maker/v1/estimate_buy_backing_out:
     get:
       summary: EstimateBuyBackingOut estimates output of buying backing assets.
       operationId: EstimateBuyBackingOut
@@ -1494,11 +1494,11 @@ paths:
                       type: string
                       format: byte
       parameters:
-        - name: lion_in.denom
+        - name: iron_in.denom
           in: query
           required: false
           type: string
-        - name: lion_in.amount
+        - name: iron_in.amount
           in: query
           required: false
           type: string
@@ -1508,7 +1508,7 @@ paths:
           type: string
       tags:
         - Query
-  /merlion/maker/v1/estimate_mint_by_collateral_in:
+  /gridiron/maker/v1/estimate_mint_by_collateral_in:
     get:
       summary: EstimateMintByCollateralIn estimates input of minting by collateral.
       operationId: EstimateMintByCollateralIn
@@ -1518,7 +1518,7 @@ paths:
           schema:
             type: object
             properties:
-              lion_in:
+              iron_in:
                 type: object
                 properties:
                   denom:
@@ -1551,7 +1551,7 @@ paths:
               total_coll:
                 type: object
                 properties:
-                  mer_debt:
+                  grid_debt:
                     type: object
                     properties:
                       denom:
@@ -1567,11 +1567,11 @@ paths:
 
                       signatures required by gogoproto.
                     title: >-
-                      total existing mer debt, including minted by collateral,
+                      total existing grid debt, including minted by collateral,
                       mint fee, last
 
                       interest
-                  mer_by_lion:
+                  grid_by_iron:
                     type: object
                     properties:
                       denom:
@@ -1586,8 +1586,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                    title: total minted merl by burning lion
-                  lion_burned:
+                    title: total minted gridl by burning iron
+                  iron_burned:
                     type: object
                     properties:
                       denom:
@@ -1602,7 +1602,7 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                    title: total burned lion
+                    title: total burned iron
               pool_coll:
                 type: object
                 properties:
@@ -1622,9 +1622,9 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  mer_debt:
+                  grid_debt:
                     title: >-
-                      total existing mer debt, including minted by collateral,
+                      total existing grid debt, including minted by collateral,
                       mint fee, last
 
                       interest
@@ -1642,8 +1642,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  mer_by_lion:
-                    title: total minted merl by burning lion
+                  grid_by_iron:
+                    title: total minted gridl by burning iron
                     type: object
                     properties:
                       denom:
@@ -1658,8 +1658,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  lion_burned:
-                    title: total burned lion
+                  iron_burned:
+                    title: total burned iron
                     type: object
                     properties:
                       denom:
@@ -1696,9 +1696,9 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  mer_debt:
+                  grid_debt:
                     title: >-
-                      remaining mer debt, including minted by collateral, mint
+                      remaining grid debt, including minted by collateral, mint
                       fee, last interest
                     type: object
                     properties:
@@ -1714,8 +1714,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  mer_by_lion:
-                    title: minted mer by burning lion
+                  grid_by_iron:
+                    title: minted grid by burning iron
                     type: object
                     properties:
                       denom:
@@ -1730,8 +1730,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                  lion_burned:
-                    title: total burned lion
+                  iron_burned:
+                    title: total burned iron
                     type: object
                     properties:
                       denom:
@@ -1805,17 +1805,17 @@ paths:
           in: query
           required: false
           type: string
-        - name: lion_in_max.denom
+        - name: iron_in_max.denom
           in: query
           required: false
           type: string
-        - name: lion_in_max.amount
+        - name: iron_in_max.amount
           in: query
           required: false
           type: string
       tags:
         - Query
-  /merlion/maker/v1/estimate_mint_by_swap_in:
+  /gridiron/maker/v1/estimate_mint_by_swap_in:
     get:
       summary: EstimateMintBySwapIn estimates input of minting by swap.
       operationId: EstimateMintBySwapIn
@@ -1840,7 +1840,7 @@ paths:
                   method
 
                   signatures required by gogoproto.
-              lion_in:
+              iron_in:
                 type: object
                 properties:
                   denom:
@@ -1912,7 +1912,7 @@ paths:
           format: boolean
       tags:
         - Query
-  /merlion/maker/v1/estimate_mint_by_swap_out:
+  /gridiron/maker/v1/estimate_mint_by_swap_out:
     get:
       summary: EstimateMintBySwapOut estimates output of minting by swap.
       operationId: EstimateMintBySwapOut
@@ -1937,7 +1937,7 @@ paths:
                   method
 
                   signatures required by gogoproto.
-              lion_in:
+              iron_in:
                 type: object
                 properties:
                   denom:
@@ -2013,17 +2013,17 @@ paths:
           in: query
           required: false
           type: string
-        - name: lion_in_max.denom
+        - name: iron_in_max.denom
           in: query
           required: false
           type: string
-        - name: lion_in_max.amount
+        - name: iron_in_max.amount
           in: query
           required: false
           type: string
       tags:
         - Query
-  /merlion/maker/v1/estimate_sell_backing_out:
+  /gridiron/maker/v1/estimate_sell_backing_out:
     get:
       summary: EstimateSellBackingOut estimates output of selling backing assets.
       operationId: EstimateSellBackingOut
@@ -2033,7 +2033,7 @@ paths:
           schema:
             type: object
             properties:
-              lion_out:
+              iron_out:
                 type: object
                 properties:
                   denom:
@@ -2096,7 +2096,7 @@ paths:
           type: string
       tags:
         - Query
-  /merlion/maker/v1/params:
+  /gridiron/maker/v1/params:
     get:
       summary: Parameters queries the parameters of the module.
       operationId: MakerParams
@@ -2122,10 +2122,10 @@ paths:
                     title: cooldown period for adjusting backing ratio
                   mint_price_bias:
                     type: string
-                    title: mint Mer price bias ratio
+                    title: mint Grid price bias ratio
                   burn_price_bias:
                     type: string
-                    title: burn Mer price bias ratio
+                    title: burn Grid price bias ratio
                   reback_bonus:
                     type: string
                     title: reback bonus ratio
@@ -2159,7 +2159,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/maker/v1/total_backing:
+  /gridiron/maker/v1/total_backing:
     get:
       summary: TotalBacking queries the total backing.
       operationId: TotalBacking
@@ -2172,7 +2172,7 @@ paths:
               total_backing:
                 type: object
                 properties:
-                  mer_minted:
+                  grid_minted:
                     type: object
                     properties:
                       denom:
@@ -2187,8 +2187,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                    title: total minted mer
-                  lion_burned:
+                    title: total minted grid
+                  iron_burned:
                     type: object
                     properties:
                       denom:
@@ -2203,7 +2203,7 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                    title: total burned lion
+                    title: total burned iron
         default:
           description: An unexpected error response
           schema:
@@ -2228,7 +2228,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/maker/v1/total_collateral:
+  /gridiron/maker/v1/total_collateral:
     get:
       summary: TotalCollateral queries the total collateral.
       operationId: TotalCollateral
@@ -2241,7 +2241,7 @@ paths:
               total_collateral:
                 type: object
                 properties:
-                  mer_debt:
+                  grid_debt:
                     type: object
                     properties:
                       denom:
@@ -2257,11 +2257,11 @@ paths:
 
                       signatures required by gogoproto.
                     title: >-
-                      total existing mer debt, including minted by collateral,
+                      total existing grid debt, including minted by collateral,
                       mint fee, last
 
                       interest
-                  mer_by_lion:
+                  grid_by_iron:
                     type: object
                     properties:
                       denom:
@@ -2276,8 +2276,8 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                    title: total minted merl by burning lion
-                  lion_burned:
+                    title: total minted gridl by burning iron
+                  iron_burned:
                     type: object
                     properties:
                       denom:
@@ -2292,7 +2292,7 @@ paths:
                       custom method
 
                       signatures required by gogoproto.
-                    title: total burned lion
+                    title: total burned iron
         default:
           description: An unexpected error response
           schema:
@@ -2317,7 +2317,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/oracle/v1/denoms/actives:
+  /gridiron/oracle/v1/denoms/actives:
     get:
       summary: Actives returns all active denoms.
       operationId: Actives
@@ -2363,7 +2363,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/oracle/v1/denoms/exchange_rates:
+  /gridiron/oracle/v1/denoms/exchange_rates:
     get:
       summary: ExchangeRates returns exchange rates of all denoms.
       operationId: ExchangeRates
@@ -2423,7 +2423,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/oracle/v1/denoms/targets:
+  /gridiron/oracle/v1/denoms/targets:
     get:
       summary: Targets returns all target denoms (including vote targets).
       operationId: Targets
@@ -2467,7 +2467,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/oracle/v1/denoms/vote_targets:
+  /gridiron/oracle/v1/denoms/vote_targets:
     get:
       summary: VoteTargets returns all vote target denoms.
       operationId: VoteTargets
@@ -2513,7 +2513,7 @@ paths:
                       format: byte
       tags:
         - Query
-  '/merlion/oracle/v1/denoms/{denom}/exchange_rate':
+  '/gridiron/oracle/v1/denoms/{denom}/exchange_rate':
     get:
       summary: ExchangeRate returns exchange rate of a denom.
       operationId: ExchangeRate
@@ -2563,7 +2563,7 @@ paths:
           type: string
       tags:
         - Query
-  '/merlion/oracle/v1/valdiators/{validator_addr}/aggregate_vote':
+  '/gridiron/oracle/v1/valdiators/{validator_addr}/aggregate_vote':
     get:
       summary: AggregateVote returns an aggregate vote of a validator.
       operationId: AggregateVote
@@ -2628,7 +2628,7 @@ paths:
           type: string
       tags:
         - Query
-  /merlion/oracle/v1/validators/aggregate_prevotes:
+  /gridiron/oracle/v1/validators/aggregate_prevotes:
     get:
       summary: AggregatePrevotes returns aggregate prevotes of all validators.
       operationId: AggregatePrevotes
@@ -2693,7 +2693,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/oracle/v1/validators/aggregate_votes:
+  /gridiron/oracle/v1/validators/aggregate_votes:
     get:
       summary: AggregateVotes returns aggregate votes of all validators.
       operationId: AggregateVotes
@@ -2757,7 +2757,7 @@ paths:
                       format: byte
       tags:
         - Query
-  '/merlion/oracle/v1/validators/{validator_addr}/aggregate_prevote':
+  '/gridiron/oracle/v1/validators/{validator_addr}/aggregate_prevote':
     get:
       summary: AggregatePrevote returns an aggregate prevote of a validator.
       operationId: AggregatePrevote
@@ -2826,7 +2826,7 @@ paths:
           type: string
       tags:
         - Query
-  '/merlion/oracle/v1/validators/{validator_addr}/feeder':
+  '/gridiron/oracle/v1/validators/{validator_addr}/feeder':
     get:
       summary: FeederDelegation returns feeder delegation of a validator.
       operationId: FeederDelegation
@@ -2872,7 +2872,7 @@ paths:
           type: string
       tags:
         - Query
-  '/merlion/oracle/v1/validators/{validator_addr}/miss':
+  '/gridiron/oracle/v1/validators/{validator_addr}/miss':
     get:
       summary: MissCounter returns oracle miss counter of a validator.
       operationId: MissCounter
@@ -2919,7 +2919,7 @@ paths:
           type: string
       tags:
         - Query
-  /merlionzone/merlion/oracle/params:
+  /gridironzone/gridiron/oracle/params:
     get:
       summary: Parameters queries the parameters of the module.
       operationId: OracleParams
@@ -2977,7 +2977,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/ve/v1/params:
+  /gridiron/ve/v1/params:
     get:
       summary: Parameters queries the parameters of the module.
       operationId: VeParams
@@ -3020,7 +3020,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/ve/v1/total_voting_power:
+  /gridiron/ve/v1/total_voting_power:
     get:
       summary: TotalVotingPower queries the total voting power.
       operationId: TotalVotingPower
@@ -3067,7 +3067,7 @@ paths:
           format: int64
       tags:
         - Query
-  '/merlion/ve/v1/voting_power/{ve_id}':
+  '/gridiron/ve/v1/voting_power/{ve_id}':
     get:
       summary: VotingPower queries the voting power of a veNFT.
       operationId: VotingPower
@@ -3118,7 +3118,7 @@ paths:
           format: int64
       tags:
         - Query
-  /merlion/vesting/v1/airdrops:
+  /gridiron/vesting/v1/airdrops:
     get:
       summary: Airdrops queries airdrop targets.
       operationId: Airdrops
@@ -3258,7 +3258,7 @@ paths:
           format: boolean
       tags:
         - Query
-  '/merlion/vesting/v1/airdrops/{target_addr}':
+  '/gridiron/vesting/v1/airdrops/{target_addr}':
     get:
       summary: Airdrops queries airdrop target for given address.
       operationId: Airdrop
@@ -3322,7 +3322,7 @@ paths:
           format: boolean
       tags:
         - Query
-  /merlion/vesting/v1/params:
+  /gridiron/vesting/v1/params:
     get:
       summary: Parameters queries the parameters of the module.
       operationId: VestingParams
@@ -3380,7 +3380,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /merlion/voter/v1/params:
+  /gridiron/voter/v1/params:
     get:
       summary: Parameters queries the parameters of the module.
       operationId: VoterParams
@@ -29667,7 +29667,7 @@ definitions:
                   "@type": "type.googleapis.com/google.protobuf.Duration",
                   "value": "1.212s"
                 }
-  merlion.erc20.v1.Owner:
+  gridiron.erc20.v1.Owner:
     type: string
     enum:
       - OWNER_UNSPECIFIED
@@ -29680,10 +29680,10 @@ definitions:
        - OWNER_UNSPECIFIED: OWNER_UNSPECIFIED defines an invalid/undefined owner.
        - OWNER_MODULE: OWNER_MODULE erc20 is owned by the erc20 module account.
        - OWNER_EXTERNAL: EXTERNAL erc20 is owned by an external account.
-  merlion.erc20.v1.Params:
+  gridiron.erc20.v1.Params:
     type: object
     title: Params defines the erc20 module params
-  merlion.erc20.v1.QueryParamsResponse:
+  gridiron.erc20.v1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -29692,7 +29692,7 @@ definitions:
     description: |-
       QueryParamsResponse is the response type for the Query/Params RPC
       method.
-  merlion.erc20.v1.QueryTokenPairResponse:
+  gridiron.erc20.v1.QueryTokenPairResponse:
     type: object
     properties:
       token_pair:
@@ -29728,7 +29728,7 @@ definitions:
     description: |-
       QueryTokenPairResponse is the response type for the Query/TokenPair RPC
       method.
-  merlion.erc20.v1.QueryTokenPairsResponse:
+  gridiron.erc20.v1.QueryTokenPairsResponse:
     type: object
     properties:
       token_pairs:
@@ -29784,7 +29784,7 @@ definitions:
     description: |-
       QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
       method.
-  merlion.erc20.v1.TokenPair:
+  gridiron.erc20.v1.TokenPair:
     type: object
     properties:
       erc20_address:
@@ -29812,10 +29812,10 @@ definitions:
     description: |-
       TokenPair defines an instance that records pairing consisting of a Cosmos
       native Coin and an ERC20 token address.
-  merlion.gauge.v1.Params:
+  gridiron.gauge.v1.Params:
     type: object
     description: Params defines the parameters for the module.
-  merlion.gauge.v1.QueryParamsResponse:
+  gridiron.gauge.v1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -29834,7 +29834,7 @@ definitions:
 
       NOTE: The amount field is an Int which implements the custom method
       signatures required by gogoproto.
-  merlion.maker.v1.AccountCollateral:
+  gridiron.maker.v1.AccountCollateral:
     type: object
     properties:
       account:
@@ -29853,9 +29853,9 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-      mer_debt:
+      grid_debt:
         title: >-
-          remaining mer debt, including minted by collateral, mint fee, last
+          remaining grid debt, including minted by collateral, mint fee, last
           interest
         type: object
         properties:
@@ -29868,8 +29868,8 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-      mer_by_lion:
-        title: minted mer by burning lion
+      grid_by_iron:
+        title: minted grid by burning iron
         type: object
         properties:
           denom:
@@ -29881,8 +29881,8 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-      lion_burned:
-        title: total burned lion
+      iron_burned:
+        title: total burned iron
         type: object
         properties:
           denom:
@@ -29911,7 +29911,7 @@ definitions:
         type: string
         format: int64
         title: the block of last settlement
-  merlion.maker.v1.BackingRiskParams:
+  gridiron.maker.v1.BackingRiskParams:
     type: object
     properties:
       backing_denom:
@@ -29924,9 +29924,9 @@ definitions:
       max_backing:
         type: string
         title: maximum total backing amount
-      max_mer_mint:
+      max_grid_mint:
         type: string
-        title: maximum mintable Mer amount
+        title: maximum mintable Grid amount
       mint_fee:
         type: string
         title: mint fee rate
@@ -29940,7 +29940,7 @@ definitions:
         type: string
         title: reback fee rate
     description: BackingRiskParams represents an object of backing coin risk parameters.
-  merlion.maker.v1.CollateralRiskParams:
+  gridiron.maker.v1.CollateralRiskParams:
     type: object
     properties:
       collateral_denom:
@@ -29953,9 +29953,9 @@ definitions:
       max_collateral:
         type: string
         title: maximum total collateral amount
-      max_mer_mint:
+      max_grid_mint:
         type: string
-        title: maximum total mintable Mer amount
+        title: maximum total mintable Grid amount
       liquidation_threshold:
         type: string
         title: ratio at which a position is defined as undercollateralized
@@ -29971,10 +29971,10 @@ definitions:
         title: |-
           basic ratio of maximum amount of currency that can be borrowed with a
           specific collateral
-      catalytic_lion_ratio:
+      catalytic_iron_ratio:
         type: string
         title: >-
-          catalytic ratio of burned Lion to minted stablecoins, to maximize the
+          catalytic ratio of burned Iron to minted stablecoins, to maximize the
           LTV
 
           in [basic-LTV, LTV]
@@ -29990,7 +29990,7 @@ definitions:
         type: string
         title: annual interest fee rate (APR)
     description: CollateralRiskParams represents an object of collateral risk parameters.
-  merlion.maker.v1.EstimateBurnByCollateralInResponse:
+  gridiron.maker.v1.EstimateBurnByCollateralInResponse:
     type: object
     properties:
       repay_in:
@@ -30020,7 +30020,7 @@ definitions:
       total_coll:
         type: object
         properties:
-          mer_debt:
+          grid_debt:
             type: object
             properties:
               denom:
@@ -30036,11 +30036,11 @@ definitions:
 
               signatures required by gogoproto.
             title: >-
-              total existing mer debt, including minted by collateral, mint fee,
+              total existing grid debt, including minted by collateral, mint fee,
               last
 
               interest
-          mer_by_lion:
+          grid_by_iron:
             type: object
             properties:
               denom:
@@ -30055,8 +30055,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-            title: total minted merl by burning lion
-          lion_burned:
+            title: total minted gridl by burning iron
+          iron_burned:
             type: object
             properties:
               denom:
@@ -30071,7 +30071,7 @@ definitions:
               method
 
               signatures required by gogoproto.
-            title: total burned lion
+            title: total burned iron
       pool_coll:
         type: object
         properties:
@@ -30091,9 +30091,9 @@ definitions:
               method
 
               signatures required by gogoproto.
-          mer_debt:
+          grid_debt:
             title: >-
-              total existing mer debt, including minted by collateral, mint fee,
+              total existing grid debt, including minted by collateral, mint fee,
               last
 
               interest
@@ -30111,8 +30111,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-          mer_by_lion:
-            title: total minted merl by burning lion
+          grid_by_iron:
+            title: total minted gridl by burning iron
             type: object
             properties:
               denom:
@@ -30127,8 +30127,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-          lion_burned:
-            title: total burned lion
+          iron_burned:
+            title: total burned iron
             type: object
             properties:
               denom:
@@ -30165,9 +30165,9 @@ definitions:
               method
 
               signatures required by gogoproto.
-          mer_debt:
+          grid_debt:
             title: >-
-              remaining mer debt, including minted by collateral, mint fee, last
+              remaining grid debt, including minted by collateral, mint fee, last
               interest
             type: object
             properties:
@@ -30183,8 +30183,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-          mer_by_lion:
-            title: minted mer by burning lion
+          grid_by_iron:
+            title: minted grid by burning iron
             type: object
             properties:
               denom:
@@ -30199,8 +30199,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-          lion_burned:
-            title: total burned lion
+          iron_burned:
+            title: total burned iron
             type: object
             properties:
               denom:
@@ -30235,7 +30235,7 @@ definitions:
             type: string
             format: int64
             title: the block of last settlement
-  merlion.maker.v1.EstimateBurnBySwapOutResponse:
+  gridiron.maker.v1.EstimateBurnBySwapOutResponse:
     type: object
     properties:
       backing_out:
@@ -30250,7 +30250,7 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-      lion_out:
+      iron_out:
         type: object
         properties:
           denom:
@@ -30274,7 +30274,7 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-  merlion.maker.v1.EstimateBuyBackingOutResponse:
+  gridiron.maker.v1.EstimateBuyBackingOutResponse:
     type: object
     properties:
       backing_out:
@@ -30301,10 +30301,10 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-  merlion.maker.v1.EstimateMintByCollateralInResponse:
+  gridiron.maker.v1.EstimateMintByCollateralInResponse:
     type: object
     properties:
-      lion_in:
+      iron_in:
         type: object
         properties:
           denom:
@@ -30331,7 +30331,7 @@ definitions:
       total_coll:
         type: object
         properties:
-          mer_debt:
+          grid_debt:
             type: object
             properties:
               denom:
@@ -30347,11 +30347,11 @@ definitions:
 
               signatures required by gogoproto.
             title: >-
-              total existing mer debt, including minted by collateral, mint fee,
+              total existing grid debt, including minted by collateral, mint fee,
               last
 
               interest
-          mer_by_lion:
+          grid_by_iron:
             type: object
             properties:
               denom:
@@ -30366,8 +30366,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-            title: total minted merl by burning lion
-          lion_burned:
+            title: total minted gridl by burning iron
+          iron_burned:
             type: object
             properties:
               denom:
@@ -30382,7 +30382,7 @@ definitions:
               method
 
               signatures required by gogoproto.
-            title: total burned lion
+            title: total burned iron
       pool_coll:
         type: object
         properties:
@@ -30402,9 +30402,9 @@ definitions:
               method
 
               signatures required by gogoproto.
-          mer_debt:
+          grid_debt:
             title: >-
-              total existing mer debt, including minted by collateral, mint fee,
+              total existing grid debt, including minted by collateral, mint fee,
               last
 
               interest
@@ -30422,8 +30422,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-          mer_by_lion:
-            title: total minted merl by burning lion
+          grid_by_iron:
+            title: total minted gridl by burning iron
             type: object
             properties:
               denom:
@@ -30438,8 +30438,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-          lion_burned:
-            title: total burned lion
+          iron_burned:
+            title: total burned iron
             type: object
             properties:
               denom:
@@ -30476,9 +30476,9 @@ definitions:
               method
 
               signatures required by gogoproto.
-          mer_debt:
+          grid_debt:
             title: >-
-              remaining mer debt, including minted by collateral, mint fee, last
+              remaining grid debt, including minted by collateral, mint fee, last
               interest
             type: object
             properties:
@@ -30494,8 +30494,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-          mer_by_lion:
-            title: minted mer by burning lion
+          grid_by_iron:
+            title: minted grid by burning iron
             type: object
             properties:
               denom:
@@ -30510,8 +30510,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-          lion_burned:
-            title: total burned lion
+          iron_burned:
+            title: total burned iron
             type: object
             properties:
               denom:
@@ -30546,7 +30546,7 @@ definitions:
             type: string
             format: int64
             title: the block of last settlement
-  merlion.maker.v1.EstimateMintBySwapInResponse:
+  gridiron.maker.v1.EstimateMintBySwapInResponse:
     type: object
     properties:
       backing_in:
@@ -30561,7 +30561,7 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-      lion_in:
+      iron_in:
         type: object
         properties:
           denom:
@@ -30585,7 +30585,7 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-  merlion.maker.v1.EstimateMintBySwapOutResponse:
+  gridiron.maker.v1.EstimateMintBySwapOutResponse:
     type: object
     properties:
       backing_in:
@@ -30600,7 +30600,7 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-      lion_in:
+      iron_in:
         type: object
         properties:
           denom:
@@ -30636,10 +30636,10 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-  merlion.maker.v1.EstimateSellBackingOutResponse:
+  gridiron.maker.v1.EstimateSellBackingOutResponse:
     type: object
     properties:
-      lion_out:
+      iron_out:
         type: object
         properties:
           denom:
@@ -30663,7 +30663,7 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-  merlion.maker.v1.Params:
+  gridiron.maker.v1.Params:
     type: object
     properties:
       backing_ratio_step:
@@ -30678,10 +30678,10 @@ definitions:
         title: cooldown period for adjusting backing ratio
       mint_price_bias:
         type: string
-        title: mint Mer price bias ratio
+        title: mint Grid price bias ratio
       burn_price_bias:
         type: string
-        title: burn Mer price bias ratio
+        title: burn Grid price bias ratio
       reback_bonus:
         type: string
         title: reback bonus ratio
@@ -30689,11 +30689,11 @@ definitions:
         type: string
         title: liquidation commission fee ratio
     description: Params defines the parameters for the maker module.
-  merlion.maker.v1.PoolBacking:
+  gridiron.maker.v1.PoolBacking:
     type: object
     properties:
-      mer_minted:
-        title: total minted mer
+      grid_minted:
+        title: total minted grid
         type: object
         properties:
           denom:
@@ -30718,8 +30718,8 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-      lion_burned:
-        title: total burned lion
+      iron_burned:
+        title: total burned iron
         type: object
         properties:
           denom:
@@ -30731,7 +30731,7 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-  merlion.maker.v1.PoolCollateral:
+  gridiron.maker.v1.PoolCollateral:
     type: object
     properties:
       collateral:
@@ -30747,9 +30747,9 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-      mer_debt:
+      grid_debt:
         title: >-
-          total existing mer debt, including minted by collateral, mint fee,
+          total existing grid debt, including minted by collateral, mint fee,
           last
 
           interest
@@ -30764,8 +30764,8 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-      mer_by_lion:
-        title: total minted merl by burning lion
+      grid_by_iron:
+        title: total minted gridl by burning iron
         type: object
         properties:
           denom:
@@ -30777,8 +30777,8 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-      lion_burned:
-        title: total burned lion
+      iron_burned:
+        title: total burned iron
         type: object
         properties:
           denom:
@@ -30790,7 +30790,7 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-  merlion.maker.v1.QueryAllBackingPoolsResponse:
+  gridiron.maker.v1.QueryAllBackingPoolsResponse:
     type: object
     properties:
       backing_pools:
@@ -30798,8 +30798,8 @@ definitions:
         items:
           type: object
           properties:
-            mer_minted:
-              title: total minted mer
+            grid_minted:
+              title: total minted grid
               type: object
               properties:
                 denom:
@@ -30830,8 +30830,8 @@ definitions:
                 method
 
                 signatures required by gogoproto.
-            lion_burned:
-              title: total burned lion
+            iron_burned:
+              title: total burned iron
               type: object
               properties:
                 denom:
@@ -30846,7 +30846,7 @@ definitions:
                 method
 
                 signatures required by gogoproto.
-  merlion.maker.v1.QueryAllBackingRiskParamsResponse:
+  gridiron.maker.v1.QueryAllBackingRiskParamsResponse:
     type: object
     properties:
       risk_params:
@@ -30864,9 +30864,9 @@ definitions:
             max_backing:
               type: string
               title: maximum total backing amount
-            max_mer_mint:
+            max_grid_mint:
               type: string
-              title: maximum mintable Mer amount
+              title: maximum mintable Grid amount
             mint_fee:
               type: string
               title: mint fee rate
@@ -30882,7 +30882,7 @@ definitions:
           description: >-
             BackingRiskParams represents an object of backing coin risk
             parameters.
-  merlion.maker.v1.QueryAllCollateralPoolsResponse:
+  gridiron.maker.v1.QueryAllCollateralPoolsResponse:
     type: object
     properties:
       collateral_pools:
@@ -30906,9 +30906,9 @@ definitions:
                 method
 
                 signatures required by gogoproto.
-            mer_debt:
+            grid_debt:
               title: >-
-                total existing mer debt, including minted by collateral, mint
+                total existing grid debt, including minted by collateral, mint
                 fee, last
 
                 interest
@@ -30926,8 +30926,8 @@ definitions:
                 method
 
                 signatures required by gogoproto.
-            mer_by_lion:
-              title: total minted merl by burning lion
+            grid_by_iron:
+              title: total minted gridl by burning iron
               type: object
               properties:
                 denom:
@@ -30942,8 +30942,8 @@ definitions:
                 method
 
                 signatures required by gogoproto.
-            lion_burned:
-              title: total burned lion
+            iron_burned:
+              title: total burned iron
               type: object
               properties:
                 denom:
@@ -30958,7 +30958,7 @@ definitions:
                 method
 
                 signatures required by gogoproto.
-  merlion.maker.v1.QueryAllCollateralRiskParamsResponse:
+  gridiron.maker.v1.QueryAllCollateralRiskParamsResponse:
     type: object
     properties:
       risk_params:
@@ -30976,9 +30976,9 @@ definitions:
             max_collateral:
               type: string
               title: maximum total collateral amount
-            max_mer_mint:
+            max_grid_mint:
               type: string
-              title: maximum total mintable Mer amount
+              title: maximum total mintable Grid amount
             liquidation_threshold:
               type: string
               title: ratio at which a position is defined as undercollateralized
@@ -30996,10 +30996,10 @@ definitions:
                 with a
 
                 specific collateral
-            catalytic_lion_ratio:
+            catalytic_iron_ratio:
               type: string
               title: >-
-                catalytic ratio of burned Lion to minted stablecoins, to
+                catalytic ratio of burned Iron to minted stablecoins, to
                 maximize the LTV
 
                 in [basic-LTV, LTV]
@@ -31019,14 +31019,14 @@ definitions:
           description: >-
             CollateralRiskParams represents an object of collateral risk
             parameters.
-  merlion.maker.v1.QueryBackingPoolResponse:
+  gridiron.maker.v1.QueryBackingPoolResponse:
     type: object
     properties:
       backing_pool:
         type: object
         properties:
-          mer_minted:
-            title: total minted mer
+          grid_minted:
+            title: total minted grid
             type: object
             properties:
               denom:
@@ -31057,8 +31057,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-          lion_burned:
-            title: total burned lion
+          iron_burned:
+            title: total burned iron
             type: object
             properties:
               denom:
@@ -31073,7 +31073,7 @@ definitions:
               method
 
               signatures required by gogoproto.
-  merlion.maker.v1.QueryBackingRatioResponse:
+  gridiron.maker.v1.QueryBackingRatioResponse:
     type: object
     properties:
       backing_ratio:
@@ -31081,7 +31081,7 @@ definitions:
       last_update_block:
         type: string
         format: int64
-  merlion.maker.v1.QueryCollateralOfAccountResponse:
+  gridiron.maker.v1.QueryCollateralOfAccountResponse:
     type: object
     properties:
       account_collateral:
@@ -31106,9 +31106,9 @@ definitions:
               method
 
               signatures required by gogoproto.
-          mer_debt:
+          grid_debt:
             title: >-
-              remaining mer debt, including minted by collateral, mint fee, last
+              remaining grid debt, including minted by collateral, mint fee, last
               interest
             type: object
             properties:
@@ -31124,8 +31124,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-          mer_by_lion:
-            title: minted mer by burning lion
+          grid_by_iron:
+            title: minted grid by burning iron
             type: object
             properties:
               denom:
@@ -31140,8 +31140,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-          lion_burned:
-            title: total burned lion
+          iron_burned:
+            title: total burned iron
             type: object
             properties:
               denom:
@@ -31176,7 +31176,7 @@ definitions:
             type: string
             format: int64
             title: the block of last settlement
-  merlion.maker.v1.QueryCollateralPoolResponse:
+  gridiron.maker.v1.QueryCollateralPoolResponse:
     type: object
     properties:
       collateral_pool:
@@ -31198,9 +31198,9 @@ definitions:
               method
 
               signatures required by gogoproto.
-          mer_debt:
+          grid_debt:
             title: >-
-              total existing mer debt, including minted by collateral, mint fee,
+              total existing grid debt, including minted by collateral, mint fee,
               last
 
               interest
@@ -31218,8 +31218,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-          mer_by_lion:
-            title: total minted merl by burning lion
+          grid_by_iron:
+            title: total minted gridl by burning iron
             type: object
             properties:
               denom:
@@ -31234,8 +31234,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-          lion_burned:
-            title: total burned lion
+          iron_burned:
+            title: total burned iron
             type: object
             properties:
               denom:
@@ -31250,7 +31250,7 @@ definitions:
               method
 
               signatures required by gogoproto.
-  merlion.maker.v1.QueryParamsResponse:
+  gridiron.maker.v1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -31269,10 +31269,10 @@ definitions:
             title: cooldown period for adjusting backing ratio
           mint_price_bias:
             type: string
-            title: mint Mer price bias ratio
+            title: mint Grid price bias ratio
           burn_price_bias:
             type: string
-            title: burn Mer price bias ratio
+            title: burn Grid price bias ratio
           reback_bonus:
             type: string
             title: reback bonus ratio
@@ -31280,13 +31280,13 @@ definitions:
             type: string
             title: liquidation commission fee ratio
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  merlion.maker.v1.QueryTotalBackingResponse:
+  gridiron.maker.v1.QueryTotalBackingResponse:
     type: object
     properties:
       total_backing:
         type: object
         properties:
-          mer_minted:
+          grid_minted:
             type: object
             properties:
               denom:
@@ -31301,8 +31301,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-            title: total minted mer
-          lion_burned:
+            title: total minted grid
+          iron_burned:
             type: object
             properties:
               denom:
@@ -31317,14 +31317,14 @@ definitions:
               method
 
               signatures required by gogoproto.
-            title: total burned lion
-  merlion.maker.v1.QueryTotalCollateralResponse:
+            title: total burned iron
+  gridiron.maker.v1.QueryTotalCollateralResponse:
     type: object
     properties:
       total_collateral:
         type: object
         properties:
-          mer_debt:
+          grid_debt:
             type: object
             properties:
               denom:
@@ -31340,11 +31340,11 @@ definitions:
 
               signatures required by gogoproto.
             title: >-
-              total existing mer debt, including minted by collateral, mint fee,
+              total existing grid debt, including minted by collateral, mint fee,
               last
 
               interest
-          mer_by_lion:
+          grid_by_iron:
             type: object
             properties:
               denom:
@@ -31359,8 +31359,8 @@ definitions:
               method
 
               signatures required by gogoproto.
-            title: total minted merl by burning lion
-          lion_burned:
+            title: total minted gridl by burning iron
+          iron_burned:
             type: object
             properties:
               denom:
@@ -31375,11 +31375,11 @@ definitions:
               method
 
               signatures required by gogoproto.
-            title: total burned lion
-  merlion.maker.v1.TotalBacking:
+            title: total burned iron
+  gridiron.maker.v1.TotalBacking:
     type: object
     properties:
-      mer_minted:
+      grid_minted:
         type: object
         properties:
           denom:
@@ -31391,8 +31391,8 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-        title: total minted mer
-      lion_burned:
+        title: total minted grid
+      iron_burned:
         type: object
         properties:
           denom:
@@ -31404,11 +31404,11 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-        title: total burned lion
-  merlion.maker.v1.TotalCollateral:
+        title: total burned iron
+  gridiron.maker.v1.TotalCollateral:
     type: object
     properties:
-      mer_debt:
+      grid_debt:
         type: object
         properties:
           denom:
@@ -31421,11 +31421,11 @@ definitions:
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
         title: >-
-          total existing mer debt, including minted by collateral, mint fee,
+          total existing grid debt, including minted by collateral, mint fee,
           last
 
           interest
-      mer_by_lion:
+      grid_by_iron:
         type: object
         properties:
           denom:
@@ -31437,8 +31437,8 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-        title: total minted merl by burning lion
-      lion_burned:
+        title: total minted gridl by burning iron
+      iron_burned:
         type: object
         properties:
           denom:
@@ -31450,7 +31450,7 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-        title: total burned lion
+        title: total burned iron
   cosmos.base.v1beta1.DecCoin:
     type: object
     properties:
@@ -31463,7 +31463,7 @@ definitions:
 
       NOTE: The amount field is an Dec which implements the custom method
       signatures required by gogoproto.
-  merlion.oracle.v1.AggregateExchangeRatePrevote:
+  gridiron.oracle.v1.AggregateExchangeRatePrevote:
     type: object
     properties:
       hash:
@@ -31483,7 +31483,7 @@ definitions:
       SHA256("{salt}:{exchange
 
       rate}{denom},...,{exchange rate}{denom}:{voter}")
-  merlion.oracle.v1.AggregateExchangeRateVote:
+  gridiron.oracle.v1.AggregateExchangeRateVote:
     type: object
     properties:
       exchange_rate_tuples:
@@ -31501,7 +31501,7 @@ definitions:
     description: |-
       AggregateExchangeRateVote represents the voting on
       the exchange rates of various assets denominated in uUSD.
-  merlion.oracle.v1.ExchangeRateTuple:
+  gridiron.oracle.v1.ExchangeRateTuple:
     type: object
     properties:
       denom:
@@ -31509,7 +31509,7 @@ definitions:
       exchange_rate:
         type: string
     description: ExchangeRateTuple stores interpreted exchange rates data.
-  merlion.oracle.v1.Params:
+  gridiron.oracle.v1.Params:
     type: object
     properties:
       vote_period:
@@ -31530,7 +31530,7 @@ definitions:
       min_valid_per_window:
         type: string
     description: Params defines the parameters for the oracle module.
-  merlion.oracle.v1.QueryActivesResponse:
+  gridiron.oracle.v1.QueryActivesResponse:
     type: object
     properties:
       actives:
@@ -31543,7 +31543,7 @@ definitions:
     description: |-
       QueryActivesResponse is response type for the
       Query/Actives RPC method.
-  merlion.oracle.v1.QueryAggregatePrevoteResponse:
+  gridiron.oracle.v1.QueryAggregatePrevoteResponse:
     type: object
     properties:
       aggregate_prevote:
@@ -31574,7 +31574,7 @@ definitions:
     description: |-
       QueryAggregatePrevoteResponse is response type for the
       Query/AggregatePrevote RPC method.
-  merlion.oracle.v1.QueryAggregatePrevotesResponse:
+  gridiron.oracle.v1.QueryAggregatePrevotesResponse:
     type: object
     properties:
       aggregate_prevotes:
@@ -31608,7 +31608,7 @@ definitions:
     description: |-
       QueryAggregatePrevotesResponse is response type for the
       Query/AggregatePrevotes RPC method.
-  merlion.oracle.v1.QueryAggregateVoteResponse:
+  gridiron.oracle.v1.QueryAggregateVoteResponse:
     type: object
     properties:
       aggregate_vote:
@@ -31634,7 +31634,7 @@ definitions:
     description: |-
       QueryAggregateVoteResponse is response type for the
       Query/AggregateVote RPC method.
-  merlion.oracle.v1.QueryAggregateVotesResponse:
+  gridiron.oracle.v1.QueryAggregateVotesResponse:
     type: object
     properties:
       aggregate_votes:
@@ -31665,7 +31665,7 @@ definitions:
     description: |-
       QueryAggregateVotesResponse is response type for the
       Query/AggregateVotes RPC method.
-  merlion.oracle.v1.QueryExchangeRateResponse:
+  gridiron.oracle.v1.QueryExchangeRateResponse:
     type: object
     properties:
       exchange_rate:
@@ -31678,7 +31678,7 @@ definitions:
     description: |-
       QueryExchangeRateResponse is response type for the
       Query/ExchangeRate RPC method.
-  merlion.oracle.v1.QueryExchangeRatesResponse:
+  gridiron.oracle.v1.QueryExchangeRatesResponse:
     type: object
     properties:
       exchange_rates:
@@ -31701,7 +31701,7 @@ definitions:
     description: |-
       QueryExchangeRatesResponse is response type for the
       Query/ExchangeRates RPC method.
-  merlion.oracle.v1.QueryFeederDelegationResponse:
+  gridiron.oracle.v1.QueryFeederDelegationResponse:
     type: object
     properties:
       feeder_addr:
@@ -31710,7 +31710,7 @@ definitions:
     description: |-
       QueryFeederDelegationResponse is response type for the
       Query/FeederDelegation RPC method.
-  merlion.oracle.v1.QueryMissCounterResponse:
+  gridiron.oracle.v1.QueryMissCounterResponse:
     type: object
     properties:
       miss_counter:
@@ -31720,7 +31720,7 @@ definitions:
     description: |-
       QueryMissCounterResponse is response type for the
       Query/MissCounter RPC method.
-  merlion.oracle.v1.QueryParamsResponse:
+  gridiron.oracle.v1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -31745,7 +31745,7 @@ definitions:
           min_valid_per_window:
             type: string
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  merlion.oracle.v1.QueryTargetsResponse:
+  gridiron.oracle.v1.QueryTargetsResponse:
     type: object
     properties:
       targets:
@@ -31758,7 +31758,7 @@ definitions:
     description: |-
       QueryTargetsResponse is response type for the
       Query/Targets RPC method.
-  merlion.oracle.v1.QueryVoteTargetsResponse:
+  gridiron.oracle.v1.QueryVoteTargetsResponse:
     type: object
     properties:
       vote_targets:
@@ -31771,13 +31771,13 @@ definitions:
     description: |-
       QueryVoteTargetsResponse is response type for the
       Query/VoteTargets RPC method.
-  merlion.ve.v1.Params:
+  gridiron.ve.v1.Params:
     type: object
     properties:
       lock_denom:
         type: string
     description: Params defines the parameters for the module.
-  merlion.ve.v1.QueryParamsResponse:
+  gridiron.ve.v1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -31787,17 +31787,17 @@ definitions:
           lock_denom:
             type: string
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  merlion.ve.v1.QueryTotalVotingPowerResponse:
+  gridiron.ve.v1.QueryTotalVotingPowerResponse:
     type: object
     properties:
       power:
         type: string
-  merlion.ve.v1.QueryVotingPowerResponse:
+  gridiron.ve.v1.QueryVotingPowerResponse:
     type: object
     properties:
       power:
         type: string
-  merlion.vesting.v1.Airdrop:
+  gridiron.vesting.v1.Airdrop:
     type: object
     properties:
       target_addr:
@@ -31814,7 +31814,7 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-  merlion.vesting.v1.AllocationAmounts:
+  gridiron.vesting.v1.AllocationAmounts:
     type: object
     properties:
       total_amount:
@@ -31831,7 +31831,7 @@ definitions:
         type: string
       team_vesting_amount:
         type: string
-  merlion.vesting.v1.Params:
+  gridiron.vesting.v1.Params:
     type: object
     properties:
       allocation:
@@ -31852,7 +31852,7 @@ definitions:
           team_vesting_amount:
             type: string
     description: Params defines the parameters for the module.
-  merlion.vesting.v1.QueryAirdropResponse:
+  gridiron.vesting.v1.QueryAirdropResponse:
     type: object
     properties:
       airdrop:
@@ -31875,7 +31875,7 @@ definitions:
               method
 
               signatures required by gogoproto.
-  merlion.vesting.v1.QueryAirdropsResponse:
+  gridiron.vesting.v1.QueryAirdropsResponse:
     type: object
     properties:
       airdrops:
@@ -31919,7 +31919,7 @@ definitions:
               PageRequest.count_total
 
               was set, its value is undefined otherwise
-  merlion.vesting.v1.QueryParamsResponse:
+  gridiron.vesting.v1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -31944,10 +31944,10 @@ definitions:
               team_vesting_amount:
                 type: string
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  merlion.voter.v1.Params:
+  gridiron.voter.v1.Params:
     type: object
     description: Params defines the parameters for the module.
-  merlion.voter.v1.QueryParamsResponse:
+  gridiron.voter.v1.QueryParamsResponse:
     type: object
     properties:
       params:

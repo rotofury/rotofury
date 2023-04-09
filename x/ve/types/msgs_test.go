@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlion-zone/merlion/app"
-	mertypes "github.com/merlion-zone/merlion/types"
-	"github.com/merlion-zone/merlion/x/ve/types"
+	"github.com/gridiron-zone/gridiron/app"
+	gridtypes "github.com/gridiron-zone/gridiron/types"
+	"github.com/gridiron-zone/gridiron/x/ve/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -33,27 +33,27 @@ func TestMsgCreate_ValidateBasic(t *testing.T) {
 			desc:   "ErrAmountNotPositive",
 			sender: "mer1mnfm9c7cdgqnkk66sganp78m0ydmcr4ppeaeg5",
 			to:     "mer1353a4uac03etdylz86tyq9ssm3x2704jr632l3",
-			amount: sdk.NewCoin(mertypes.AttoLionDenom, sdk.NewInt(0)),
+			amount: sdk.NewCoin(gridtypes.AttoIronDenom, sdk.NewInt(0)),
 		},
 		{
 			desc:         "ErrPastLockTime",
 			sender:       "mer1mnfm9c7cdgqnkk66sganp78m0ydmcr4ppeaeg5",
 			to:           "mer1353a4uac03etdylz86tyq9ssm3x2704jr632l3",
-			amount:       sdk.NewCoin(mertypes.AttoLionDenom, sdk.NewInt(1)),
+			amount:       sdk.NewCoin(gridtypes.AttoIronDenom, sdk.NewInt(1)),
 			lockDuration: 0,
 		},
 		{
 			desc:         "ErrTooLongLockTime",
 			sender:       "mer1mnfm9c7cdgqnkk66sganp78m0ydmcr4ppeaeg5",
 			to:           "mer1353a4uac03etdylz86tyq9ssm3x2704jr632l3",
-			amount:       sdk.NewCoin(mertypes.AttoLionDenom, sdk.NewInt(1)),
+			amount:       sdk.NewCoin(gridtypes.AttoIronDenom, sdk.NewInt(1)),
 			lockDuration: types.MaxLockTime + 1,
 		},
 		{
 			desc:         "valid",
 			sender:       "mer1mnfm9c7cdgqnkk66sganp78m0ydmcr4ppeaeg5",
 			to:           "mer1353a4uac03etdylz86tyq9ssm3x2704jr632l3",
-			amount:       sdk.NewCoin(mertypes.AttoLionDenom, sdk.NewInt(1)),
+			amount:       sdk.NewCoin(gridtypes.AttoIronDenom, sdk.NewInt(1)),
 			lockDuration: types.MaxLockTime - 1,
 			valid:        true,
 		},
@@ -80,7 +80,7 @@ func TestMsgCreate_GetSigners(t *testing.T) {
 	msg := &types.MsgCreate{
 		Sender:       "mer1mnfm9c7cdgqnkk66sganp78m0ydmcr4ppeaeg5",
 		To:           "mer1353a4uac03etdylz86tyq9ssm3x2704jr632l3",
-		Amount:       sdk.NewCoin(mertypes.AttoLionDenom, sdk.NewInt(1)),
+		Amount:       sdk.NewCoin(gridtypes.AttoIronDenom, sdk.NewInt(1)),
 		LockDuration: uint64(100000),
 	}
 	signers := msg.GetSigners()
@@ -111,13 +111,13 @@ func TestMsgDeposit_ValidateBasic(t *testing.T) {
 			desc:   "ErrAmountNotPositive",
 			sender: "mer1mnfm9c7cdgqnkk66sganp78m0ydmcr4ppeaeg5",
 			veId:   "ve-100",
-			amount: sdk.NewCoin(mertypes.AttoLionDenom, sdk.NewInt(0)),
+			amount: sdk.NewCoin(gridtypes.AttoIronDenom, sdk.NewInt(0)),
 		},
 		{
 			desc:   "valid",
 			sender: "mer1mnfm9c7cdgqnkk66sganp78m0ydmcr4ppeaeg5",
 			veId:   "ve-100",
-			amount: sdk.NewCoin(mertypes.AttoLionDenom, sdk.NewInt(1)),
+			amount: sdk.NewCoin(gridtypes.AttoIronDenom, sdk.NewInt(1)),
 			valid:  true,
 		},
 	} {
@@ -142,7 +142,7 @@ func TestMsgDeposit_GetSigners(t *testing.T) {
 	msg := &types.MsgDeposit{
 		Sender: "mer1mnfm9c7cdgqnkk66sganp78m0ydmcr4ppeaeg5",
 		VeId:   "ve-100",
-		Amount: sdk.NewCoin(mertypes.AttoLionDenom, sdk.NewInt(1)),
+		Amount: sdk.NewCoin(gridtypes.AttoIronDenom, sdk.NewInt(1)),
 	}
 	signers := msg.GetSigners()
 	sender, err := sdk.AccAddressFromBech32(msg.Sender)

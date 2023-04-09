@@ -1,12 +1,12 @@
 package keeper_test
 
-import "github.com/merlion-zone/merlion/x/ve/types"
+import "github.com/gridiron-zone/gridiron/x/ve/types"
 
 func (suite *KeeperTestSuite) TestKeeper_GetParams() {
 	suite.SetupTest()
 	k := suite.app.VeKeeper
 	params := k.GetParams(suite.ctx)
-	suite.Require().Equal("alion", params.LockDenom)
+	suite.Require().Equal("airon", params.LockDenom)
 }
 
 func (suite *KeeperTestSuite) TestKeeper_SetParams() {
@@ -21,5 +21,5 @@ func (suite *KeeperTestSuite) TestKeeper_LockDenom() {
 	suite.SetupTest()
 	k := suite.app.VeKeeper
 	res := k.LockDenom(suite.ctx)
-	suite.Require().Equal("alion", res)
+	suite.Require().Equal("airon", res)
 }

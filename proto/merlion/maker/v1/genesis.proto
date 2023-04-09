@@ -1,9 +1,9 @@
 syntax = "proto3";
-package merlion.maker.v1;
+package gridiron.maker.v1;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/merlion-zone/merlion/x/maker/types";
+option go_package = "github.com/gridiron-zone/gridiron/x/maker/types";
 
 // GenesisState defines the maker module's genesis state.
 message GenesisState {
@@ -36,13 +36,13 @@ message Params {
   // cooldown period for adjusting backing ratio
   int64 backing_ratio_cooldown_period = 3
       [ (gogoproto.moretags) = "yaml:\"backing_ratio_cooldown_period\"" ];
-  // mint Mer price bias ratio
+  // mint Grid price bias ratio
   string mint_price_bias = 4 [
     (gogoproto.moretags) = "yaml:\"mint_price_bias\"",
     (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
     (gogoproto.nullable) = false
   ];
-  // burn Mer price bias ratio
+  // burn Grid price bias ratio
   string burn_price_bias = 5 [
     (gogoproto.moretags) = "yaml:\"burn_price_bias\"",
     (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",

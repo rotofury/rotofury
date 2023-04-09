@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	keepertest "github.com/merlion-zone/merlion/testutil/keeper"
-	"github.com/merlion-zone/merlion/x/voter/keeper"
-	"github.com/merlion-zone/merlion/x/voter/types"
+	keepertest "github.com/gridiron-zone/gridiron/testutil/keeper"
+	"github.com/gridiron-zone/gridiron/x/voter/keeper"
+	"github.com/gridiron-zone/gridiron/x/voter/types"
 )
 
 func setupMsgServer(t testing.TB) (types.MsgServer, context.Context) {

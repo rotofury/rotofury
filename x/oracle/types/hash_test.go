@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlion-zone/merlion/x/oracle/types"
+	"github.com/gridiron-zone/gridiron/x/oracle/types"
 	"github.com/stretchr/testify/require"
 	"gopkg.in/yaml.v2"
 )
@@ -15,7 +15,7 @@ func TestAggregateVoteHash(t *testing.T) {
 		sdk.AccAddress([]byte("addr1_______________")),
 	}
 
-	aggregateVoteHash := types.GetAggregateVoteHash("salt", "uusm:100,alion:100", sdk.ValAddress(addrs[0]))
+	aggregateVoteHash := types.GetAggregateVoteHash("salt", "uusm:100,airon:100", sdk.ValAddress(addrs[0]))
 	hexStr := hex.EncodeToString(aggregateVoteHash)
 	aggregateVoteHashRes, err := types.AggregateVoteHashFromHexString(hexStr)
 	require.NoError(t, err)
